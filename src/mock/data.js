@@ -75,6 +75,11 @@ export const footerData = {
       name: 'github',
       url: 'https://github.com/mfranceschit',
     },
+    {
+      id: nanoid(),
+      name: 'medium',
+      url: 'https://medium.com/@mfranceschit',
+    },
   ],
 };
 
