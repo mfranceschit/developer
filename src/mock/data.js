@@ -2,24 +2,24 @@ import { nanoid } from 'nanoid';
 
 // HEAD DATA
 export const headData = {
-  title: 'Marco Franceschi', // e.g: 'Name | Developer'
+  title: 'Marco Franceschi as Developer', // e.g: 'Name | Developer'
   lang: 'en', // e.g: en, es, fr, jp
-  description: 'Hola mola', // e.g: Welcome to my website
+  description: 'Welcome', // e.g: Welcome to my website
 };
 
 // HERO DATA
 export const heroData = {
   title: '',
   name: 'Marco Franceschi',
-  subtitle: `I'm a Code Craftsman`,
+  subtitle: `I'm a JavaScript Lover`,
   cta: '',
 };
 
 // ABOUT DATA
 export const aboutData = {
   img: 'profile.png',
-  paragraphOne: 'For me, Coding can be interpreted as a way of art. I enjoy turn ideas into reality using technology. I take advantage of best practices and standards to create software, either for building a project architecture from scratch, create a new feature, or even improve an existing one.',
-  paragraphTwo: `I'm not afraid to try new frameworks and technologies. I keep myself updated reading about new libraries and frameworks, always keeping an eye on what's happening in the community.`,
+  paragraphOne: 'I’m a Full-Stack Developer specialized at JavaScript with around 5 years of experience creating mobile and web apps. For me, Coding can be interpreted as a way of art. I enjoy turn ideas into reality using technology.',
+  paragraphTwo: `I take advantage of best practices and standards to create software, either for building a project architecture from scratch, create a new feature, or even improve an existing one. I'm not afraid to try new frameworks and technologies. I keep myself updated reading about new libraries and frameworks, always keeping an eye on what's happening in the community.`,
   paragraphThree: `Let's be clear software development is about people. For years I've been part of teams with great professionals that I admire. I feel lucky to learn from other and mentoring new developers.`,
   resume: '', // if no resume, the button will not show up
 };
