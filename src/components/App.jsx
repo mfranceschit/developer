@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import Hero from './Hero/Hero';
 import About from './About/About';
 import Projects from './Projects/Projects';
@@ -6,31 +7,42 @@ import Contact from './Contact/Contact';
 import Footer from './Footer/Footer';
 
 import { PortfolioProvider } from '../context/context';
+import useIntl from '../hooks/useIntl'
 
-import { heroData, aboutData, projectsData, contactData, footerData } from '../mock/data';
+import { footerData } from '../mock/data';
+import LanguageSelector from './LanguageSelector/LanguageSelector';
+
+const LANGUAGES = ['en', 'es', 'pt']
+
 
 function App() {
-  const [hero, setHero] = useState({});
-  const [about, setAbout] = useState({});
-  const [projects, setProjects] = useState([]);
-  const [contact, setContact] = useState({});
+  const [language, setLanguage] = useState(0)
   const [footer, setFooter] = useState({});
 
+  const data = useIntl(LANGUAGES[language])
+
+  const changeLanguage = () => {
+    console.log(language)
+
+    if(language === 2) {
+      setLanguage(0)
+    } else {
+      setLanguage(language + 1)
+    }
+  }
+
   useEffect(() => {
-    setHero({ ...heroData });
-    setAbout({ ...aboutData });
-    setProjects([...projectsData]);
-    setContact({ ...contactData });
     setFooter({ ...footerData });
   }, []);
 
   return (
-    <PortfolioProvider value={{ hero, about, projects, contact, footer }}>
+    <PortfolioProvider value={{ ...data, footer }}>
       <Hero />
       <About />
       <Projects />
       <Contact />
       <Footer />
+      <LanguageSelector language={LANGUAGES[language]} changeLanguage={changeLanguage} />
     </PortfolioProvider>
   );
 }

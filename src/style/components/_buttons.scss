@@ -58,6 +58,12 @@
       width: 100%;
     }
   }
+
+  &.cta-btn--language {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+  }
 }
 
 /* Resume Style */
