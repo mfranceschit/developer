@@ -4,7 +4,7 @@ export default {
   hero: {
     title: '',
     name: 'Marco Franceschi',
-    subtitle: `I'm a JavaScript Lover`,
+    subtitle: `I'm a JavaScript Developer`,
     cta: '',
   },
   about: {
