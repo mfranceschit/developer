@@ -24,7 +24,7 @@ function App() {
   const changeLanguage = () => {
     console.log(language)
 
-    if(language === 2) {
+    if (language === 2) {
       setLanguage(0)
     } else {
       setLanguage(language + 1)
@@ -38,10 +38,6 @@ function App() {
   return (
     <PortfolioProvider value={{ ...data, footer }}>
       <Hero />
-      <About />
-      <Projects />
-      <Contact />
-      <Footer />
       <LanguageSelector language={LANGUAGES[language]} changeLanguage={changeLanguage} />
     </PortfolioProvider>
   );
