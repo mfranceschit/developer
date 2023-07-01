@@ -38,7 +38,6 @@ function App() {
   return (
     <PortfolioProvider value={{ ...data, footer }}>
       <Hero />
-      <LanguageSelector language={LANGUAGES[language]} changeLanguage={changeLanguage} />
     </PortfolioProvider>
   );
 }
