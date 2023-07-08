@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid';
 
-export default {
+const pt = {
   hero: {
     title: '',
     name: 'Marco Franceschi',
-    subtitle: `will be back`,
+    subtitle: `I'm a JavaScript Developer`,
     cta: '',
   },
   about: {
@@ -63,3 +63,5 @@ export default {
     email: 'franceschi.marco@gmail.com',
   },
 };
+
+export default pt

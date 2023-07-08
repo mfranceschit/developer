@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-export default {
+const es = {
   hero: {
     title: '',
     name: 'Marco Franceschi',
@@ -63,3 +63,5 @@ export default {
     email: 'franceschi.marco@gmail.com',
   },
 };
+
+export default es
