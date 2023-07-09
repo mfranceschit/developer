@@ -1,0 +1,51 @@
+.contactContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 400px;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+
+}
+
+.contactForm input, .contactForm textarea {
+    background-color: transparent;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 2px solid rgba(205,14,0);
+    line-height: 1.5;
+}
+
+.contactForm textarea {
+    resize: none;
+}
+
+.contactForm button {
+    margin-top: 10px;
+    border: 2px solid rgba(205,14,0);
+    cursor: pointer;
+    padding: 5px;
+    width: 120px;
+}
+
+.contactForm button:hover {
+    color: white;
+    background-color: rgba(205,14,0);
+}
+
+.social {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.textWrapper {
+    flex: 0.6;
+}
