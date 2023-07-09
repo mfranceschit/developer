@@ -40,7 +40,7 @@
   --card-border-rgb: 131, 134, 135;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -93,6 +93,9 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  position: relative;
+  margin: 0 30px;
+  overflow: hidden;
 }
 
 a {
@@ -100,7 +103,16 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+}
+
+@media (prefers-color-scheme: light) {
   html {
     color-scheme: dark;
   }

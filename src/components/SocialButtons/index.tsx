@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 const SocialButtons = ({ size }: { size: number }) => (
   <div className={styles.socialLinks}>
     <a
+      title="linkedin"
       href="https://www.linkedin.com/in/mfranceschit/"
       rel="noopener noreferrer"
       target="_blank"
@@ -13,6 +14,7 @@ const SocialButtons = ({ size }: { size: number }) => (
       <FaLinkedin size={size} />
     </a>
     <a
+      title="github"
       href="https://github.com/mfranceschit"
       rel="noopener noreferrer"
       target="_blank"
@@ -20,6 +22,7 @@ const SocialButtons = ({ size }: { size: number }) => (
       <FaGithub size={size} />
     </a>
     <a
+      title="gitlab"
       href="https://gitlab.com/mfranceschit"
       rel="noopener noreferrer"
       target="_blank"
@@ -27,6 +30,7 @@ const SocialButtons = ({ size }: { size: number }) => (
       <FaGitlab size={size} />
     </a>
     <a
+      title="medium"
       href="https://medium.com/@mfranceschit"
       rel="noopener noreferrer"
       target="_blank"
