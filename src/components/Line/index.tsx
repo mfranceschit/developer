@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './line.module.css';
+import styles from './styles.module.css';
 
 const CLASSNAME: { [position: string]: string } = {
   top: styles.top,
