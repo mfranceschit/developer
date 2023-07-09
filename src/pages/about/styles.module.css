@@ -1,0 +1,10 @@
+.aboutContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 400px;
+}
+
+.textWrapper {
+    flex: 0.6;
+}
