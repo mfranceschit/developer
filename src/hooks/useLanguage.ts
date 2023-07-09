@@ -16,6 +16,6 @@ const LANGUAGES = {
 }
 
 export const useLanguage = () => {
-  const { locale = LOCALES.en} = useRouter()
+  const { locale } = useRouter()
   return LANGUAGES[locale as LOCALES];
 };
