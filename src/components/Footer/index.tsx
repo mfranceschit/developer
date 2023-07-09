@@ -1,26 +1,41 @@
 import React from 'react';
+import { FaLinkedin, FaMedium, FaGitlab, FaGithub } from 'react-icons/fa';
+
+import styles from './styles.module.css';
 
 const Footer = () => {
-  const networks = []
-
   return (
-    <footer className="footer navbar-static-bottom">
-        <div className="social-links">
-          {networks.map((network) => {
-              const { id, name, url } = network;
-              return (
-                <a
-                  key={id}
-                  href={url || 'https://github.com/cobidev/gatsby-simplefolio'}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  aria-label={name}
-                >
-                  <i className={`fa fa-${name || 'refresh'} fa-inverse`} />
-                </a>
-              );
-            })}
-        </div>
+    <footer className={styles.footer}>
+      <div className={styles.socialLinks}>
+        <a
+          href="https://www.linkedin.com/in/mfranceschit/"
+          rel="noopener noreferrer"
+          target="_blank"
+          aria-label="linkedin">
+          <FaLinkedin size={24} />
+        </a>
+        <a
+          href="https://github.com/mfranceschit"
+          rel="noopener noreferrer"
+          target="_blank"
+          aria-label="github">
+          <FaGithub size={24} />
+        </a>
+        <a
+          href="https://gitlab.com/mfranceschit"
+          rel="noopener noreferrer"
+          target="_blank"
+          aria-label="gitlab">
+          <FaGitlab size={24} />
+        </a>
+        <a
+          href="https://medium.com/@mfranceschit"
+          rel="noopener noreferrer"
+          target="_blank"
+          aria-label="medium">
+          <FaMedium size={24} />
+        </a>
+      </div>
     </footer>
   );
 };
