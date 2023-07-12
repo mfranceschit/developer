@@ -1,12 +1,10 @@
-import Link from 'next/link';
-
 import styles from './styles.module.css';
-import Title from '@/components/Title';
+import AnimatedTitle from '@/components/AnimatedTitle';
 
 export default function Home() {
   return (
     <main className={styles.homeContainer}>
-      <Title>Marco Franceschi</Title>
+      <AnimatedTitle text="Marco Franceschi" />
       <p>Description</p>
     </main>
   );
