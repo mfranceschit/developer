@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { FaHome } from 'react-icons/fa';
+import { FaHouse } from 'react-icons/fa6';
 import { usePathname } from 'next/navigation';
 
 import styles from './styles.module.css';
@@ -13,8 +13,9 @@ const Header = () => {
       <div className={styles.links}>
         <Link
           href={ROUTES.home}
+          passHref
           className={ROUTES.home === path ? styles.active : ''}>
-          <FaHome />
+          <FaHouse />
         </Link>
         <Link
           href={ROUTES.about}

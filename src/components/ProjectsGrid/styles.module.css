@@ -1,0 +1,48 @@
+.cpTransitionContainer {
+  height: 100%;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .cpTransitionContainer {
+    min-height: 250px;
+ }
+}
+.cpTransitionContainer > div {
+  height: 100%;
+}
+
+.cpTransitionSquaresWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cpTransition .card {
+  color: white;
+}
+.cpTransition .cardWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr;
+  gap: 20px;
+}
+.cpTransition .cardWrapperyellow {
+  background-image: radial-gradient(circle 929px at 0.6% 1.3%, #cd0e00 0%, #cd0e00 82.6%);
+}
+.cpTransition .cardWrappergreen {
+  background-image: linear-gradient(110.1deg, #cd0e00 2.9%, #cd0e00 90.3%);
+}
+.cpTransition .cardWrapperviolet {
+  background-image: linear-gradient(109.7deg, #cd0e00 1.8%, #cd0e00 90.2%);
+}
+.cpTransition .cardWrapperblue {
+  background-image: radial-gradient(circle 654px at 0.6% 48%, #cd0e00 0%, #cd0e00 86.3%);
+}
