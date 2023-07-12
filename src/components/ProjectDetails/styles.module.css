@@ -1,0 +1,42 @@
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardHeader h2 {
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+.cardHeader button {
+  color: white;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.cardHeader button:focus {
+  outline: none;
+}
+.cardContent {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: min-content 1fr;
+  align-content: center;
+  shape-outside: circle();
+}
+.cardImgPlaceholder {
+  height: 175px;
+  width: 175px;
+  background: rgba(255, 255, 255, .7);
+  border-radius: 50%;
+}
+@media (max-width: 768px) {
+  .cardImgPlaceholder {
+    height: 100px;
+    width: 100px;
+ }
+}
+.cardTextPlaceholder {
+  text-align: justify;
+  line-height: 125%;
+  font-size: 1.6rem;
+}
