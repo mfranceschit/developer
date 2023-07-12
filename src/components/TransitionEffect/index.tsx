@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -31,7 +31,7 @@ const variants = {
   },
 };
 
-const TransitionEffect = ({ children }: { children: any }) => {
+const TransitionEffect = ({ children }: { children: ReactNode }) => {
   const { asPath } = useRouter();
 
   return (

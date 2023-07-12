@@ -94,7 +94,7 @@ body {
     )
     rgb(var(--background-start-rgb));
   position: relative;
-  margin: 0 30px;
+  margin: 0;
   overflow: hidden;
 }
 

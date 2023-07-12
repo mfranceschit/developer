@@ -1,0 +1,42 @@
+.square {
+  height: 100px;
+  width: 100px;
+  margin: 15px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s;
+  cursor: pointer;
+  border-radius: 2px;
+
+}
+
+.evensquare {
+  border: 2px solid #cd0e00;
+  background-color: #fff;
+}
+
+.evensquare:hover {
+  background-color: #cd0e00;
+  color: #fff;
+}
+
+.oddsquare {
+  border: 2px solid #cd0e00;
+  background-color: #fff;
+}
+
+.oddsquare:hover {
+  background-color: #cd0e00;
+  color: #fff;
+}
+
+.square:hover {
+  transform: translateY(-3px) !important;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
