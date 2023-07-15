@@ -1,7 +1,7 @@
-import english from '@/i18n/en';
-import spanish from '@/i18n/es';
-import portuguese from '@/i18n/pt';
+import { LanguageContext } from '@/context';
+
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
 enum LOCALES {
   en = 'en',
@@ -9,13 +9,16 @@ enum LOCALES {
   pt = 'pt',
 }
 
-const LANGUAGES = {
-  en: english,
-  es: spanish,
-  pt: portuguese
-}
+
 
 export const useLanguage = () => {
   const { locale } = useRouter()
-  return LANGUAGES[locale as LOCALES];
+  const context = useContext(LanguageContext)
+
+  if (context === undefined) {
+    throw new Error('`useLanguage` must be used within `LanguageProvider`')
+  }
+
+  return context[locale as LOCALES];
 };
+
