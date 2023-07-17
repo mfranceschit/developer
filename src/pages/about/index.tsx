@@ -12,42 +12,22 @@ export const metadata: Metadata = {
 };
 
 const About = () => {
-  useLanguage();
+  const { about } = useLanguage();
+  const { title, description = [] } = about;
+
   return (
     <section className={styles.aboutContainer}>
       <Head>
-        <title>Me</title>
+        <title>{title}</title>
       </Head>
-      <Title>Me</Title>
+      <Title>{title}</Title>
       <div className={styles.textWrapper}>
-        <div className="about-wrapper__info">
-          <p className="about-wrapper__info-text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi
-            neque, ipsa animi maiores repellendu distinctioaperiam earum dolor
-            voluptatum consequatur blanditiis inventore debitis fuga numquam
-            voluptate architecto itaque molestiae.
-          </p>
-          <p className="about-wrapper__info-text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi
-            neque, ipsa animi maiores repellendu distinctioaperiam earum dolor
-            voluptatum consequatur blanditiis inventore debitis fuga numquam
-            voluptate architecto itaque molestiae.
-          </p>
-          <p className="about-wrapper__info-text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi
-            neque, ipsa animi maiores repellendu distinctioaperiam earum dolor
-            voluptatum consequatur blanditiis inventore debitis fuga numquam
-            voluptate architecto itaque molestiae.
-          </p>
-          <p className="about-wrapper__info-text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi
-            neque, ipsa animi maiores repellendu distinctioaperiam earum dolor
-            voluptatum consequatur blanditiis inventore debitis fuga numquam
-            voluptate architecto itaque molestiae.
-          </p>
-          <p className="about-wrapper__info-text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          </p>
+        <div className={styles.textBlock}>
+          {description.map((paragraph: string, index: number) => (
+            <p key={index} className="about-wrapper__info-text">
+              {paragraph}
+            </p>
+          ))}
         </div>
       </div>
     </section>

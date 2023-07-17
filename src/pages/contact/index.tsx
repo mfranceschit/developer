@@ -3,6 +3,7 @@ import React, { FormEvent } from 'react';
 import Title from '@/components/Title';
 import SocialButtons from '@/components/SocialButtons';
 import styles from './styles.module.css';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface CustomElements extends HTMLFormControlsCollection {
   subject: HTMLInputElement;
@@ -14,6 +15,16 @@ interface ContactForm extends HTMLFormElement {
 }
 
 const Contact = () => {
+  const { contact } = useLanguage();
+  const {
+    title,
+    description,
+    cta,
+    socials,
+    placeholderSubject,
+    placeholderMessage,
+  } = contact;
+
   const submit = (form: FormEvent<ContactForm>) => {
     form.preventDefault();
     const target = form.currentTarget.elements;
@@ -29,24 +40,22 @@ const Contact = () => {
 
   return (
     <section className={styles.contactContainer}>
-      <Title>Contact</Title>
+      <Title>{title}</Title>
       <div className={styles.textWrapper}>
-        <h2 className="contact-wrapper__text">
-          Would you like to work together?
-        </h2>
+        <h2 className={styles.description}>{description}</h2>
         <form className={styles.contactForm} onSubmit={submit}>
-          <input name="subject" type="text" placeholder="Subject" />
+          <input name="subject" type="text" placeholder={placeholderSubject} />
           <textarea
             name="message"
             rows={5}
             cols={40}
-            placeholder="Message"></textarea>
-          <button type="submit">Let&#39;s Talk!</button>
+            placeholder={placeholderMessage}></textarea>
+          <button type="submit">{cta}</button>
         </form>
 
         <div className={styles.social}>
           <p>
-            Find me on social media as <strong>mfranceschit</strong>
+            {socials} <strong>mfranceschit</strong>
           </p>
           <SocialButtons size={30} />
         </div>
