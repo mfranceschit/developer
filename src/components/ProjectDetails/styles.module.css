@@ -46,7 +46,7 @@
 }
 
 .imageContainer {
-  height: 400px;
+  min-height: 400px;
   position: relative;
   overflow: hidden;
   margin-bottom: 20px;
@@ -101,4 +101,24 @@
 
 .cardTextPlaceholder p:first-of-type {
   margin-top: 15px;
+}
+
+@media (max-width: 800px) {
+  .cardContent {
+      flex-direction: column;
+  }
+
+  .cardContent h2 {
+    font-size: 40px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .projectInformation {
+    flex: 1;
+  }
+
+  .imageContainer {
+    min-height: 180px;
+  }
 }

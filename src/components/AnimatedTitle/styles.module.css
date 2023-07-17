@@ -1,4 +1,4 @@
-.line {
+.title {
     position: relative;
     top: 50%;  
     width: 8em;
@@ -24,4 +24,10 @@
 @keyframes blinkTextCursor{
   from{border-right-color: rgba(205,14,0);}
   to{border-right-color: transparent;}
+}
+
+@media (max-width: 800px) {
+  .title {
+    font-size: 40px;
+  }
 }

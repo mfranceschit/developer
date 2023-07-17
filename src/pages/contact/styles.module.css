@@ -55,3 +55,16 @@
     margin-left: 15px;
     margin-right: 15px;
 }
+
+
+@media (max-width: 800px) {
+    .contactContainer {
+      flex-direction: column;
+      margin-top: 40px;
+    }
+
+    .textWrapper {
+        margin-top: 15px;
+    }
+    
+  }

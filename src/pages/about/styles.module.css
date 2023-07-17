@@ -14,3 +14,15 @@
     margin-left: 15px;
     margin-right: 15px;
 }
+
+@media (max-width: 800px) {
+    .aboutContainer {
+        flex-direction: column;
+        margin-top: 40px;
+    }
+
+    .textBlock {
+        margin-left: 0;
+        margin-right: 0;
+    }
+  }

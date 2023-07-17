@@ -9,3 +9,15 @@
     flex: 0.6;
     max-height: 80vh;
 }
+
+@media (max-width: 800px) {
+    .projectsContainer {
+        flex-direction: column;
+        margin-top: 40px;
+    }
+
+    .textWrapper {
+        flex: 1;
+        max-height: 100vh;
+    }
+  }

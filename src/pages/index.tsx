@@ -7,9 +7,9 @@ export default function Home() {
   const { title, subtitle } = home;
 
   return (
-    <main className={styles.homeContainer}>
+    <section className={styles.homeContainer}>
       <AnimatedTitle text={title} />
       <p>{subtitle}</p>
-    </main>
+    </section>
   );
 }

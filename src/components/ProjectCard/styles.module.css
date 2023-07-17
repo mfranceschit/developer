@@ -40,3 +40,14 @@
   align-items: center;
   height: 100%;
 }
+
+@media (max-width: 800px) {
+  .square {
+    height: 100px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

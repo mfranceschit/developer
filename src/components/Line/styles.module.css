@@ -1,6 +1,7 @@
 .line {
     position: fixed;
     background: rgba(205,14,0);
+    z-index: 99999;
 }
 
 .top {
@@ -32,3 +33,13 @@
     width: 15px;
     height: 200%;
 }
+
+@media (max-width: 800px) {
+    .left, .right {
+        width: 10px;
+    }
+
+    .top, .bottom {
+        height: 10px;
+    }
+  }

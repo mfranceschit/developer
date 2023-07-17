@@ -7,3 +7,15 @@
     width: 100%;
     justify-content: flex-end;
 }
+
+
+@media (max-width: 800px) {
+    .footer {
+        right: 0;
+        background-color: rgba(205,14,0);
+        bottom: 10px;
+        padding-top: 10px;
+        justify-content: center;
+        color: white;
+    }
+  }

@@ -34,7 +34,7 @@ const AnimatedTitle = ({ text }: { text: string }) => {
   };
 
   return (
-    <h1 className={`${styles.line} ${styles.typewriterAnimation}`}>{text}</h1>
+    <h1 className={`${styles.title} ${styles.typewriterAnimation}`}>{text}</h1>
   );
 };
 
