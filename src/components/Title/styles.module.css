@@ -1,5 +1,7 @@
 .title {
     font-size: 60px;
     color: rgba(205,14,0);
+    flex: 0.4;
+    text-align: center;
 }
 

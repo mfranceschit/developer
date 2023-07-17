@@ -1,6 +1,6 @@
 .cardHeader {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 .cardHeader h2 {
@@ -17,17 +17,19 @@
   outline: none;
 }
 .cardContent {
-  display: grid;
-  gap: 30px;
-  grid-template-columns: min-content 1fr;
-  align-content: center;
-  shape-outside: circle();
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
+
+.cardContent h2 {
+  font-size: 60px;
+}
+
 .cardImgPlaceholder {
-  height: 175px;
-  width: 175px;
-  background: rgba(255, 255, 255, .7);
-  border-radius: 50%;
+  object-fit: contain;
+  width: auto !important;
 }
 @media (max-width: 768px) {
   .cardImgPlaceholder {
@@ -35,8 +37,68 @@
     width: 100px;
  }
 }
-.cardTextPlaceholder {
+
+.projectInformation {
   text-align: justify;
   line-height: 125%;
   font-size: 1.6rem;
+  flex: 0.5;
+}
+
+.imageContainer {
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.cardTextPlaceholder{
+  --scrollbar-width: 8px;
+  --mask-height: 32px;
+  overflow-y:scroll;
+  height: 300px;
+  padding-bottom: var(--mask-height);
+  padding-right: 20px;
+  --mask-image-content: linear-gradient(
+      to bottom,
+      transparent,
+      black var(--mask-height),
+      black calc(100% - var(--mask-height)),
+      transparent
+  );
+  --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
+  --mask-image-scrollbar: linear-gradient(black, black);
+  --mask-size-scrollbar: var(--scrollbar-width) 100%;
+  mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+  mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+  mask-position: 0 0, 100% 0;
+  mask-repeat: no-repeat, no-repeat;
+}
+
+/* Firefox */
+.cardTextPlaceholder {
+  scrollbar-width: thin;
+  scrollbar-color: currentColor transparent;
+}
+
+/* Webkit / Blink */
+.cardTextPlaceholder::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+.cardTextPlaceholder::-webkit-scrollbar-thumb {
+  background-color: currentColor;
+  border-radius: 9999px;
+}
+
+.cardTextPlaceholder::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.cardTextPlaceholder p {
+  height: auto;
+}
+
+.cardTextPlaceholder p:first-of-type {
+  margin-top: 15px;
 }

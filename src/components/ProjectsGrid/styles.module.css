@@ -13,7 +13,7 @@
 
 .cpTransitionSquaresWrapper {
   height: 100%;
-  width: 100%;
+  max-width: 840px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

@@ -1,4 +1,4 @@
-.aboutContainer {
+.projectsContainer {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -7,10 +7,5 @@
 
 .textWrapper {
     flex: 0.6;
-}
-
-.textBlock {
-    max-width: 810px;
-    margin-left: 15px;
-    margin-right: 15px;
+    max-height: 80vh;
 }
