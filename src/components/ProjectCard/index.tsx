@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { motion } from 'framer-motion';
 
 import styles from './styles.module.css';
+import { Project } from '@/types';
 
 const squareVariants = {
   initial: {
@@ -20,23 +21,24 @@ const square: { [type: string]: string } = {
 };
 
 const ProjectCard = ({
-  name,
+  project,
   index,
-  setSelectedSquare,
+  setSelectedProject,
 }: {
-  name: string;
+  project: Project;
   index: number;
-  setSelectedSquare: Dispatch<SetStateAction<string>>;
+  setSelectedProject: Dispatch<SetStateAction<Project | undefined>>;
 }) => {
+  const { title } = project;
   const type = index % 2 ? 'even' : 'odd';
   return (
     <motion.div
       className={`${styles.square} ${square[type]}`}
-      onClick={() => setSelectedSquare(type)}
+      onClick={() => setSelectedProject(project)}
       variants={squareVariants}
       transition={{ duration: 0.2, type: 'spring' }}>
       <div className={styles.content}>
-        <h3>{name}</h3>
+        <h3>{title}</h3>
       </div>
     </motion.div>
   );
