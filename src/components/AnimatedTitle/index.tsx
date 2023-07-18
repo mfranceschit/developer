@@ -11,7 +11,7 @@ const AnimatedTitle = ({ text }: { text: string }) => {
     if (!animationStarted) {
       setAnimationStarted(true);
     }
-  }, []);
+  }, [animationStarted]);
 
   const wordAnimation = {
     hidden: {},
