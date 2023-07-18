@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { Dispatch, SetStateAction } from 'react';
 import { FaX } from 'react-icons/fa6';
-import Image from 'next/image';
 
 import styles from './styles.module.css';
 import { Project } from '@/types';
@@ -13,6 +13,7 @@ const ProjectDetails = ({
   setSelectedProject: Dispatch<SetStateAction<Project | undefined>>;
 }) => {
   const { title, info, img } = project;
+  const imageSrc = `../../assets/images/${img}`;
   return (
     <>
       <div className={styles.cardHeader}>
@@ -24,12 +25,13 @@ const ProjectDetails = ({
         <h2>{title}</h2>
         <div className={styles.projectInformation}>
           <div className={styles.imageContainer}>
-            <Image
-              src={require(`../../assets/images/${img}`)}
-              fill
-              alt={`${title} project image`}
-              className={styles.cardImgPlaceholder}
-            />
+            <picture>
+              <img
+                src={imageSrc}
+                alt={`${title} project image`}
+                className={styles.cardImgPlaceholder}
+              />
+            </picture>
           </div>
           <div className={styles.cardTextPlaceholder}>
             <p>{info}</p>

@@ -29,13 +29,7 @@
 
 .cardImgPlaceholder {
   object-fit: contain;
-  width: auto !important;
-}
-@media (max-width: 768px) {
-  .cardImgPlaceholder {
-    height: 100px;
-    width: 100px;
- }
+  width: 100%;
 }
 
 .projectInformation {
@@ -43,13 +37,6 @@
   line-height: 125%;
   font-size: 1.6rem;
   flex: 0.5;
-}
-
-.imageContainer {
-  min-height: 400px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 20px;
 }
 
 .cardTextPlaceholder{
@@ -116,9 +103,5 @@
 
   .projectInformation {
     flex: 1;
-  }
-
-  .imageContainer {
-    min-height: 180px;
   }
 }
