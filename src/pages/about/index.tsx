@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { Metadata } from 'next';
 
 import Title from '@/components/Title';
-import styles from './styles.module.css';
 import { LOCALES } from '@/types';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -17,13 +16,13 @@ const About = () => {
   const { title = '', description = [] } = about;
 
   return (
-    <section className={styles.aboutContainer}>
+    <section className="about-container">
       <Head>
         <title>{title}</title>
       </Head>
       <Title>{title}</Title>
-      <div className={styles.textWrapper}>
-        <div className={styles.textBlock}>
+      <div className="text-wrapper">
+        <div className="text-block">
           {description.map((paragraph: string, index: number) => (
             <p key={index} className="about-wrapper__info-text">
               {paragraph}

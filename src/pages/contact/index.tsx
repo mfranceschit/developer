@@ -2,7 +2,6 @@ import React, { FormEvent } from 'react';
 
 import Title from '@/components/Title';
 import SocialButtons from '@/components/SocialButtons';
-import styles from './styles.module.css';
 import { LOCALES } from '@/types';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -40,11 +39,11 @@ const Contact = () => {
   };
 
   return (
-    <section className={styles.contactContainer}>
+    <section className="contact-container">
       <Title>{title}</Title>
-      <div className={styles.textWrapper}>
-        <h2 className={styles.description}>{description}</h2>
-        <form className={styles.contactForm} onSubmit={submit}>
+      <div className="text-wrapper">
+        <h2 className="contact-description">{description}</h2>
+        <form className="contact-form" onSubmit={submit}>
           <input name="subject" type="text" placeholder={placeholderSubject} />
           <textarea
             name="message"
@@ -54,7 +53,7 @@ const Contact = () => {
           <button type="submit">{cta}</button>
         </form>
 
-        <div className={styles.social}>
+        <div className="social">
           <p>
             {socials} <strong>mfranceschit</strong>
           </p>

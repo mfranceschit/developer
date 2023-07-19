@@ -1,17 +1,17 @@
-.cpTransitionContainer {
+.cp-transition-container {
   height: 100%;
   width: 100%;
 }
 @media (max-width: 768px) {
-  .cpTransitionContainer {
+  .cp-transition-container {
     min-height: 250px;
  }
 }
-.cpTransitionContainer > div {
+.cp-transition-container > div {
   height: 100%;
 }
 
-.cpTransitionSquaresWrapper {
+.cp-transition-squares-wrapper {
   height: 100%;
   max-width: 840px;
   display: flex;
@@ -19,10 +19,10 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.cpTransition .card {
+.cp-transition .card {
   color: white;
 }
-.cpTransition .cardWrapper {
+.cp-transition .card-wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -33,12 +33,7 @@
   grid-template-columns: 1fr;
   grid-template-rows: min-content 1fr;
   gap: 20px;
-}
-.cpTransition .cardWrapperyellow {
   z-index: 9999;
   background-image: radial-gradient(circle 929px at 0.6% 1.3%, #cd0e00 0%, #cd0e00 82.6%);
 }
-.cpTransition .cardWrappergreen {
-  z-index: 9999;
-  background-image: linear-gradient(110.1deg, #cd0e00 2.9%, #cd0e00 90.3%);
-}
+

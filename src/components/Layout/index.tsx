@@ -4,7 +4,6 @@ import { Inter } from 'next/font/google';
 import Line from '@/components/Line';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import styles from './styles.module.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +20,7 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      <main className={styles.main}>{children}</main>
+      <main className="main">{children}</main>
       <Footer />
       <Line position="top" />
       <Line position="bottom" />

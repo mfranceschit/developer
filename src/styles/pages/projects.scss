@@ -1,23 +1,13 @@
-.projectsContainer {
+.projects-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
     min-height: 400px;
 }
 
-.textWrapper {
-    flex: 0.6;
-    max-height: 80vh;
-}
-
 @media (max-width: 800px) {
-    .projectsContainer {
+    .projects-container {
         flex-direction: column;
         margin-top: 40px;
-    }
-
-    .textWrapper {
-        flex: 1;
-        max-height: 100vh;
     }
   }

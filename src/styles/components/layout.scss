@@ -7,6 +7,10 @@
   min-height: 100vh;
 }
 
+.text-wrapper {
+  flex: 0.6;
+}
+
 @media (max-width: 800px) {
   .main {
     padding: 2rem;

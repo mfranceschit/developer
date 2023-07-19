@@ -2,8 +2,6 @@ import React, { ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import styles from './styles.module.css';
-
 const variants = {
   fadeIn: {
     y: 100,
@@ -35,7 +33,7 @@ const TransitionEffect = ({ children }: { children: ReactNode }) => {
   const { asPath } = useRouter();
 
   return (
-    <div className={styles.effect}>
+    <div className="effect">
       <AnimatePresence initial={false} mode="wait">
         <motion.div
           key={asPath}

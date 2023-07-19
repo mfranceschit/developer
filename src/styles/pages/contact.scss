@@ -1,4 +1,4 @@
-.contactContainer {
+.contact-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,14 +6,14 @@
     flex: 1;
 }
 
-.contactForm {
+.contact-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
     margin-top: 30px;
 }
 
-.contactForm input, .contactForm textarea {
+.contact-form input, .contact-form textarea {
     background-color: transparent;
     border-top: 0;
     border-right: 0;
@@ -22,11 +22,11 @@
     line-height: 1.5;
 }
 
-.contactForm textarea {
+.contact-form textarea {
     resize: none;
 }
 
-.contactForm button {
+.contact-form button {
     margin-top: 10px;
     border: 2px solid rgba(205,14,0);
     cursor: pointer;
@@ -34,7 +34,7 @@
     width: 120px;
 }
 
-.contactForm button:hover {
+.contact-form button:hover {
     color: white;
     background-color: rgba(205,14,0);
 }
@@ -46,11 +46,7 @@
     margin-top: 30px;
 }
 
-.textWrapper {
-    flex: 0.6;
-}
-
-.textWrapper .description, .textWrapper .contactForm, .textWrapper .social {
+.text-wrapper .contact-description, .text-wrapper .contact-form, .text-wrapper .social {
     max-width: 810px;
     margin-left: 15px;
     margin-right: 15px;
@@ -58,16 +54,16 @@
 
 
 @media (max-width: 800px) {
-    .contactContainer {
+    .contact-container {
       flex-direction: column;
       margin-top: 40px;
     }
 
-    .textWrapper {
+    .text-wrapper {
         margin-top: 15px;
     }
 
-    .textWrapper .description, .textWrapper .contactForm, .textWrapper .social {
+    .text-wrapper .contact-description, .text-wrapper .contact-form, .text-wrapper .social {
         margin-left: 0;
         margin-right: 0;
     }

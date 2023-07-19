@@ -2,7 +2,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { FaX } from 'react-icons/fa6';
 
-import styles from './styles.module.css';
 import { Project } from '@/types';
 
 const ProjectDetails = ({
@@ -16,24 +15,24 @@ const ProjectDetails = ({
   const imageSrc = `../../assets/images/${img}`;
   return (
     <>
-      <div className={styles.cardHeader}>
+      <div className="card-header">
         <button onClick={() => setSelectedProject(undefined)}>
           <FaX size={30} />
         </button>
       </div>
-      <div className={styles.cardContent}>
+      <div className="card-content">
         <h2>{title}</h2>
-        <div className={styles.projectInformation}>
-          <div className={styles.imageContainer}>
+        <div className="project-information">
+          <div className="image-container">
             <picture>
               <img
                 src={imageSrc}
                 alt={`${title} project image`}
-                className={styles.cardImgPlaceholder}
+                className="card-img-placeholder"
               />
             </picture>
           </div>
-          <div className={styles.cardTextPlaceholder}>
+          <div className="card-text-placeholder">
             <p>{info}</p>
             <p>{info}</p>
             <p>{info}</p>

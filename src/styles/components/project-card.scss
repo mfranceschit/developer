@@ -9,31 +9,22 @@
 
 }
 
-.evensquare {
+.square-box {
   border: 2px solid #cd0e00;
   background-color: #fff;
 }
 
-.evensquare:hover {
+.square-box:hover {
   background-color: #cd0e00;
   color: #fff;
 }
 
-.oddsquare {
-  border: 2px solid #cd0e00;
-  background-color: #fff;
-}
-
-.oddsquare:hover {
-  background-color: #cd0e00;
-  color: #fff;
-}
 
 .square:hover {
   transform: translateY(-3px) !important;
 }
 
-.content {
+.box-content {
   display: flex;
   flex: 1;
   justify-content: center;

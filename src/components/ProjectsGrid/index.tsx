@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import styles from './styles.module.css';
 import ProjectCard from '../ProjectCard';
 import ProjectDetails from '../ProjectDetails';
 import { Project } from '@/types';
@@ -24,28 +23,12 @@ const wrapperVariants = {
 export const ProjectsGrid = ({ projects = [] }: { projects: Project[] }) => {
   const [selectedProject, setSelectedProject] = useState<Project | undefined>();
 
-  const dynamicStyles: {
-    [type: string]: {
-      container: string;
-      card: string;
-    };
-  } = {
-    even: {
-      container: styles.cpTransitionContaineryellow,
-      card: styles.cardWrapperyellow,
-    },
-    odd: {
-      container: styles.cpTransitionContainergreen,
-      card: styles.cardWrappergreen,
-    },
-  };
-
   return (
-    <div className={`${styles.cpTransition} ${styles.cpTransitionContainer}`}>
+    <div className={`cp-transition cp-transition-container`}>
       <AnimatePresence mode={selectedProject ? 'sync' : 'wait'} initial={false}>
         {selectedProject ? (
           <motion.div
-            className={`${styles.card} ${styles.cardWrapper} ${dynamicStyles.even.card}`}
+            className={`card card-wrapper `}
             key="card"
             variants={wrapperVariants}
             initial="initial"
@@ -58,7 +41,7 @@ export const ProjectsGrid = ({ projects = [] }: { projects: Project[] }) => {
           </motion.div>
         ) : (
           <motion.div
-            className={styles.cpTransitionSquaresWrapper}
+            className="cp-transition-squares-wrapper"
             key="squares"
             variants={{
               ...wrapperVariants,
@@ -73,7 +56,6 @@ export const ProjectsGrid = ({ projects = [] }: { projects: Project[] }) => {
             {projects.map((project: Project, i) => (
               <ProjectCard
                 key={i}
-                index={i}
                 project={project}
                 setSelectedProject={setSelectedProject}
               />
