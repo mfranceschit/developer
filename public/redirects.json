@@ -1,0 +1,14 @@
+{
+    "/about": {
+        "to": "/about.html",
+        "statusCode": 301
+    },
+    "/contact": {
+        "to": "/contact.html",
+        "statusCode": 301
+    },
+    "/projects": {
+        "to": "/projects.html",
+        "statusCode": 301
+    }
+}
