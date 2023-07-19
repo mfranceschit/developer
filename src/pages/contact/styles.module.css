@@ -66,5 +66,10 @@
     .textWrapper {
         margin-top: 15px;
     }
-    
-  }
+
+    .textWrapper .description, .textWrapper .contactForm, .textWrapper .social {
+        margin-left: 0;
+        margin-right: 0;
+    }
+   
+}
