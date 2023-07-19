@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Title from '@/components/Title';
 import styles from './styles.module.css';
 import { ProjectsGrid } from '@/components/ProjectsGrid';
+import { LOCALES } from '@/types';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const Projects = () => {

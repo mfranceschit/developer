@@ -3,6 +3,7 @@ import React, { FormEvent } from 'react';
 import Title from '@/components/Title';
 import SocialButtons from '@/components/SocialButtons';
 import styles from './styles.module.css';
+import { LOCALES } from '@/types';
 import { useLanguage } from '@/hooks/useLanguage';
 
 interface CustomElements extends HTMLFormControlsCollection {

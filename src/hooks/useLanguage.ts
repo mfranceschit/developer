@@ -1,24 +1,14 @@
 import { LanguageContext } from '@/context';
+import { LOCALES } from '@/types';
 
-import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
-enum LOCALES {
-  en = 'en',
-  es = 'es',
-  pt = 'pt',
-}
-
-
-
 export const useLanguage = () => {
-  const { locale } = useRouter()
-  const context = useContext(LanguageContext)
+  const context = useContext(LanguageContext);
 
   if (context === undefined) {
-    throw new Error('`useLanguage` must be used within `LanguageProvider`')
+    throw new Error('`useLanguage` must be used within `LanguageProvider`');
   }
 
-  return context[locale as LOCALES];
+  return context[LOCALES.en as LOCALES];
 };
-

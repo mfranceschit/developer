@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
- i18n: {
-    locales: ['en', 'es', 'pt'],
-    defaultLocale: 'en',
- },
- distDir: 'build'
+   images: {
+      unoptimized: true
+   },
+   output: 'export',
+   distDir: 'build',
 }
 
 module.exports = nextConfig

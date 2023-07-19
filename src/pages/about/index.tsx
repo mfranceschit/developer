@@ -3,8 +3,9 @@ import Head from 'next/head';
 import { Metadata } from 'next';
 
 import Title from '@/components/Title';
-import { useLanguage } from '@/hooks/useLanguage';
 import styles from './styles.module.css';
+import { LOCALES } from '@/types';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export const metadata: Metadata = {
   title: 'Maco',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 const About = () => {
   const { about } = useLanguage();
-  const { title, description = [] } = about;
+  const { title = '', description = [] } = about;
 
   return (
     <section className={styles.aboutContainer}>

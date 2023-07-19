@@ -1,6 +1,7 @@
-import styles from './styles.module.css';
 import { useLanguage } from '@/hooks/useLanguage';
+import styles from './styles.module.css';
 import AnimatedTitle from '@/components/AnimatedTitle';
+import { LOCALES } from '@/types';
 
 export default function Home() {
   const { home } = useLanguage();
