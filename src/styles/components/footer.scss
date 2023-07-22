@@ -2,20 +2,15 @@
     display: flex;
     position: fixed;
     bottom: 40px;
-    right: 40px;
+    left: 40px;
     height: 50px;
     width: 100%;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 
 @media (max-width: 800px) {
     .footer {
-        right: 0;
-        background-color: rgba(205,14,0);
-        bottom: 10px;
-        padding-top: 10px;
-        justify-content: center;
-        color: white;
+        display: none;
     }
   }
