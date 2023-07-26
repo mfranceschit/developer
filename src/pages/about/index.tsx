@@ -24,7 +24,7 @@ const About = () => {
       <div className="text-wrapper">
         <div className="text-block">
           {description.map((paragraph: string, index: number) => (
-            <p key={index} className="about-wrapper__info-text">
+            <p key={index} className="about-text-paragraph">
               {paragraph}
             </p>
           ))}

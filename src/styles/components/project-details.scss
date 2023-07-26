@@ -6,6 +6,7 @@
 .card-header h2 {
   font-size: 3.2rem;
   font-weight: 700;
+  font-family: $font-type;
 }
 .card-header button {
   color: white;
@@ -25,6 +26,7 @@
 
 .card-content h2 {
   font-size: 60px;
+  font-family: $font-type;
 }
 
 .card-img-placeholder {
@@ -88,6 +90,11 @@
 
 .card-text-placeholder p:first-of-type {
   margin-top: 15px;
+}
+
+.project-text-paragraph {
+  text-align: justify;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 800px) {

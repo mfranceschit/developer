@@ -16,7 +16,6 @@
 
 .square-box:hover {
   background-color: $base-red;
-  color: #fff;
 }
 
 
@@ -30,6 +29,15 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+
+  h3 {
+    font-family: $font-type;
+    color: $base-red;
+  }
+}
+
+.box-content:hover h3 {
+  color: #fff;
 }
 
 @media (max-width: 800px) {

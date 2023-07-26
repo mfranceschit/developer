@@ -10,6 +10,7 @@
     white-space: nowrap;
     overflow: hidden;
     transform: translateY(-50%);    
+    font-family: $font-type;
 }
 
 /* Animation */
@@ -19,7 +20,7 @@
 }
 @keyframes typewriter{
   from{width: 0;}
-  to{width: 8em;}
+  to{width: 9em;}
 }
 @keyframes blinkTextCursor{
   from{border-right-color: $base-red;}
@@ -28,6 +29,6 @@
 
 @media (max-width: 800px) {
   .animated-text {
-    font-size: 40px;
+    font-size: 36px;
   }
 }

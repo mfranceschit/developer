@@ -33,12 +33,7 @@ const ProjectDetails = ({
             </picture>
           </div>
           <div className="card-text-placeholder">
-            <p>{info}</p>
-            <p>{info}</p>
-            <p>{info}</p>
-            <p>{info}</p>
-            <p>{info}</p>
-            <p>{info}</p>
+            <p className="project-text-paragraph">{info}</p>
           </div>
         </div>
       </div>
