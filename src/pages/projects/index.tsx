@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React from 'react';
 
 import Title from '@/components/Title';
 import { ProjectsGrid } from '@/components/ProjectsGrid';
-import { LOCALES } from '@/types';
 import { useLanguage } from '@/hooks/useLanguage';
+import { Project } from '@/types';
 
 const Projects = () => {
   const { projects } = useLanguage();
@@ -13,7 +13,7 @@ const Projects = () => {
     <section className="projects-container">
       <Title>{title}</Title>
       <div className="text-wrapper">
-        <ProjectsGrid projects={items as any[]} />
+        <ProjectsGrid projects={items as Project[]} />
       </div>
     </section>
   );

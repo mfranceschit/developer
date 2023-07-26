@@ -11,7 +11,7 @@ const ProjectDetails = ({
   project: Project;
   setSelectedProject: Dispatch<SetStateAction<Project | undefined>>;
 }) => {
-  const { title, info, img } = project;
+  const { title, url, description, img } = project;
   const imageSrc = `../../assets/images/${img}`;
   return (
     <>
@@ -23,7 +23,7 @@ const ProjectDetails = ({
       <div className="card-content">
         <h2>{title}</h2>
         <div className="project-information">
-          <div className="image-container">
+          <a rel="noopener noreferrer" target="_blank" href={url}>
             <picture>
               <img
                 src={imageSrc}
@@ -31,9 +31,13 @@ const ProjectDetails = ({
                 className="card-img-placeholder"
               />
             </picture>
-          </div>
+          </a>
           <div className="card-text-placeholder">
-            <p className="project-text-paragraph">{info}</p>
+            {description.map((p, i) => (
+              <p key={i} className="project-text-paragraph">
+                {p}
+              </p>
+            ))}
           </div>
         </div>
       </div>

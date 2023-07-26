@@ -2,8 +2,7 @@ export interface Project {
   id: string;
   img: string;
   title: string;
-  info: string;
-  info2: string;
+  description: string[];
   url: string;
   repo: string;
 }
