@@ -1,6 +1,5 @@
 .line {
     position: fixed;
-    background: rgba(205,14,0);
     z-index: 99999;
 }
 
@@ -9,6 +8,7 @@
     top: 0;
     width: 100%;
     height: 15px;
+    background: linear-gradient(90deg, $light-red 15px, $base-red 10%, $dark-red 45%);
 }
 
 .bottom {
@@ -17,6 +17,7 @@
     bottom: 0;
     width: 100%;
     height: 15px;
+    background: linear-gradient(90deg, $light-red 15px, $base-red 10%, $dark-red 45%);
 }
 
 .left {
@@ -24,6 +25,7 @@
     top: 0;
     width: 15px;
     height: 200%;
+    background-color: $light-red;
 }
 
 .right {
@@ -32,6 +34,7 @@
     top: 0;
     width: 15px;
     height: 200%;
+    background-color: $dark-red;
 }
 
 @media (max-width: 800px) {

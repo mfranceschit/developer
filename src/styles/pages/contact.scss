@@ -18,7 +18,7 @@
     border-top: 0;
     border-right: 0;
     border-left: 0;
-    border-bottom: 2px solid rgba(205,14,0);
+    border-bottom: 2px solid $base-red;
     line-height: 1.5;
 }
 
@@ -28,7 +28,7 @@
 
 .contact-form button {
     margin-top: 10px;
-    border: 2px solid rgba(205,14,0);
+    border: 2px solid $base-red;
     cursor: pointer;
     padding: 5px;
     width: 120px;
@@ -36,7 +36,7 @@
 
 .contact-form button:hover {
     color: white;
-    background-color: rgba(205,14,0);
+    background-color: $base-red;
 }
 
 .social {

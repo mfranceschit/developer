@@ -102,6 +102,10 @@
       color-scheme: light;
     }
   }
+
+  $light-red:   #e91b0c;
+  $base-red: #b91003;
+  $dark-red: #940303;
   
   @import '../styles/components/layout.scss';
   @import '../styles/components/animated-title.scss';

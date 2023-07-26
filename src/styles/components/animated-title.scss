@@ -5,7 +5,7 @@
     margin: 0 auto;
     border-right: 2px solid rgba(255,255,255,.75);
     font-size: 60px;
-    color: rgba(205,14,0);
+    color: $base-red;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -22,7 +22,7 @@
   to{width: 8em;}
 }
 @keyframes blinkTextCursor{
-  from{border-right-color: rgba(205,14,0);}
+  from{border-right-color: $base-red;}
   to{border-right-color: transparent;}
 }
 
