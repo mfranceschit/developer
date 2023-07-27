@@ -24,13 +24,13 @@ const ProjectDetails = ({
         <h2>{title}</h2>
         <div className="project-information">
           <a rel="noopener noreferrer" target="_blank" href={url}>
-            <picture>
+            <div className="image-container">
               <img
                 src={imageSrc}
                 alt={`${title} project image`}
                 className="card-img-placeholder"
               />
-            </picture>
+            </div>
           </a>
           <div className="card-text-placeholder">
             {description.map((p, i) => (

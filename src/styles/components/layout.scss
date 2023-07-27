@@ -7,6 +7,17 @@
   min-height: 100vh;
 }
 
+.main:before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  border-top: 150px solid $dark-red;
+  border-left: 150px solid transparent;
+  width: 0;
+  z-index: 99;
+}
+
 .text-wrapper {
   flex: 0.6;
 }

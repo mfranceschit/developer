@@ -25,7 +25,7 @@ export const ProjectsGrid = ({ projects = [] }: { projects: Project[] }) => {
 
   return (
     <div className={`cp-transition cp-transition-container`}>
-      <AnimatePresence mode={selectedProject ? 'sync' : 'wait'} initial={false}>
+      <AnimatePresence mode="sync" initial={false}>
         {selectedProject ? (
           <motion.div
             className={`card card-wrapper `}

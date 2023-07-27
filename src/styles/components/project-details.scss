@@ -44,6 +44,8 @@
 }
 
 .card-text-placeholder {
+  margin-top: 20px;
+  margin-bottom: 10px;
   --scrollbar-width: 8px;
   --mask-height: 32px;
   overflow-y:scroll;
@@ -99,9 +101,19 @@
   margin-bottom: 10px;
 }
 
+.image-container {
+  height: 560px;
+  background-color: #fff;
+}
+
 @media (max-width: 800px) {
   .card-content {
       flex-direction: column;
+  }
+
+  .image-container {
+    height: 180px;
+
   }
 
   .card-content h2 {
