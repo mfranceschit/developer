@@ -1,5 +1,6 @@
 import { useLanguage } from '@/hooks/useLanguage';
 import AnimatedTitle from '@/components/AnimatedTitle';
+import Head from 'next/head';
 
 export default function Home() {
   const { home } = useLanguage();
@@ -7,6 +8,9 @@ export default function Home() {
 
   return (
     <section className="home-container">
+      <Head>
+        <title>{`Marco Franceschi 🏠`}</title>
+      </Head>
       <AnimatedTitle>{title}</AnimatedTitle>
       <p>{subtitle}</p>
     </section>

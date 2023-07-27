@@ -2,8 +2,8 @@ import React, { FormEvent } from 'react';
 
 import Title from '@/components/Title';
 import SocialButtons from '@/components/SocialButtons';
-import { LOCALES } from '@/types';
 import { useLanguage } from '@/hooks/useLanguage';
+import Head from 'next/head';
 
 interface CustomElements extends HTMLFormControlsCollection {
   subject: HTMLInputElement;
@@ -40,6 +40,9 @@ const Contact = () => {
 
   return (
     <section className="contact-container">
+      <Head>
+        <title>{`Marco Franceschi 📫 ${title}`}</title>
+      </Head>
       <Title>{title}</Title>
       <div className="text-wrapper">
         <h2 className="contact-description">{description}</h2>

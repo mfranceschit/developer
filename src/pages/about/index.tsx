@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { Metadata } from 'next';
 
 import Title from '@/components/Title';
-import { LOCALES } from '@/types';
 import { useLanguage } from '@/hooks/useLanguage';
 
 export const metadata: Metadata = {
@@ -18,7 +17,7 @@ const About = () => {
   return (
     <section className="about-container">
       <Head>
-        <title>{title}</title>
+        <title>{`Marco Franceschi 🙋🏽‍♂️ ${title}`}</title>
       </Head>
       <Title>{title}</Title>
       <div className="text-wrapper">
