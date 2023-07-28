@@ -22,6 +22,7 @@
     line-height: 1.5;
     font-family: $font-type;
     font-size: 18px;
+    border-radius: 0;
 }
 
 .contact-form textarea {
@@ -52,8 +53,6 @@
     margin-top: 30px;
 }
 
-
-
 .text-wrapper .contact-description, .text-wrapper .contact-form, .text-wrapper .social {
     max-width: 730px;
     margin-left: 15px;
@@ -77,5 +76,11 @@
         margin-left: 0;
         margin-right: 0;
     }
-   
+
+    .text-wrapper .social {
+        align-items: flex-end;
+        p {
+            text-align: end;
+        }
+    }
 }

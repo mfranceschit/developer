@@ -8,7 +8,7 @@ const pt = {
   },
   home: {
     title: 'Marco Franceschi',
-    subtitle: `Senior Full-stack Developer`,
+    subtitle: `Desenvolvedor Full-stack Sênior`,
   },
   about: {
     title: 'Eu',

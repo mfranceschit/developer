@@ -6,6 +6,10 @@ const es = {
     work: 'Proyectos',
     contact: 'Contacto',
   },
+  home: {
+    title: 'Marco Franceschi',
+    subtitle: `Desarrollador Full-stack Sénior`,
+  },
   about: {
     title: 'Yo',
     description: [
