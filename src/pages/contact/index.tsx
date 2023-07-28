@@ -15,7 +15,9 @@ interface ContactForm extends HTMLFormElement {
 }
 
 const Contact = () => {
-  const { contact } = useLanguage();
+  const {
+    content: { contact },
+  } = useLanguage();
   const {
     title,
     description,

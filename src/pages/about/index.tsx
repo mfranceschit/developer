@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 };
 
 const About = () => {
-  const { about } = useLanguage();
+  const {
+    content: { about },
+  } = useLanguage();
   const { title = '', description = [] } = about;
 
   return (

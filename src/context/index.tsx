@@ -1,8 +1,9 @@
-import { createContext, ReactNode } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 
 import english from '@/i18n/en';
 import spanish from '@/i18n/es';
 import portuguese from '@/i18n/pt';
+import { LOCALES } from '@/types';
 
 const LANGUAGES = {
   en: english,
@@ -11,9 +12,9 @@ const LANGUAGES = {
 };
 
 export type LanguageValue = {
-  en: any;
-  es: any;
-  pt: any;
+  content: any;
+  selectedLanguage: LOCALES;
+  changeLanguage: (direction: string) => void;
 };
 
 export const LanguageContext = createContext<LanguageValue>(
@@ -25,8 +26,30 @@ interface Props {
 }
 
 const LanguageProvider = ({ children }: Props) => {
+  const [selectedLanguage, setSelectedLanguage] = useState(0);
+  const availableLanguages = [LOCALES.en, LOCALES.es, LOCALES.pt];
+
+  const changeLanguage = (direction: string) => {
+    if (direction === 'back' && selectedLanguage > 0) {
+      setSelectedLanguage(selectedLanguage - 1);
+    }
+
+    if (
+      direction === 'next' &&
+      selectedLanguage < availableLanguages.length - 1
+    ) {
+      setSelectedLanguage(selectedLanguage + 1);
+    }
+  };
+
+  const LanguageContextValue = {
+    content: LANGUAGES[availableLanguages[selectedLanguage]],
+    selectedLanguage: availableLanguages[selectedLanguage],
+    changeLanguage,
+  } as LanguageValue;
+
   return (
-    <LanguageContext.Provider value={LANGUAGES}>
+    <LanguageContext.Provider value={LanguageContextValue}>
       {children}
     </LanguageContext.Provider>
   );

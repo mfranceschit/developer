@@ -3,7 +3,9 @@ import AnimatedTitle from '@/components/AnimatedTitle';
 import Head from 'next/head';
 
 export default function Home() {
-  const { home } = useLanguage();
+  const {
+    content: { home },
+  } = useLanguage();
   const { title, subtitle } = home;
 
   return (

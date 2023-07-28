@@ -1,13 +1,15 @@
 import React from 'react';
+import Head from 'next/head';
 
 import Title from '@/components/Title';
 import { ProjectsGrid } from '@/components/ProjectsGrid';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Project } from '@/types';
-import Head from 'next/head';
 
 const Projects = () => {
-  const { projects } = useLanguage();
+  const {
+    content: { projects },
+  } = useLanguage();
   const { title, items } = projects;
 
   return (

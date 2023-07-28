@@ -1,7 +1,6 @@
-import { LanguageContext } from '@/context';
-import { LOCALES } from '@/types';
-
 import { useContext } from 'react';
+
+import { LanguageContext } from '@/context';
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
@@ -10,5 +9,5 @@ export const useLanguage = () => {
     throw new Error('`useLanguage` must be used within `LanguageProvider`');
   }
 
-  return context[LOCALES.en as LOCALES];
+  return context;
 };

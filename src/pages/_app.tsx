@@ -5,12 +5,12 @@ import './globals.scss';
 
 export default function MyApp({ Component, pageProps }: any) {
   return (
-    <Layout>
-      <TransitionEffect>
-        <Context>
+    <Context>
+      <Layout>
+        <TransitionEffect>
           <Component {...pageProps} />
-        </Context>
-      </TransitionEffect>
-    </Layout>
+        </TransitionEffect>
+      </Layout>
+    </Context>
   );
 }
