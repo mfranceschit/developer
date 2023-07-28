@@ -1,16 +1,33 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaHouse } from 'react-icons/fa6';
 import { usePathname } from 'next/navigation';
 
 import { ROUTES } from '@/routes';
 import SocialButtons from '../SocialButtons';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const Header = () => {
   const path = usePathname();
+  const {
+    content: { menu },
+  } = useLanguage();
+  const { about, work, contact } = menu;
+  const [openMenu, setOpenMenu] = useState(false);
+
+  useEffect(() => {
+    setOpenMenu(false);
+  }, [path]);
+
   return (
     <header className="header">
-      <input type="checkbox" className="openSidebarMenu" id="openSidebarMenu" />
+      <input
+        type="checkbox"
+        className="openSidebarMenu"
+        id="openSidebarMenu"
+        onChange={() => setOpenMenu(!openMenu)}
+        checked={openMenu}
+      />
       <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
         <div className="spinner diagonal part-1"></div>
         <div className="spinner horizontal"></div>
@@ -30,21 +47,21 @@ const Header = () => {
             <Link
               href={ROUTES.about}
               className={ROUTES.about === path ? 'active-path' : ''}>
-              About
+              {about}
             </Link>
           </li>
           <li>
             <Link
               href={ROUTES.projects}
               className={ROUTES.projects === path ? 'active-path' : ''}>
-              Work
+              {work}
             </Link>
           </li>
           <li>
             <Link
               href={ROUTES.contact}
               className={ROUTES.contact === path ? 'active-path' : ''}>
-              Contact
+              {contact}
             </Link>
           </li>
         </ul>

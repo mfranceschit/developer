@@ -1,9 +1,10 @@
 import { nanoid } from 'nanoid';
 
 const es = {
-  home: {
-    title: 'Marco Franceschi',
-    subtitle: `Senior Full-stack Developer`,
+  menu: {
+    about: 'Sobre mí',
+    work: 'Proyectos',
+    contact: 'Contacto',
   },
   about: {
     title: 'Yo',
@@ -15,7 +16,7 @@ const es = {
     ],
   },
   projects: {
-    title: 'Projects',
+    title: 'Proyectos',
     items: [
       {
         id: nanoid(),
