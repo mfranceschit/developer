@@ -8,7 +8,7 @@
     top: 0;
     width: 100%;
     height: 15px;
-    background: linear-gradient(90deg, $light-red 15px, $base-red 10%, $dark-red 45%);
+    background: linear-gradient(90deg, $base-red 30%, $dark-red 45%);
 }
 
 .bottom {
@@ -17,7 +17,7 @@
     bottom: 0;
     width: 100%;
     height: 15px;
-    background: linear-gradient(90deg, $light-red 15px, $base-red 10%, $dark-red 45%);
+    background: linear-gradient(90deg, $base-red 30%, $dark-red 45%);
 }
 
 .left {
@@ -25,7 +25,7 @@
     top: 0;
     width: 15px;
     height: 200%;
-    background-color: $light-red;
+    background-color: $base-red;
 }
 
 .right {

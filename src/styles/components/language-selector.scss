@@ -1,0 +1,23 @@
+.language-selector {
+    font-family: $font-type;
+    color: white;
+    z-index: 99;
+    display: flex;
+
+    h4 {
+        text-transform: uppercase;
+        width: 22px;
+        text-align: center;
+    }
+
+    .button-container {
+        width: 15px;        
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+}
