@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 const en = {
   menu: {
     about: 'About Me',
-    work: 'Proyects',
+    work: 'Projects',
     contact: 'Contact',
   },
   home: {
