@@ -5,8 +5,10 @@ const nextConfig = {
    images: {
       unoptimized: true
    },
-   output: 'export',
-   distDir: 'build',
+   i18n: {
+      locales: ['en', 'es', 'pt'],
+      defaultLocale: 'en'
+   },
    sassOptions: {
       includePaths: [path.join(__dirname, 'styles')],
    }

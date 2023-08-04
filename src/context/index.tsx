@@ -4,6 +4,7 @@ import english from '@/i18n/en';
 import spanish from '@/i18n/es';
 import portuguese from '@/i18n/pt';
 import { LOCALES } from '@/types';
+import { useRouter } from 'next/router';
 
 const LANGUAGES = {
   en: english,
@@ -26,25 +27,22 @@ interface Props {
 }
 
 const LanguageProvider = ({ children }: Props) => {
+  const { locale, locales = [] } = useRouter();
   const [selectedLanguage, setSelectedLanguage] = useState(0);
-  const availableLanguages = [LOCALES.en, LOCALES.es, LOCALES.pt];
 
   const changeLanguage = (direction: string) => {
     if (direction === 'back' && selectedLanguage > 0) {
       setSelectedLanguage(selectedLanguage - 1);
     }
 
-    if (
-      direction === 'next' &&
-      selectedLanguage < availableLanguages.length - 1
-    ) {
+    if (direction === 'next' && selectedLanguage < locales.length - 1) {
       setSelectedLanguage(selectedLanguage + 1);
     }
   };
 
   const LanguageContextValue = {
-    content: LANGUAGES[availableLanguages[selectedLanguage]],
-    selectedLanguage: availableLanguages[selectedLanguage],
+    content: LANGUAGES[locale as LOCALES],
+    selectedLanguage: locale,
     changeLanguage,
   } as LanguageValue;
 

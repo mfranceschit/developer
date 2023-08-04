@@ -14,10 +14,9 @@
         width: 15px;        
     }
 
-    button {
-        background-color: transparent;
-        border: none;
-        color: #fff;
-        cursor: pointer;
+    a {
+        display: flex;
+        align-items: center;
+        height: 100%;
     }
 }

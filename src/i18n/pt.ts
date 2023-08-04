@@ -8,12 +8,12 @@ const pt = {
   },
   home: {
     title: 'Marco Franceschi',
-    subtitle: `Desenvolvedor Full-stack Sênior`,
+    subtitle: `Desenvolvedor Full-Stack Sênior`,
   },
   about: {
     title: 'Eu',
     description: [
-      'Sou um desenvolvedor Full-stack com mais de 6 anos de experiência, especializado em JavaScript. Para mim, programação é uma forma de arte pela qual transformo ideias em realidade usando tecnologia.',
+      'Sou um desenvolvedor Full-Stack com mais de 6 anos de experiência, especializado em JavaScript. Para mim, programação é uma forma de arte pela qual transformo ideias em realidade usando tecnologia.',
       'Tenho ampla experiência na criação de aplicações web e mobile, seguindo as melhores práticas e padrões da indústria. Estou sempre aberto a explorar novas tecnologias e me manter atualizado sobre as últimas bibliotecas e frameworks da comunidade tecnológica.',
       'Atualmente, é fundamental dominar ferramentas que permitem compilar, implantar e monitorar aplicativos. Sinto-me confortável construindo e gerenciando infraestrutura em ambientes de nuvem, como AWS, Azure e GCP. Além disso, tenho experiência em configurar pipelines personalizados para integração e implantação contínuas. Utilizo ferramentas como Terraform, New Relic e Docker para aprimorar meu fluxo de trabalho.',
       'Não podemos esquecer que o desenvolvimento de software é baseado nas pessoas que o realizam. Ao longo da minha carreira, tive o privilégio de trabalhar e aprender com profissionais excepcionais que admiro. Além disso, orientar novos desenvolvedores tem sido uma experiência gratificante.',
@@ -86,7 +86,7 @@ const pt = {
         title: 'EnergyBillKill',
         description: [
           'Encontre o melhor fornecedor de energia que se adapte a você por meio de um aplicativo móvel para Android / iOS, sem precisar sair de casa. Esse foi o objetivo do projeto, baseado em uma arquitetura de microsserviços construída completamente no JavaScript stack.',
-          'Foi minha primeira abordagem à integração de serviços da AWS, como SNS, SES, Lambda, Cognito, DynamoDB, entre outros. Atuei como desenvolvedor Full-stack, utilizando Node.js para o backend e React Native para o frontend.',
+          'Foi minha primeira abordagem à integração de serviços da AWS, como SNS, SES, Lambda, Cognito, DynamoDB, entre outros. Atuei como desenvolvedor Full-Stack, utilizando Node.js para o backend e React Native para o frontend.',
         ],
         url: 'https://apps.apple.com/us/app/energybillkill/id1436518949',
         repo: '',
