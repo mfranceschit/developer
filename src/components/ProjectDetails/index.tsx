@@ -1,8 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { Dispatch, SetStateAction } from 'react';
 import { FaX } from 'react-icons/fa6';
+import Image from 'next/image';
 
 import { Project } from '@/types';
+import { useImageSize } from '@/hooks/useImageSize';
 
 const ProjectDetails = ({
   project,
@@ -12,7 +13,9 @@ const ProjectDetails = ({
   setSelectedProject: Dispatch<SetStateAction<Project | undefined>>;
 }) => {
   const { title, url, description, img } = project;
-  const imageSrc = `../../assets/images/${img}`;
+  const imageSrc = `/assets/images/${img}`;
+  const { width, height } = useImageSize();
+
   return (
     <>
       <div className="card-header">
@@ -25,10 +28,12 @@ const ProjectDetails = ({
         <div className="project-information">
           <div className="image-container">
             <a rel="noopener noreferrer" target="_blank" href={url}>
-              <img
+              <Image
                 src={imageSrc}
-                alt={`${title} project image`}
+                height={height}
+                width={width}
                 className="card-img-placeholder"
+                alt={`${title} project image`}
               />
             </a>
           </div>

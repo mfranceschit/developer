@@ -103,6 +103,10 @@
   padding-bottom: 20px;
 }
 
+.image-container {
+  display: flex;
+}
+
 @media (max-width: 800px) {
   .card-content {
     display: block;

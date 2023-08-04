@@ -2,9 +2,6 @@ const path = require('path')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   images: {
-      unoptimized: true
-   },
    i18n: {
       locales: ['en', 'es', 'pt'],
       defaultLocale: 'en'
