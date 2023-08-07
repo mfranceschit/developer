@@ -24,16 +24,16 @@
 }
 .cp-transition .card-wrapper {
   position: absolute;
-  top: 0;
+  top: 0px;
   left: 0;
   width: 100%;
   height: 100%;
   padding: 30px;
+  z-index: 9999;
+  background: linear-gradient(90deg, $base-red 30%, $dark-red 45%);
+  overflow-y: scroll;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: min-content 1fr;
   gap: 20px;
-  z-index: 9999;
-  background: linear-gradient(90deg, $base-red 30%, $dark-red 45%)
 }
-
