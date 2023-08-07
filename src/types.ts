@@ -5,6 +5,7 @@ export interface Project {
   description: string[];
   url: string;
   repo: string;
+  technologies: string[];
 }
 
 export enum LOCALES {
