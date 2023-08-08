@@ -25,10 +25,10 @@ const Certifications = () => {
       </Head>
       <Title>{title}</Title>
       <div className="text-wrapper">
-        <h2>{certificatesTitle}</h2>
+        <h2 className="certifications-subtitle">{certificatesTitle}</h2>
         <Badges entries={certificates as Badge[]} />
 
-        <h2>{degreesTitle}</h2>
+        <h2 className="certifications-subtitle">{degreesTitle}</h2>
         <Badges entries={degrees as Badge[]} />
       </div>
     </section>
