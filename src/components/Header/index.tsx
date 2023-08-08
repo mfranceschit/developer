@@ -12,7 +12,7 @@ const Header = () => {
   const {
     content: { menu },
   } = useLanguage();
-  const { about, work, contact } = menu;
+  const { about, work, certifications, contact } = menu;
   const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
@@ -55,6 +55,13 @@ const Header = () => {
               href={ROUTES.projects}
               className={ROUTES.projects === path ? 'active-path' : ''}>
               {work}
+            </Link>
+          </li>
+          <li>
+            <Link
+              href={ROUTES.certifications}
+              className={ROUTES.certifications === path ? 'active-path' : ''}>
+              {certifications}
             </Link>
           </li>
           <li>

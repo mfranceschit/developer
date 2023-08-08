@@ -8,6 +8,14 @@ export interface Project {
   technologies: string[];
 }
 
+export interface Badge {
+  id: string;
+  img: string;
+  name: string;
+  issued: string;
+  url: string;
+}
+
 export enum LOCALES {
   en = 'en',
   es = 'es',
