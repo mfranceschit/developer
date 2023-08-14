@@ -1,35 +1,19 @@
-.certifications-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 400px;
-}
-
-.text-wrapper {
-    max-width: 730px;
+.certifications-subtitle {
+    font-size: 20px;
+    font-family: $font-type;
+    color: $base-red;
     margin-left: 15px;
-    margin-right: 15px;
-
-    .certifications-subtitle {
-        font-size: 20px;
-        font-family: $font-type;
-        color: $base-red;
-    }
 }
+
 
 .certifications-text-paragraph {
     text-align: justify;
     margin-bottom: 10px;
 }
 
-@media (max-width: 800px) {
-    .certifications-container {
-        flex-direction: column;
-        margin-top: 40px;
-    }
 
-    .text-block {
+@media (max-width: 800px) {
+    .certifications-subtitle {
         margin-left: 0;
-        margin-right: 0;
     }
-  }
+}

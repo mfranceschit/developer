@@ -1,7 +1,7 @@
 .badges-container {
     display: flex;
     flex-direction: row;
-    margin: 2em 0;
+    margin: 2em 0 2em 15px;
     max-width: 840px;
 }
 
@@ -49,6 +49,7 @@
 @media (max-width: 800px) {
     .badges-container {
         flex-direction: column;
+        margin-left: 0;
     }
 
     .badge {

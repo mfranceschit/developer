@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 
-import Title from '@/components/Title';
 import { ProjectsGrid } from '@/components/ProjectsGrid';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Project } from '@/types';
@@ -13,15 +12,12 @@ const Projects = () => {
   const { title, items } = projects;
 
   return (
-    <section className="projects-container">
+    <div className="text-wrapper">
       <Head>
         <title>{`Marco Franceschi 🧑🏾‍💻 ${title}`}</title>
       </Head>
-      <Title>{title}</Title>
-      <div className="text-wrapper">
-        <ProjectsGrid projects={items as Project[]} />
-      </div>
-    </section>
+      <ProjectsGrid projects={items as Project[]} />
+    </div>
   );
 };
 

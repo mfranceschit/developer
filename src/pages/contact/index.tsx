@@ -1,6 +1,5 @@
 import React, { FormEvent } from 'react';
 
-import Title from '@/components/Title';
 import SocialButtons from '@/components/SocialButtons';
 import { useLanguage } from '@/hooks/useLanguage';
 import Head from 'next/head';
@@ -41,31 +40,28 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact-container">
+    <div className="text-wrapper">
       <Head>
         <title>{`Marco Franceschi 📫 ${title}`}</title>
       </Head>
-      <Title>{title}</Title>
-      <div className="text-wrapper">
-        <h2 className="contact-description">{description}</h2>
-        <form className="contact-form" onSubmit={submit}>
-          <input name="subject" type="text" placeholder={placeholderSubject} />
-          <textarea
-            name="message"
-            rows={5}
-            cols={40}
-            placeholder={placeholderMessage}></textarea>
-          <button type="submit">{cta}</button>
-        </form>
+      <h2 className="contact-description">{description}</h2>
+      <form className="contact-form" onSubmit={submit}>
+        <input name="subject" type="text" placeholder={placeholderSubject} />
+        <textarea
+          name="message"
+          rows={5}
+          cols={40}
+          placeholder={placeholderMessage}></textarea>
+        <button type="submit">{cta}</button>
+      </form>
 
-        <div className="social">
-          <p>
-            {socials} <strong>mfranceschit</strong>
-          </p>
-          <SocialButtons size={30} />
-        </div>
+      <div className="social">
+        <p>
+          {socials} <strong>mfranceschit</strong>
+        </p>
+        <SocialButtons size={30} />
       </div>
-    </section>
+    </div>
   );
 };
 

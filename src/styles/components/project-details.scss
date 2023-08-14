@@ -90,12 +90,17 @@
 .image-container {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   flex: 0.5;
 }
 
 @media (max-width: 800px) {
   .card-content {
     display: block;
+    
+    .image-container {
+      margin-bottom: 10px;
+    }
 
     h2 {
       font-size: 40px;

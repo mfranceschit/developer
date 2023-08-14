@@ -1,15 +1,6 @@
-.contact-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-    flex: 1;
-}
-
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
     margin-top: 30px;
 }
 
@@ -56,18 +47,11 @@
 .text-wrapper .contact-description, .text-wrapper .contact-form, .text-wrapper .social {
     max-width: 730px;
     margin-left: 15px;
-    margin-right: 15px;
     font-family: $font-type;
 }
 
-
 @media (max-width: 800px) {
-    .contact-container {
-      flex-direction: column;
-      margin-top: 40px;
-    }
-
-    .text-wrapper {
+    .text-wrapper { 
         margin-top: 15px;
         width: 100%;
     }
