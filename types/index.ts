@@ -21,3 +21,7 @@ export enum LOCALES {
   es = 'es',
   pt = 'pt',
 }
+
+export interface ServerComponentProps {
+  params: { locale: string };
+}

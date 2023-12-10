@@ -253,6 +253,28 @@ const en = {
     socials: 'Find me on social media as ',
     submitted: 'Great! Talk to you soon',
   },
+  serps: {
+    home: {
+      title: 'Marco Franceschi 🏠',
+      description: '',
+    },
+    projects: {
+      title: 'Projects 🧑🏾‍💻 ',
+      description: '',
+    },
+    about: {
+      title: 'Me 🙋🏽‍♂️ ',
+      description: '',
+    },
+    certifications: {
+      title: 'Certifications 🏆 ',
+      description: '',
+    },
+    contact: {
+      title: 'Contact 📫 ',
+      description: '',
+    },
+  },
 };
 
 export default en;
