@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../ProjectCard';
 import ProjectDetails from '../ProjectDetails';
 import { Project } from '@/types';
+import styles from './project-grid.module.scss';
 
 const wrapperVariants = {
   initial: {
@@ -26,11 +27,11 @@ export const ProjectsGrid = ({ projects = [] }: { projects: Project[] }) => {
   const [selectedProject, setSelectedProject] = useState<Project | undefined>();
 
   return (
-    <div className={`cp-transition cp-transition-container`}>
+    <div className={`${styles.cpTransition} ${styles.cpTransitionContainer}`}>
       <AnimatePresence mode="sync" initial={false}>
         {selectedProject ? (
           <motion.div
-            className={`card card-wrapper `}
+            className={`${styles.card} ${styles.cardWrapper} `}
             key="card"
             variants={wrapperVariants}
             initial="initial"
@@ -43,7 +44,7 @@ export const ProjectsGrid = ({ projects = [] }: { projects: Project[] }) => {
           </motion.div>
         ) : (
           <motion.div
-            className="cp-transition-squares-wrapper"
+            className={styles.cpTransitionSquaresWrapper}
             key="squares"
             variants={{
               ...wrapperVariants,

@@ -1,11 +1,11 @@
-.contact-form {
+.contactForm {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
     gap: 1rem;
 }
 
-.contact-form input, .contact-form textarea {
+.contactForm input, .contactForm textarea {
     background-color: transparent;
     border-top: 0;
     border-right: 0;
@@ -17,11 +17,11 @@
     border-radius: 0;;
 }
 
-.contact-form textarea {
+.contactForm textarea {
     resize: none;
 }
 
-.contact-form button {
+.contactForm button {
     margin-top: 10px;
     border: 2px solid $base-red;
     cursor: pointer;
@@ -33,19 +33,12 @@
     color: #000;
 }
 
-.contact-form button:hover {
+.contactForm button:hover {
     color: white;
     background-color: $base-red;
 }
 
-.social {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 30px;
-}
-
- .wrapper .contact-form, .wrapper .social {
+ .wrapper .contactForm {
     max-width: 730px;
     margin-left: 15px;
     font-family: $font-type;
@@ -57,15 +50,8 @@
         width: 100%;
     }
 
-    .wrapper .contact-description, .wrapper .contact-form, .wrapper .social {
+    .wrapper .contactDescription, .wrapper .contactForm {
         margin-left: 0;
         margin-right: 0;
-    }
-
-    .wrapper .social {
-        align-items: flex-end;
-        p {
-            text-align: end;
-        }
     }
 }

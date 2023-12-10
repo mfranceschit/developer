@@ -1,23 +1,23 @@
-.card-header {
+.cardHeader {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.card-header h2 {
+.cardHeader h2 {
   font-size: 3.2rem;
   font-weight: 700;
   font-family: $font-type;
 }
-.card-header button {
+.cardHeader button {
   color: white;
   border: none;
   background: transparent;
   cursor: pointer;
 }
-.card-header button:focus {
+.cardHeader button:focus {
   outline: none;
 }
-.card-content {
+.cardContent {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -25,23 +25,23 @@
   gap: 10px;
 }
 
-.card-img-placeholder {
+.cardImgPlaceholder {
   object-fit: contain;
   width: 100%;
 }
 
-.project-information {
+.projectInformation {
   flex: 0.5;
   text-align: justify;
   line-height: 125%;
   font-size: 1.6rem;
 }
 
-.project-text-paragraph {
+.projectTextParagraph {
   text-align: justify;
 }
 
-.technologies-container {
+.technologiesContainer {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
@@ -58,7 +58,7 @@
   }
 }
 
-.card-text-placeholder {
+.cardTextPlaceholder {
   max-width: 770px;
   margin: 0 auto;
 
@@ -82,12 +82,12 @@
     font-weight: 600;
   }
 
-  .text-bottom-space {
+  .textBottomSpace {
     height: 100px;
   }
 }
 
-.image-container {
+.imageContainer {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -95,10 +95,10 @@
 }
 
 @media (max-width: 800px) {
-  .card-content {
+  .cardContent {
     display: block;
     
-    .image-container {
+    .imageContainer {
       margin-bottom: 10px;
     }
 
@@ -112,13 +112,13 @@
 }
 
 @media  (max-height: 900px)  {
-  .project-information {
+  .projectInformation {
     height: 600px;
    }
 }
 
 @media (max-height: 820px ) and (min-width: 1024px) {
-  .project-information {
+  .projectInformation {
     height: 500px;
   }
 }

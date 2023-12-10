@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import Title from '@/components/Title';
 import en from '@/locales/en';
+import styles from './transition-effect.module.scss';
 
 const variants = {
   fadeIn: {
@@ -39,10 +40,10 @@ const TransitionEffect = ({ children }: { children: ReactNode }) => {
   const { title = '' } = en.home;
 
   return (
-    <div className="effect">
+    <div className={styles.effect}>
       <AnimatePresence initial={false} mode="wait">
         <motion.section
-          className="container"
+          className={styles.container}
           key={pathname}
           variants={variants}
           initial="fadeIn"

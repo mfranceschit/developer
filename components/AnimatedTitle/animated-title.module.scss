@@ -1,4 +1,4 @@
-.animated-text {
+.animatedText {
     position: relative;
     top: 50%;  
     width: 9em;
@@ -14,7 +14,7 @@
 }
 
 /* Animation */
-.typewriter-animation {
+.typewriterAnimation {
   animation: blinkTextCursor 500ms steps(44) infinite normal;
 }
 
@@ -24,7 +24,7 @@
 }
 
 @media (max-width: 800px) {
-  .animated-text {
+  .animatedText {
     font-size: 36px;
   }
 }

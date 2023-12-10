@@ -7,7 +7,7 @@
     z-index: 999;
   }
 
-.active-path {
+.activePath {
     border-bottom: 2px solid #fff;
   }
   
@@ -124,7 +124,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     margin-top: -9px;
 }
 
-.header-socials {
+.headerSocials {
   display: flex;
   justify-content: flex-start;
   padding-left: 20px;

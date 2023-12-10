@@ -5,6 +5,7 @@ import Badges from '@/components/Badges';
 import Title from '@/components/Title';
 import { Badge } from '@/types';
 import en from '@/locales/en';
+import styles from './certifications.module.scss';
 
 const Certifications = () => {
   const {
@@ -22,11 +23,11 @@ const Certifications = () => {
       </Head>
       <Title>{title}</Title>
 
-      <div className="certifications-wrapper">
-        <h2 className="certifications-subtitle">{certificatesTitle}</h2>
+      <div className={styles.certificationsWrapper}>
+        <h2 className={styles.certificationsSubtitle}>{certificatesTitle}</h2>
         <Badges entries={certificates as Badge[]} />
 
-        <h2 className="certifications-subtitle">{degreesTitle}</h2>
+        <h2 className={styles.certificationsSubtitle}>{degreesTitle}</h2>
         <Badges entries={degrees as Badge[]} />
       </div>
     </section>

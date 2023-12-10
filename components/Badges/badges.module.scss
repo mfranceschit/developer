@@ -1,4 +1,4 @@
-.badges-container {
+.badgesContainer {
     display: flex;
     flex-direction: row;
     margin: 2em 0 2em 15px;
@@ -13,9 +13,10 @@
     justify-content: center;
     align-items: center;
     margin-right: 2em;
+    cursor: pointer;
 
 
-    .badge-details {
+    .badgeDetails {
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -24,7 +25,7 @@
         transform: rotateY(180deg);
 
 
-        .badge-title {
+        .badgeTitle {
             display: flex;
             justify-content: space-between;
 
@@ -35,7 +36,7 @@
             }
         }
 
-        .engraved-text {
+        .engravedText {
             font-size: 12px;
             font-family: $font-type;
             -webkit-background-clip: text;
@@ -47,7 +48,7 @@
 }
 
 @media (max-width: 800px) {
-    .badges-container {
+    .badgesContainer {
         flex-direction: column;
         margin-left: 0;
     }

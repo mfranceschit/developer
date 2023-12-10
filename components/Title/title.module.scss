@@ -1,4 +1,4 @@
-.main-title {
+.mainTitle {
     font-size: 60px;
     color: $base-red;
     flex: 0.5;
@@ -7,13 +7,13 @@
 }
 
 @media (max-width: 1400px) {
-    .main-title {
+    .mainTitle {
         width: 100%;
     }
 }
 
 @media (max-width: 800px) {
-    .main-title {
+    .mainTitle {
         text-align: left;
         font-size: 40px;
     }

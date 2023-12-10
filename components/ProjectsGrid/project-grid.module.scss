@@ -1,17 +1,17 @@
-.cp-transition-container {
+.cpTransitionContainer {
   height: 100%;
   width: 100%;
 }
 @media (max-width: 768px) {
-  .cp-transition-container {
+  .cpTransitionContainer {
     min-height: 250px;
  }
 }
-.cp-transition-container > div {
+.cpTransitionContainer > div {
   height: 100%;
 }
 
-.cp-transition-squares-wrapper {
+.cpTransitionSquaresWrapper {
   height: 100%;
   max-width: 840px;
   display: flex;
@@ -19,10 +19,10 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.cp-transition .card {
+.cpTransition .card {
   color: white;
 }
-.cp-transition .card-wrapper {
+.cpTransition .cardWrapper {
   position: absolute;
   top: 0px;
   left: 0;

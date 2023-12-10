@@ -1,4 +1,4 @@
-.certifications-subtitle {
+.certificationsSubtitle {
     font-size: 20px;
     font-family: $font-type;
     color: $base-red;
@@ -6,14 +6,14 @@
 }
 
 
-.certifications-text-paragraph {
+.certificationsTextParagraph {
     text-align: justify;
     margin-bottom: 10px;
 }
 
 
 @media (max-width: 800px) {
-    .certifications-subtitle {
+    .certificationsSubtitle {
         margin-left: 0;
     }
 }

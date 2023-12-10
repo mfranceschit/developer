@@ -9,12 +9,12 @@
 
 }
 
-.square-box {
+.squareBox {
   border: 2px solid $base-red;
   background-color: #fff;
 }
 
-.square-box:hover {
+.squareBox:hover {
   background-color: $base-red;
 }
 
@@ -23,7 +23,7 @@
   transform: translateY(-3px) !important;
 }
 
-.box-content {
+.boxContent {
   display: flex;
   flex: 1;
   justify-content: center;
@@ -37,7 +37,7 @@
   }
 }
 
-.box-content:hover h3 {
+.boxContent:hover h3 {
   color: #fff;
 }
 
