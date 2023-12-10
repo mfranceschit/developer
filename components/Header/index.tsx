@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaHouse } from 'react-icons/fa6';
@@ -5,14 +7,11 @@ import { usePathname } from 'next/navigation';
 
 import SocialButtons from '@/components/SocialButtons';
 import { ROUTES } from '@/constants/routes';
-import { useLanguage } from '@/hooks/useLanguage';
+import en from '@/locales/en';
 
 const Header = () => {
   const path = usePathname();
-  const {
-    content: { menu },
-  } = useLanguage();
-  const { about, work, certifications, contact } = menu;
+  const { about, work, certifications, contact } = en.menu;
   const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {

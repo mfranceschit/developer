@@ -1,9 +1,11 @@
-import React, { ReactNode } from 'react';
-import { useRouter } from 'next/router';
-import { AnimatePresence, motion } from 'framer-motion';
+'use client';
 
-import { useLanguage } from '@/hooks/useLanguage';
+import React, { ReactNode } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+
 import Title from '@/components/Title';
+import en from '@/locales/en';
 
 const variants = {
   fadeIn: {
@@ -33,24 +35,21 @@ const variants = {
 };
 
 const TransitionEffect = ({ children }: { children: ReactNode }) => {
-  const { asPath } = useRouter();
-  const currentPage = asPath.replace('/', '');
-  const { content } = useLanguage();
-  const { title = '' } = content[currentPage]
-    ? content[currentPage]
-    : content['home'];
+  const pathname = usePathname();
+  const currentPage = pathname.replace('/', '');
+  const { title = '' } = en[currentPage] ? en[currentPage] : en['home'];
 
   return (
     <div className="effect">
       <AnimatePresence initial={false} mode="wait">
         <motion.section
           className="container"
-          key={asPath}
+          key={pathname}
           variants={variants}
           initial="fadeIn"
           animate="inactive"
           exit="fadeOut">
-          {content[currentPage] && <Title>{title}</Title>}
+          {currentPage && <Title>{title}</Title>}
           {children}
         </motion.section>
       </AnimatePresence>

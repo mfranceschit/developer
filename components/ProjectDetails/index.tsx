@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { Project } from '@/types';
 import { useImageSize } from '@/hooks/useImageSize';
-import { useLanguage } from '@/hooks/useLanguage';
+import en from '@/locales/en';
 
 const ProjectDetails = ({
   project,
@@ -14,10 +14,8 @@ const ProjectDetails = ({
   setSelectedProject: Dispatch<SetStateAction<Project | undefined>>;
 }) => {
   const { width, height } = useImageSize();
-  const {
-    content: { projects },
-  } = useLanguage();
-  const { stack, summary } = projects;
+
+  const { stack, summary } = en.projects;
   const { title, url, description, img, technologies } = project;
   const imageSrc = `/assets/images/${img}`;
 

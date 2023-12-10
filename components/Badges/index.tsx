@@ -1,7 +1,8 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
 
 import { Badge } from '@/types';
@@ -24,7 +25,7 @@ const badgeVariants = {
   },
 };
 const Badges: React.FC<{ entries: Badge[] }> = ({ entries }) => {
-  const { locale } = useRouter();
+  const { locale } = { locale: 'en' };
   const [selectedBadge, setSelectedBadge] = useState<Badge | null>(null);
 
   const selectBadge = (badge: Badge) => {

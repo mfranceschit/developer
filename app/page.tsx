@@ -1,12 +1,10 @@
-import { useLanguage } from '@/hooks/useLanguage';
-import AnimatedTitle from '@/components/AnimatedTitle';
 import Head from 'next/head';
 
-export default function Home() {
-  const {
-    content: { home },
-  } = useLanguage();
-  const { title, subtitle } = home;
+import AnimatedTitle from '@/components/AnimatedTitle';
+import en from '@/locales/en';
+
+const Home = () => {
+  const { title, subtitle } = en.home;
 
   return (
     <section className="home-container">
@@ -17,4 +15,6 @@ export default function Home() {
       <p>{subtitle}</p>
     </section>
   );
-}
+};
+
+export default Home;
