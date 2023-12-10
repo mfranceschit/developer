@@ -7,17 +7,11 @@ import SocialButtons from '@/components/SocialButtons';
 import ContactForm from '@/components/ContactForm';
 import Title from '@/components/Title';
 import en from '@/locales/en';
+import styles from './contact.module.scss';
 
 const Contact = () => {
-  const {
-    title,
-    description,
-    cta,
-    socials,
-    placeholderSubject,
-    placeholderMessage,
-    submitted,
-  } = en.contact;
+  const { title, description, cta, socials, placeholderMessage, submitted } =
+    en.contact;
 
   return (
     <section className="wrapper">
@@ -26,7 +20,7 @@ const Contact = () => {
       </Head>
       <Title>{title}</Title>
 
-      <div className="form-wrapper">
+      <div className={styles.formWrapper}>
         <ContactForm
           title={description}
           submittedMessage={submitted}
@@ -34,7 +28,7 @@ const Contact = () => {
           cta={cta}
         />
 
-        <div className="social">
+        <div className={styles.social}>
           <p>
             {socials} <strong>mfranceschit</strong>
           </p>

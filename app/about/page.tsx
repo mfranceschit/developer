@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 import en from '@/locales/en';
 import Title from '@/components/Title';
+import styles from './about.module.scss';
 
 const About = () => {
   const { title = '', description = [] } = en.about;
@@ -13,9 +14,9 @@ const About = () => {
         <title>{`Marco Franceschi 🙋🏽‍♂️ ${title}`}</title>
       </Head>
       <Title>{title}</Title>
-      <div className="text-block">
+      <div className={styles.textBlock}>
         {description.map((paragraph: string, index: number) => (
-          <p key={index} className="about-text-paragraph">
+          <p key={index} className={styles.aboutTextParagraph}>
             {paragraph}
           </p>
         ))}

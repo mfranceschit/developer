@@ -1,0 +1,16 @@
+.textBlock {
+    max-width: 730px;
+    margin-left: 15px;
+}
+
+.aboutTextParagraph {
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 800px) {
+    .textBlock {
+        margin-left: 0;
+    }
+}
