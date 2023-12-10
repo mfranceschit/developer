@@ -6,8 +6,17 @@ import { useForm, ValidationError } from '@formspree/react';
 import { formspreeKey } from '@/constants/environment';
 import { ContactFormProps } from './types';
 
-const ContactForm = ({ title, placeholderMessage, cta }: ContactFormProps) => {
+const ContactForm = ({
+  title,
+  placeholderMessage,
+  cta,
+  submittedMessage,
+}: ContactFormProps) => {
   const [state, handleSubmit] = useForm(formspreeKey);
+
+  if (state.succeeded) {
+    return <p>{submittedMessage}</p>;
+  }
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>

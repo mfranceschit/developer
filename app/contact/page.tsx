@@ -16,6 +16,7 @@ const Contact = () => {
     socials,
     placeholderSubject,
     placeholderMessage,
+    submitted,
   } = en.contact;
 
   return (
@@ -28,7 +29,7 @@ const Contact = () => {
       <div className="form-wrapper">
         <ContactForm
           title={description}
-          placeholderSubject={placeholderSubject}
+          submittedMessage={submitted}
           placeholderMessage={placeholderMessage}
           cta={cta}
         />
