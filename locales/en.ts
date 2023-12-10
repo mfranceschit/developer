@@ -253,6 +253,33 @@ const en = {
     socials: 'Find me on social media as ',
     submitted: 'Great! Talk to you soon',
   },
+  serps: {
+    home: {
+      title: 'Marco Franceschi 🏠',
+      description:
+        'A seasoned full-stack developer with expertise in building high-performance web applications.',
+    },
+    about: {
+      title: 'Me 🙋🏽‍♂️',
+      description:
+        'Full-stack developer with 6+ years of experience building web & mobile apps. Passionate coder, cloud & CI/CD expert, loves learning & collaboration.',
+    },
+    projects: {
+      title: 'Projects 🧑🏾‍💻',
+      description:
+        'Explore my diverse portfolio of projects built with cutting-edge technologies like TypeScript, Node.js, React, and more.',
+    },
+    certifications: {
+      title: 'Certifications 🏆',
+      description:
+        'Dive deeper into my technical background and explore the certifications and education that have shaped my skills as a full-stack developer',
+    },
+    contact: {
+      title: 'Contact 📫',
+      description:
+        "Interested in working together? I'm always open to exciting opportunities and connecting with fellow tech enthusiasts.",
+    },
+  },
 };
 
 export default en;
