@@ -53,7 +53,7 @@
     font-family: $font-type;
 }
 
-input#openSidebarMenu[type=checkbox] {
+input[type=checkbox] {
     transition: all 0.3s;
     box-sizing: border-box;
     display: none;
@@ -85,13 +85,13 @@ input#openSidebarMenu[type=checkbox] {
     float: left;
     margin-top: 4px;
 }
-.diagonal.part1 {
+.diagonal.part-1 {
     position: relative;
     transition: all 0.3s;
     box-sizing: border-box;
     float: left;
 }
-.diagonal.part2 {
+.diagonal.part-2 {
     transition: all 0.3s;
     box-sizing: border-box;
     position: relative;
@@ -99,24 +99,24 @@ input#openSidebarMenu[type=checkbox] {
     margin-top: 4px;
 }
 
-input#openSidebarMenu[type="checkbox"]:checked ~ #sidebarMenu {
+input[type="checkbox"]:checked ~ #sidebarMenu {
   transform: translateX(0px);
 }
 
-input#openSidebarMenu[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
     background-color: #fff;
     transition: all 0.3s;
     box-sizing: border-box;
     opacity: 0;
   }
-  input#openSidebarMenu[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part1 {
+  input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
   background-color: #fff;
   transition: all 0.3s;
   box-sizing: border-box;
   transform: rotate(135deg);
   margin-top: 8px;
 }
-input#openSidebarMenu[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part2 {
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
   background-color: #fff;
     transition: all 0.3s;
     box-sizing: border-box;

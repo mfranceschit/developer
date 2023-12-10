@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import SocialButtons from '@/components/SocialButtons';
 import { ROUTES } from '@/constants/routes';
 import en from '@/locales/en';
-import styles from './header.module.scss';
+import './header.scss';
 
 const Header = () => {
   const path = usePathname();
@@ -20,64 +20,60 @@ const Header = () => {
   }, [path]);
 
   return (
-    <header className={styles.header}>
+    <header className="header">
       <input
         type="checkbox"
-        className={styles.openSidebarMenu}
+        className="openSidebarMenu"
         id="openSidebarMenu"
         onChange={() => setOpenMenu(!openMenu)}
         checked={openMenu}
       />
-      <label htmlFor="openSidebarMenu" className={styles.sidebarIconToggle}>
-        <div
-          className={`${styles.spinner} ${styles.diagonal} ${styles.part1}`}></div>
-        <div className={`${styles.spinner} ${styles.horizontal}`}></div>
-        <div
-          className={`${styles.spinner} ${styles.diagonal} ${styles.part2}`}></div>
+      <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
+        <div className={'spinner diagonal part-1'}></div>
+        <div className={'spinner horizontal'}></div>
+        <div className={'spinner diagonal part-2'}></div>
       </label>
       <div id="sidebarMenu">
-        <ul className={styles.sidebarMenuInner}>
+        <ul className="sidebarMenuInner">
           <li>
             <Link
               href={ROUTES.home}
               passHref
-              className={ROUTES.home === path ? styles.activePath : ''}>
+              className={ROUTES.home === path ? 'activePath' : ''}>
               <FaHouse />
             </Link>
           </li>
           <li>
             <Link
               href={ROUTES.about}
-              className={ROUTES.about === path ? styles.activePath : ''}>
+              className={ROUTES.about === path ? 'activePath' : ''}>
               {about}
             </Link>
           </li>
           <li>
             <Link
               href={ROUTES.projects}
-              className={ROUTES.projects === path ? styles.activePath : ''}>
+              className={ROUTES.projects === path ? 'activePath' : ''}>
               {work}
             </Link>
           </li>
           <li>
             <Link
               href={ROUTES.certifications}
-              className={
-                ROUTES.certifications === path ? styles.activePath : ''
-              }>
+              className={ROUTES.certifications === path ? 'activePath' : ''}>
               {certifications}
             </Link>
           </li>
           <li>
             <Link
               href={ROUTES.contact}
-              className={ROUTES.contact === path ? styles.activePath : ''}>
+              className={ROUTES.contact === path ? 'activePath' : ''}>
               {contact}
             </Link>
           </li>
         </ul>
 
-        <div className={styles.headerSocials}>
+        <div className="headerSocials">
           {path !== ROUTES.contact && <SocialButtons size={24} />}
         </div>
       </div>
