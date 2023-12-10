@@ -1,39 +1,38 @@
 'use client';
 
-import React, { FormEvent } from 'react';
+import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 
-import { ContactFormProps, ContactFormPayload } from './types';
+import { formspreeKey } from '@/constants/environment';
+import { ContactFormProps } from './types';
 
 const ContactForm = ({
   title,
-  placeholderSubject,
   placeholderMessage,
   cta,
+  submittedMessage,
 }: ContactFormProps) => {
-  const submit = (form: FormEvent<ContactFormPayload>) => {
-    form.preventDefault();
-    const target = form.currentTarget.elements;
-    const data = {
-      subject: target.subject.value,
-      message: target.message.value,
-    };
+  const [state, handleSubmit] = useForm(formspreeKey);
 
-    window.open(
-      `mailto:franceschi.marco@gmail.com?subject=${data.subject}&body=${data.message}`,
-    );
-  };
+  if (state.succeeded) {
+    return <p>{submittedMessage}</p>;
+  }
 
   return (
-    <form className="contact-form" onSubmit={submit}>
+    <form className="contact-form" onSubmit={handleSubmit}>
       <h2 className="contact-description">{title}</h2>
-
-      <input name="subject" type="text" placeholder={placeholderSubject} />
+      <input id="email" name="email" type="text" placeholder="Email" />
+      <ValidationError prefix="Email" field="email" errors={state.errors} />
       <textarea
+        id="message"
         name="message"
         rows={5}
         cols={40}
         placeholder={placeholderMessage}></textarea>
-      <button type="submit">{cta}</button>
+      <ValidationError prefix="Message" field="message" errors={state.errors} />
+      <button type="submit" disabled={state.submitting}>
+        {cta}
+      </button>
     </form>
   );
 };

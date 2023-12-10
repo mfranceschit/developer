@@ -251,6 +251,7 @@ const en = {
     placeholderSubject: 'Subject',
     placeholderMessage: 'Message',
     socials: 'Find me on social media as ',
+    submitted: 'Great! Talk to you soon',
   },
 };
 
