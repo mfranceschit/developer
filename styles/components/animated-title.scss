@@ -1,7 +1,7 @@
 .animated-text {
     position: relative;
     top: 50%;  
-    width: 8em;
+    width: 9em;
     margin: 0 auto;
     border-right: 2px solid rgba(255,255,255,.75);
     font-size: 60px;
@@ -15,13 +15,9 @@
 
 /* Animation */
 .typewriter-animation {
-  animation: typewriter 4s steps(44) 1s 1 normal both,
-  blinkTextCursor 500ms steps(44) infinite normal;
+  animation: blinkTextCursor 500ms steps(44) infinite normal;
 }
-@keyframes typewriter{
-  from{width: 0;}
-  to{width: 9em;}
-}
+
 @keyframes blinkTextCursor{
   from{border-right-color: $base-red;}
   to{border-right-color: transparent;}
