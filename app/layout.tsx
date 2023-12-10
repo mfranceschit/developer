@@ -1,3 +1,5 @@
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Line from '@/components/Line';
@@ -14,6 +16,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Line position="bottom" />
         <Line position="left" />
         <Line position="right" />
+        <SpeedInsights />
       </body>
     </html>
   );
