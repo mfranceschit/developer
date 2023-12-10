@@ -5,6 +5,7 @@ import { useForm, ValidationError } from '@formspree/react';
 
 import { formspreeKey } from '@/constants/environment';
 import { ContactFormProps } from './types';
+import styles from './contact-form.module.scss';
 
 const ContactForm = ({
   title,
@@ -19,8 +20,8 @@ const ContactForm = ({
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      <h2 className="contact-description">{title}</h2>
+    <form className={styles.contactForm} onSubmit={handleSubmit}>
+      <h2 className={styles.contactDescription}>{title}</h2>
       <input id="email" name="email" type="text" placeholder="Email" />
       <ValidationError prefix="Email" field="email" errors={state.errors} />
       <textarea

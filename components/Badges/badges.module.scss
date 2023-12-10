@@ -1,0 +1,62 @@
+.badgesContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 2em 0 2em 15px;
+    max-width: 840px;
+}
+
+.badge {
+    width: 160px;
+    height: 160px;
+    border: 2px solid $base-red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2em;
+    cursor: pointer;
+
+
+    .badgeDetails {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        transform: rotateY(180deg);
+
+
+        .badgeTitle {
+            display: flex;
+            justify-content: space-between;
+
+            h5 {
+                font-family: $font-type;
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .engravedText {
+            font-size: 12px;
+            font-family: $font-type;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            background-clip: text;
+            text-shadow: -4px 8px 7px rgba(255,255,255,0.3);
+         }
+    }
+}
+
+@media (max-width: 800px) {
+    .badgesContainer {
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+    .badge {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 2em;
+    }
+
+  }

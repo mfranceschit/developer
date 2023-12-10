@@ -4,14 +4,15 @@ import { FaCaretLeft, FaCaretRight } from 'react-icons/fa6';
 import Link from 'next/link';
 
 import { LOCALES } from '@/types';
+import styles from './language-selector.module.scss';
 
 const LanguageSelector = () => {
   // const router = useRouter();
   const { asPath, locale } = { asPath: 'home', locale: 'en' };
 
   return (
-    <div className="language-selector">
-      <div className="button-container">
+    <div className={styles.languageSelector}>
+      <div className={styles.buttonContainer}>
         {locale === LOCALES.pt && (
           <Link passHref href={asPath} locale="es">
             <FaCaretLeft />
@@ -25,7 +26,7 @@ const LanguageSelector = () => {
       </div>
       <h4>en</h4>
 
-      <div className="button-container">
+      <div className={styles.buttonContainer}>
         {locale === LOCALES.es && (
           <Link passHref href={asPath} locale="pt">
             <FaCaretRight />

@@ -1,0 +1,39 @@
+.cpTransitionContainer {
+  height: 100%;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .cpTransitionContainer {
+    min-height: 250px;
+ }
+}
+.cpTransitionContainer > div {
+  height: 100%;
+}
+
+.cpTransitionSquaresWrapper {
+  height: 100%;
+  max-width: 840px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cpTransition .card {
+  color: white;
+}
+.cpTransition .cardWrapper {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  z-index: 9999;
+  background: linear-gradient(90deg, $base-red 30%, $dark-red 45%);
+  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr;
+  gap: 20px;
+}

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
 
 import { Badge } from '@/types';
+import styles from './badges.module.scss';
 
 const badgeVariants = {
   selected: {
@@ -43,11 +44,11 @@ const Badges: React.FC<{ entries: Badge[] }> = ({ entries }) => {
   }, [locale]);
 
   return (
-    <div className="badges-container">
+    <div className={styles.badgesContainer}>
       {entries.map((badge, i) => (
         <motion.div
           key={i}
-          className="badge"
+          className={styles.badge}
           variants={badgeVariants}
           animate={selectedBadge?.id !== badge.id ? 'selected' : 'notSelected'}
           onClick={() => selectBadge(badge)}>
@@ -59,8 +60,8 @@ const Badges: React.FC<{ entries: Badge[] }> = ({ entries }) => {
               alt={badge.name}
             />
           ) : (
-            <div className="badge-details">
-              <div className="badge-title">
+            <div className={styles.badgeDetails}>
+              <div className={styles.badgeTitle}>
                 <h5>{badge.name}</h5>
                 {badge.url && (
                   <a href={badge.url} rel="noopener noreferrer" target="_blank">
@@ -68,7 +69,7 @@ const Badges: React.FC<{ entries: Badge[] }> = ({ entries }) => {
                   </a>
                 )}
               </div>
-              <p className="engraved-text">{badge.issued}</p>
+              <p className={styles.engravedText}>{badge.issued}</p>
             </div>
           )}
         </motion.div>

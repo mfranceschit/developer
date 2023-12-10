@@ -1,0 +1,48 @@
+.line {
+    position: fixed;
+    z-index: 9;
+}
+
+.top {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 15px;
+    background: linear-gradient(90deg, $base-red 30%, $dark-red 45%);
+}
+
+.bottom {
+    left: 0;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 15px;
+    background: linear-gradient(90deg, $base-red 30%, $dark-red 45%);
+}
+
+.left {
+    left: 0;
+    top: 0;
+    width: 15px;
+    height: 200%;
+    background-color: $base-red;
+}
+
+.right {
+    left: auto;
+    right: 0;
+    top: 0;
+    width: 15px;
+    height: 200%;
+    background-color: $dark-red;
+}
+
+@media (max-width: 800px) {
+    .left, .right {
+        width: 10px;
+    }
+
+    .top, .bottom {
+        height: 10px;
+    }
+  }

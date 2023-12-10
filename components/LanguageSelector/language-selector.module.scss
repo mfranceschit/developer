@@ -1,0 +1,22 @@
+.languageSelector {
+    font-family: $font-type;
+    color: white;
+    z-index: 99;
+    display: flex;
+
+    h4 {
+        text-transform: uppercase;
+        width: 22px;
+        text-align: center;
+    }
+
+    .buttonContainer {
+        width: 15px;        
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+}

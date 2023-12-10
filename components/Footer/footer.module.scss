@@ -1,0 +1,21 @@
+.footer {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    left: 30px;
+    height: 50px;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 9;
+}
+
+.footer:before {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-left: 150px solid $base-red;
+    border-top: 150px solid transparent;
+    width: 0;
+    z-index: 99;
+  }

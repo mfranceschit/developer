@@ -1,8 +1,10 @@
 import React from 'react';
 import { FaGithub, FaGitlab, FaLinkedin, FaMedium } from 'react-icons/fa6';
 
+import styles from './social-buttons.module.scss';
+
 const SocialButtons = ({ size }: { size: number }) => (
-  <div className="social-links">
+  <div className={styles.socialLink}>
     <a
       title="linkedin"
       href="https://www.linkedin.com/in/mfranceschit/"
