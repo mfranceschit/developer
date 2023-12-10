@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { FaHouse } from 'react-icons/fa6';
 import { usePathname } from 'next/navigation';
 
-import { ROUTES } from '@/routes';
-import SocialButtons from '../SocialButtons';
+import SocialButtons from '@/components/SocialButtons';
+import { ROUTES } from '@/constants/routes';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const Header = () => {
