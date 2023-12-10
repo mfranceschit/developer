@@ -36,8 +36,7 @@ const variants = {
 
 const TransitionEffect = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
-  const currentPage = pathname.replace('/', '');
-  const { title = '' } = en[currentPage] ? en[currentPage] : en['home'];
+  const { title = '' } = en.home;
 
   return (
     <div className="effect">
@@ -49,7 +48,7 @@ const TransitionEffect = ({ children }: { children: ReactNode }) => {
           initial="fadeIn"
           animate="inactive"
           exit="fadeOut">
-          {currentPage && <Title>{title}</Title>}
+          <Title>{title}</Title>
           {children}
         </motion.section>
       </AnimatePresence>
