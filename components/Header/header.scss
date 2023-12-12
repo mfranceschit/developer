@@ -8,7 +8,7 @@
   }
 
 .activePath {
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid $white;
   }
   
   #sidebarMenu {
@@ -30,7 +30,7 @@
 }
 .sidebarMenuInner li{
     list-style: none;
-    color: #fff;
+    color: $white;
     text-transform: uppercase;
     font-weight: bold;
     padding: 20px;
@@ -45,7 +45,7 @@
     font-family: $font-type;
 }
 .sidebarMenuInner li a{
-    color: #fff;
+    color: $white;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
@@ -76,7 +76,7 @@ input[type=checkbox] {
     position: absolute;
     height: 3px;
     width: 100%;
-    background-color: #fff;
+    background-color: $white;
 }
 .horizontal {
     transition: all 0.3s;
@@ -104,20 +104,20 @@ input[type="checkbox"]:checked ~ #sidebarMenu {
 }
 
 input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
-    background-color: #fff;
+    background-color: $white;
     transition: all 0.3s;
     box-sizing: border-box;
     opacity: 0;
   }
   input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
-  background-color: #fff;
+  background-color: $white;
   transition: all 0.3s;
   box-sizing: border-box;
   transform: rotate(135deg);
   margin-top: 8px;
 }
 input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
-  background-color: #fff;
+  background-color: $white;
     transition: all 0.3s;
     box-sizing: border-box;
     transform: rotate(-135deg);

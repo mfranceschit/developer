@@ -11,7 +11,7 @@
 
 .squareBox {
   border: 2px solid $base-red;
-  background-color: #fff;
+  background-color: $white;
 }
 
 .squareBox:hover {
@@ -38,7 +38,7 @@
 }
 
 .boxContent:hover h3 {
-  color: #fff;
+  color: $white;
 }
 
 @media (max-width: 800px) {
