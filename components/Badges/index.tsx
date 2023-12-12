@@ -56,7 +56,7 @@ const Badges: React.FC<{ entries: Badge[] }> = ({ entries }) => {
             <Image
               height={100}
               width={100}
-              src={`/assets/images/${badge.img}`}
+              src={`/images/${badge.img}`}
               alt={badge.name}
             />
           ) : (

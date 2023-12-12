@@ -18,7 +18,7 @@ const ProjectDetails = ({
 
   const { stack, summary } = en.projects;
   const { title, url, description, img, technologies } = project;
-  const imageSrc = `/assets/images/${img}`;
+  const imageSrc = `/images/${img}`;
 
   useEffect(() => {
     if (window.scrollY > 0) {
