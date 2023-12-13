@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 
 import AnimatedTitle from '@/components/AnimatedTitle';
 import en from '@/locales/en';
@@ -20,9 +21,12 @@ const Home = () => {
   const { title, subtitle } = en.home;
 
   return (
-    <section className={styles.homeContainer}>
-      <AnimatedTitle>{title}</AnimatedTitle>
-      <p>{subtitle}</p>
+    <section className={styles.container}>
+      <div>
+        <AnimatedTitle>{title}</AnimatedTitle>
+        <p className={styles.subtitle}>{subtitle}</p>
+      </div>
+      <Image alt="Logo" width="200" height="200" src="/images/logo.png" />
     </section>
   );
 };
