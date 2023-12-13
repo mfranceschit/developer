@@ -1,7 +1,18 @@
-.homeContainer {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 400px;
-  flex-direction: column;
+  gap: 4rem;
+}
+
+.subtitle {
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .container {
+    img {
+      display: none;
+    }
+  }
 }
