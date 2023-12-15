@@ -6,6 +6,8 @@ import { Project } from '@/types';
 import en from '@/locales/en';
 import Title from '@/components/Title';
 
+import { getProjects } from '@/sanity/sanity-utils';
+
 // set dynamic metadata
 export async function generateMetadata(): Promise<Metadata> {
   // TODO: set i18n locale
@@ -17,9 +19,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Projects = () => {
+const Projects = async () => {
   const { title, items } = en.projects;
+  const projects = await getProjects();
 
+  console.log(projects);
   return (
     <section className="wrapper">
       <Title>{title}</Title>
