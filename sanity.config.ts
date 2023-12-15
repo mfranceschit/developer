@@ -1,8 +1,8 @@
 import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '';
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || '';
+import schemas from './sanity/schemas';
+import { dataset, projectId } from './constants/environment';
 
 export default defineConfig({
   projectId,
@@ -11,4 +11,5 @@ export default defineConfig({
   apiVersion: '2023-12-08',
   basePath: '/admin',
   plugins: [deskTool()],
+  schema: { types: schemas },
 });
