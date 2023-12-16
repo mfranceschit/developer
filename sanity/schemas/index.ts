@@ -1,4 +1,4 @@
-import project from './project-shema';
+import project from './project.shema';
 
 const schemas = [project];
 
