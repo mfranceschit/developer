@@ -59,8 +59,21 @@ p {
     align-items: center;
     gap: 4rem;
   }
-  
-  
+
+  .details {
+    background: linear-gradient(90deg, $base-red 30%, $dark-red 45%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem;
+    min-height: 100vh;
+    padding-bottom: 10rem;
+
+    & > section.wrapper {
+      flex-direction: column;
+    }
+  }
+
   @media (max-width: 1400px) {
     .container {
       flex-direction: column;
