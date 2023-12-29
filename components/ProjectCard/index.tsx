@@ -1,36 +1,23 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
 
-import { Project } from '@/types';
+import { Project } from '@/types/Project';
 import styles from './project-card.module.scss';
+import Link from 'next/link';
+import { ROUTES } from '@/constants/routes';
 
-const squareVariants = {
-  initial: {
-    scale: 0.01,
-  },
-  animate: {
-    scale: 1,
-  },
-};
-
-const ProjectCard = ({
-  project,
-  setSelectedProject,
-}: {
-  project: Project;
-  setSelectedProject: Dispatch<SetStateAction<Project | undefined>>;
-}) => {
-  const { title } = project;
+const ProjectCard = ({ project }: { project: Project }) => {
+  const { name } = project;
   return (
-    <motion.div
-      className={`${styles.square} ${styles.squareBox}`}
-      onClick={() => setSelectedProject(project)}
-      variants={squareVariants}
-      transition={{ duration: 0.2, type: 'spring' }}>
-      <div className={styles.boxContent}>
-        <h3>{title}</h3>
+    <Link
+      className={styles.item}
+      passHref
+      href={`${ROUTES.projects}/${project.slug}`}>
+      <div className={`${styles.square} ${styles.squareBox}`}>
+        <div className={styles.boxContent}>
+          <h3>{name}</h3>
+        </div>
       </div>
-    </motion.div>
+    </Link>
   );
 };
 

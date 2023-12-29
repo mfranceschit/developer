@@ -1,0 +1,16 @@
+.imageContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex: 0.5;
+
+    a {
+        width: 100%;
+    }
+}
+
+.cardImgPlaceholder {
+    object-fit: contain;
+    object-position: top;
+    width: 100%;
+}

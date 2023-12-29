@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <section className={styles.container}>
-      <div>
+      <div className={styles.title}>
         <AnimatedTitle>{title}</AnimatedTitle>
         <p className={styles.subtitle}>{subtitle}</p>
       </div>

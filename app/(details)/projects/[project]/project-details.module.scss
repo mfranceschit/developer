@@ -1,33 +1,54 @@
+.breadcrumb {
+  display: flex;
+  flex-direction: row;
+}
+
 .cardHeader {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
+  width: 100%;
+
+  ul {
+    display: flex;
+    gap: .3rem;
+    list-style: none;
+    font-family: $font-type;
+    color: $white;
+
+    li:first-child {
+      font-weight: 700;
+      
+      &:after {
+        content: ' / '; 
+      }
+    }
+  }
 }
-.cardHeader h2 {
-  font-size: 3.2rem;
+
+.projectInformation h1 {
+  font-size: 2.5rem;
   font-weight: 700;
   font-family: $font-type;
+  color: $white;
+  text-align: left;
+  line-height: 2.4rem;
 }
-.cardHeader button {
-  color: white;
+.cardHeader a {
+  color: $white;
   border: none;
   background: transparent;
   cursor: pointer;
 }
-.cardHeader button:focus {
+.cardHeader a:focus {
   outline: none;
 }
 .cardContent {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
-  gap: 10px;
-}
-
-.cardImgPlaceholder {
-  object-fit: contain;
-  width: 100%;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
 .projectInformation {
@@ -63,6 +84,7 @@
   margin: 0 auto;
 
   p {
+    color: $white;
     height: auto;
   }
 
@@ -74,12 +96,14 @@
     font-size: 40px;
     font-family: $font-type;
     margin-bottom: 10px;
+    color: $white;
   }
   
   h4 {
     font-family: $font-type;
     font-size: 16px;
     font-weight: 600;
+    color: $white;
   }
 
   .textBottomSpace {
@@ -87,16 +111,11 @@
   }
 }
 
-.imageContainer {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex: 0.5;
-}
 
 @media (max-width: 800px) {
   .cardContent {
-    display: block;
+    flex-direction: column-reverse;
+    gap: 1rem;
     
     .imageContainer {
       margin-bottom: 10px;
@@ -107,18 +126,5 @@
       margin-bottom: 15px;
       width: 100%;
     }
-  }
-  
-}
-
-@media  (max-height: 900px)  {
-  .projectInformation {
-    height: 600px;
-   }
-}
-
-@media (max-height: 820px ) and (min-width: 1024px) {
-  .projectInformation {
-    height: 500px;
   }
 }
