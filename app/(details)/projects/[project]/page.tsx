@@ -1,15 +1,26 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
 import { getProject } from '@/sanity/sanity-utils';
 
 import en from '@/locales/en';
 import styles from './project-details.module.scss';
 import { ROUTES } from '@/constants/routes';
+import DynamicSizeImage from '@/components/DynamicSizeImage';
 
 type Props = {
   params: { project: string };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = params.project;
+  const project = await getProject(slug);
+  const { name } = project;
+
+  return {
+    title: `Project - ${name}`,
+  };
+}
 
 const Project: React.FC<Props> = async ({ params }) => {
   const slug = params.project;
@@ -43,20 +54,9 @@ const Project: React.FC<Props> = async ({ params }) => {
             </div>
             <h4>{summary}:</h4>
             <PortableText value={description} />
-            <div className={styles.textBottomSpace} />
           </div>
         </div>
-        <div className={styles.imageContainer}>
-          <a rel="noopener noreferrer" target="_blank" href={url}>
-            <Image
-              src={image}
-              height={300}
-              width={300}
-              className={styles.cardImgPlaceholder}
-              alt={`${name} project image`}
-            />
-          </a>
-        </div>
+        <DynamicSizeImage image={image} name={name} url={url} />
       </div>
     </section>
   );

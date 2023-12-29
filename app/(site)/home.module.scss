@@ -6,13 +6,14 @@
 }
 
 .subtitle {
+  margin-top: 10px;
   text-align: center;
 }
 
 @media (max-width: 800px) {
   .container {
-    img {
-      display: none;
-    }
+    flex-direction: column;
+    height: 50vh;
+
   }
 }

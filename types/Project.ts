@@ -15,6 +15,6 @@ export type ProjectDetail = {
   slug: string;
   url: string;
   repository: string;
-  description: PortableTextBlock[];
+  description: PortableTextBlock;
   technologies: string[];
 };

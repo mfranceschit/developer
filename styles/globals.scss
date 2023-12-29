@@ -68,6 +68,7 @@ p {
     padding: 6rem;
     min-height: 100vh;
     padding-bottom: 10rem;
+    overflow-y: auto;
 
     & > section.wrapper {
       flex-direction: column;
@@ -87,9 +88,21 @@ p {
     }
   
     .main {
+      display: block;
+      padding:  2rem;
+      margin-top: 3.5rem;
+      padding-bottom: 10rem;
+
+      
+      section.wrapper {
+        display: block;
+      }
+    }
+
+    .details {
       padding: 2rem;
       padding-bottom: 10rem;
-      justify-content: flex-start;
+      overflow-y: auto;
     }
   }
   

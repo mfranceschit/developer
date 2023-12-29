@@ -1,19 +1,19 @@
-.certificationsSubtitle {
+h2.certificationsSubtitle {
     font-size: 20px;
     font-family: $font-type;
-    color: $base-red;
+    color: $base-red;    
     margin-left: 15px;
 }
 
 
 .certificationsTextParagraph {
     text-align: justify;
-    margin-bottom: 10px;
 }
 
 
 @media (max-width: 800px) {
-    .certificationsSubtitle {
+    h2.certificationsSubtitle {
         margin-left: 0;
+        margin-top: 10px;
     }
 }

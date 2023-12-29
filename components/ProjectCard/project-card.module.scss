@@ -41,7 +41,12 @@
   color: $white;
 }
 
+
 @media (max-width: 800px) {
+  a.item {
+    width: 100%;
+  }
+  
   .square {
     width: 100%;
     margin-top: 10px;

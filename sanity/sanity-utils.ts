@@ -20,7 +20,7 @@ export const getProjects = async (): Promise<Project[]> => {
 };
 
 export const getProject = async (slug: string): Promise<ProjectDetail> => {
-  const client = createClient({ ...clientConfig, useCdn: true });
+  const client = createClient(clientConfig);
 
   return client.fetch(
     groq`*[_type == "project" && slug.current == $slug && language == $language][0]{
