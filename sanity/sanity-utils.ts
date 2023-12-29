@@ -1,6 +1,6 @@
 import { createClient, groq } from 'next-sanity';
 
-import { Project } from '@/types/Project';
+import { Project, ProjectDetail } from '@/types/Project';
 import clientConfig from '@/sanity/config/client-config';
 
 export const getProjects = async (): Promise<Project[]> => {
@@ -11,12 +11,7 @@ export const getProjects = async (): Promise<Project[]> => {
     _id,
     _createdAt,
     name,
-    "slug": slug.current,
-    "image": image.asset->url,
-    repository,
-    url,
-    description,
-    technologies
+    "slug": slug.current
   }`,
     {
       language: 'en',
@@ -24,8 +19,8 @@ export const getProjects = async (): Promise<Project[]> => {
   );
 };
 
-export const getProject = async (slug: string): Promise<Project> => {
-  const client = createClient(clientConfig);
+export const getProject = async (slug: string): Promise<ProjectDetail> => {
+  const client = createClient({ ...clientConfig, useCdn: true });
 
   return client.fetch(
     groq`*[_type == "project" && slug.current == $slug && language == $language][0]{

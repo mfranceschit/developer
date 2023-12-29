@@ -2,7 +2,6 @@ import React from 'react';
 import { Metadata } from 'next';
 
 import { ProjectsGrid } from '@/components/ProjectsGrid';
-import { Project } from '@/types';
 import en from '@/locales/en';
 import Title from '@/components/Title';
 
@@ -20,14 +19,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Projects = async () => {
-  const { title, items } = en.projects;
+  const { title } = en.projects;
   const projects = await getProjects();
 
-  console.log(projects);
   return (
     <section className="wrapper">
       <Title>{title}</Title>
-      <ProjectsGrid projects={items as Project[]} />
+      <ProjectsGrid projects={projects} />
     </section>
   );
 };
