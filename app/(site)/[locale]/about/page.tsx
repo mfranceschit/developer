@@ -19,16 +19,12 @@ export async function generateMetadata({
   };
 }
 
-// export async function getServerSideProps({ params }: ServerComponentProps) {
-//   return {
-//     props: {
-//       data: {},
-//     },
-//   };
-// }
-
-const About: React.FC = props => {
-  const { title = '', description = [] } = en.about;
+const About: React.FC<ServerComponentProps> = async ({
+  params: { locale },
+}) => {
+  // TODO: Improve reusable code here
+  const content = (await import(`@/locales/${locale}.ts`)).default;
+  const { title = '', description = [] } = content.about;
 
   return (
     <section className="wrapper">

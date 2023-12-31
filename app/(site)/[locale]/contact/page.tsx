@@ -6,6 +6,7 @@ import ContactForm from '@/components/ContactForm';
 import Title from '@/components/Title';
 import en from '@/locales/en';
 import styles from './contact.module.scss';
+import { ServerComponentProps } from '@/types';
 
 // set dynamic metadata
 export async function generateMetadata(): Promise<Metadata> {
@@ -18,9 +19,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Contact = () => {
+const Contact: React.FC<ServerComponentProps> = async ({
+  params: { locale },
+}) => {
+  // TODO: Improve reusable code here
+  const content = (await import(`@/locales/${locale}.ts`)).default;
   const { title, description, cta, socials, placeholderMessage, submitted } =
-    en.contact;
+    content.contact;
 
   return (
     <section className="wrapper">

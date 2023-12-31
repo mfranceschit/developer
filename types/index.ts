@@ -13,5 +13,5 @@ export enum LOCALES {
 }
 
 export interface ServerComponentProps {
-  params: { locale: string };
+  params: { locale: string; project: string };
 }
