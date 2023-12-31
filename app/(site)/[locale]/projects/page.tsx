@@ -26,6 +26,7 @@ const Projects: React.FC<ServerComponentProps> = async ({
   const content = (await import(`@/locales/${locale}.ts`)).default;
   const { title } = content.projects;
   const projects = await getProjects();
+
   return (
     <section className="wrapper">
       <Title>{title}</Title>

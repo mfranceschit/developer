@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 export const useImageSize = () => {
   const { width, height } = useMemo(() => {
+    // TODO: Fix the error when window is not defined
     const { innerWidth, innerHeight } = window;
 
     if (innerWidth <= 800) {

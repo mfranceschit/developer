@@ -10,10 +10,9 @@ import DynamicSizeImage from '@/components/DynamicSizeImage';
 import { ServerComponentProps } from '@/types';
 
 export async function generateMetadata({
-  params,
+  params: { locale, project: slug },
 }: ServerComponentProps): Promise<Metadata> {
-  const slug = params.project;
-  const project = await getProject(slug);
+  const project = await getProject(slug, locale);
   const { name } = project;
 
   return {

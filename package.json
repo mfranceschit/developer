@@ -11,7 +11,7 @@
   "dependencies": {
     "@formspree/react": "^2.5.1",
     "@portabletext/react": "^3.0.11",
-    "@sanity/document-internationalization": "^2.0.2",
+    "@sanity/language-filter": "^3.2.1",
     "@sanity/vision": "^3.21.3",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
