@@ -1,9 +1,7 @@
+const withNextIntl = require('next-intl/plugin')();
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  i18n: {
-    locales: ['en', 'es', 'pt'],
-    defaultLocale: 'en',
-  },
+const nextConfig = withNextIntl({
   sassOptions: {
     includePaths: ['./'],
     prependData: `@import "./styles/theme/theme.scss";`,
@@ -17,6 +15,6 @@ const nextConfig = {
       },
     ],
   },
-};
+});
 
 module.exports = nextConfig;
