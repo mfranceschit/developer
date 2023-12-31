@@ -6,10 +6,12 @@ import Line from '@/components/Line';
 import '@/styles/globals.scss';
 import { ServerComponentProps } from '@/types';
 
-const RootLayout = ({
+const RootLayout = async ({
   children,
   params: { locale },
 }: { children: React.ReactNode } & ServerComponentProps) => {
+  const content = (await import(`@/locales/${locale}.ts`)).default;
+
   return (
     <html lang={locale}>
       <head>
@@ -47,7 +49,7 @@ const RootLayout = ({
         />
       </head>
       <body>
-        <Header />
+        <Header menu={content.menu} />
         <main className="main">{children}</main>
         <Footer />
         <Line position="top" />
