@@ -7,14 +7,12 @@ import en from '@/locales/en';
 import styles from './project-details.module.scss';
 import { ROUTES } from '@/constants/routes';
 import DynamicSizeImage from '@/components/DynamicSizeImage';
+import { ServerComponentProps } from '@/types';
 
-type Props = {
-  params: { project: string };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slug = params.project;
-  const project = await getProject(slug);
+export async function generateMetadata({
+  params: { locale, project: slug },
+}: ServerComponentProps): Promise<Metadata> {
+  const project = await getProject(slug, locale);
   const { name } = project;
 
   return {
@@ -22,12 +20,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const Project: React.FC<Props> = async ({ params }) => {
+const Project: React.FC<ServerComponentProps> = async ({ params }) => {
   const slug = params.project;
   const project = await getProject(slug);
+
   const { name, url, description, image, technologies } = project;
 
-  const { stack, summary } = en.projects;
+  // TODO: Improve reusable code here
+  const content = (await import(`@/locales/${params.locale}.ts`)).default;
+  const { stack, summary } = content.projects;
 
   return (
     <section className="wrapper">

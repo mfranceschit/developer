@@ -7,23 +7,23 @@ export const getProjects = async (): Promise<Project[]> => {
   const client = createClient(clientConfig);
 
   return client.fetch(
-    groq`*[_type == "project" && language == $language]{
+    groq`*[_type == "project"]{
     _id,
     _createdAt,
     name,
     "slug": slug.current
   }`,
-    {
-      language: 'en',
-    },
   );
 };
 
-export const getProject = async (slug: string): Promise<ProjectDetail> => {
+export const getProject = async (
+  slug: string,
+  locale = 'en',
+): Promise<ProjectDetail> => {
   const client = createClient(clientConfig);
 
   return client.fetch(
-    groq`*[_type == "project" && slug.current == $slug && language == $language][0]{
+    groq`*[_type == "project" && slug.current == $slug][0]{
     _id,
     _createdAt,
     name,
@@ -31,9 +31,9 @@ export const getProject = async (slug: string): Promise<ProjectDetail> => {
     "image": image.asset->url,
     repository,
     url,
-    description,
+    "description": description[$locale],
     technologies
   }`,
-    { slug, language: 'en' },
+    { slug, locale },
   );
 };

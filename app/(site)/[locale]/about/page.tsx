@@ -3,10 +3,13 @@ import { Metadata } from 'next';
 
 import en from '@/locales/en';
 import Title from '@/components/Title';
+import { ServerComponentProps } from '@/types';
 import styles from './about.module.scss';
 
 // set dynamic metadata
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ServerComponentProps): Promise<Metadata> {
   // TODO: set i18n locale
   const { title, description } = en.serps.about;
 
@@ -16,8 +19,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const About = () => {
-  const { title = '', description = [] } = en.about;
+const About: React.FC<ServerComponentProps> = async ({
+  params: { locale },
+}) => {
+  // TODO: Improve reusable code here
+  const content = (await import(`@/locales/${locale}.ts`)).default;
+  const { title = '', description = [] } = content.about;
 
   return (
     <section className="wrapper">

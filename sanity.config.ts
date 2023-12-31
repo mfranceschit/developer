@@ -1,22 +1,32 @@
 import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
 import { visionTool } from '@sanity/vision';
-import { documentInternationalization } from '@sanity/document-internationalization';
 
 import schemas from './sanity/schemas';
 import { dataset, projectId } from './constants/environment';
-import documentInternationalizationConfig from './sanity/config/document-i18n-config';
+import { languageFilter } from '@sanity/language-filter';
 
 export default defineConfig({
   projectId,
   dataset,
   title: 'Portfolio',
   apiVersion: '2023-12-08',
-  basePath: '/admin',
+  basePath: '/admin', // TODO: Disabled locale for admin page
   plugins: [
     deskTool(),
     visionTool(),
-    documentInternationalization(documentInternationalizationConfig),
+    languageFilter({
+      supportedLanguages: [
+        { id: 'en', title: 'English' },
+        { id: 'es', title: 'Spanish' },
+        { id: 'pt', title: 'Portuguese' },
+      ],
+      defaultLanguages: ['en'],
+      documentTypes: ['page'],
+      filterField: (enclosingType, member, selectedLanguageIds) =>
+        !enclosingType.name.startsWith('locale') ||
+        selectedLanguageIds.includes(member.name),
+    }),
   ],
   schema: { types: schemas },
 });

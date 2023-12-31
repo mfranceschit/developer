@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 import Badges from '@/components/Badges';
 import Title from '@/components/Title';
-import { Badge } from '@/types';
+import { Badge, ServerComponentProps } from '@/types';
 import en from '@/locales/en';
 import styles from './certifications.module.scss';
 
@@ -18,14 +18,18 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Certifications = () => {
+const Certifications: React.FC<ServerComponentProps> = async ({
+  params: { locale },
+}) => {
+  // TODO: Improve reusable code here
+  const content = (await import(`@/locales/${locale}.ts`)).default;
   const {
     title = '',
     certificatesTitle,
     degreesTitle,
     certificates = [],
     degrees = [],
-  } = en.certifications;
+  } = content.certifications;
 
   return (
     <section className="wrapper">

@@ -4,10 +4,14 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Line from '@/components/Line';
 import '@/styles/globals.scss';
+import { ServerComponentProps } from '@/types';
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = ({
+  children,
+  params: { locale },
+}: { children: React.ReactNode } & ServerComponentProps) => {
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link

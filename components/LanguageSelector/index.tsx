@@ -1,39 +1,42 @@
+'use client';
+
 import React from 'react';
 import { FaCaretLeft, FaCaretRight } from 'react-icons/fa6';
-// import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { LOCALES } from '@/types';
 import styles from './language-selector.module.scss';
+import { useParams, usePathname } from 'next/navigation';
 
 const LanguageSelector = () => {
-  // const router = useRouter();
-  const { asPath, locale } = { asPath: 'home', locale: 'en' };
+  const { locale } = useParams();
+  const pathname = usePathname();
+  const currentRoute = pathname.replace(`/${locale}`, '') || '/';
 
   return (
     <div className={styles.languageSelector}>
       <div className={styles.buttonContainer}>
         {locale === LOCALES.pt && (
-          <Link passHref href={asPath} locale="es">
+          <Link passHref href={`/es${currentRoute}`} hrefLang="es">
             <FaCaretLeft />
           </Link>
         )}
         {locale === LOCALES.es && (
-          <Link passHref href={asPath} locale="en">
+          <Link passHref href={`/en${currentRoute}`} hrefLang="en">
             <FaCaretLeft />
           </Link>
         )}
       </div>
-      <h4>en</h4>
+      <h4>{locale}</h4>
 
       <div className={styles.buttonContainer}>
         {locale === LOCALES.es && (
-          <Link passHref href={asPath} locale="pt">
+          <Link passHref href={`/pt${currentRoute}`} hrefLang="pt">
             <FaCaretRight />
           </Link>
         )}
         {locale === LOCALES.en && (
-          <Link passHref href={asPath} locale="es">
+          <Link passHref href={`/es${currentRoute}`} hrefLang="es">
             <FaCaretRight />
           </Link>
         )}

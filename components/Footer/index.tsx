@@ -1,11 +1,13 @@
 import React from 'react';
 
-// import LanguageSelector from '../LanguageSelector';
+import LanguageSelector from '../LanguageSelector';
 import styles from './footer.module.scss';
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>{/* <LanguageSelector /> */}</footer>
+    <footer className={styles.footer}>
+      <LanguageSelector />
+    </footer>
   );
 };
 

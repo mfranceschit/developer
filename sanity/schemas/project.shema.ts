@@ -45,9 +45,7 @@ const project = {
     {
       name: 'description',
       title: 'Description',
-      type: 'array',
-      languageFilter: true,
-      of: [{ type: 'block' }],
+      type: 'localeContent',
     },
     {
       name: 'technologies',

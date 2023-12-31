@@ -6,6 +6,7 @@ import en from '@/locales/en';
 import Title from '@/components/Title';
 
 import { getProjects } from '@/sanity/sanity-utils';
+import { ServerComponentProps } from '@/types';
 
 // set dynamic metadata
 export async function generateMetadata(): Promise<Metadata> {
@@ -18,8 +19,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Projects = async () => {
-  const { title } = en.projects;
+const Projects: React.FC<ServerComponentProps> = async ({
+  params: { locale },
+}) => {
+  // TODO: Improve reusable code here
+  const content = (await import(`@/locales/${locale}.ts`)).default;
+  const { title } = content.projects;
   const projects = await getProjects();
 
   return (
