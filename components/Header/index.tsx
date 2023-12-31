@@ -3,16 +3,25 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaHouse } from 'react-icons/fa6';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 
 import SocialButtons from '@/components/SocialButtons';
 import { ROUTES } from '@/constants/routes';
-import en from '@/locales/en';
 import './header.scss';
 
-const Header = () => {
+interface Props {
+  menu: {
+    about: string;
+    work: string;
+    certifications: string;
+    contact: string;
+  };
+}
+
+const Header: React.FC<Props> = ({ menu }) => {
+  const { locale } = useParams();
   const path = usePathname();
-  const { about, work, certifications, contact } = en.menu;
+  const { about, work, certifications, contact } = menu;
   const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
@@ -37,7 +46,7 @@ const Header = () => {
         <ul className="sidebarMenuInner">
           <li>
             <Link
-              href={ROUTES.home}
+              href={`/${locale}${ROUTES.home}`}
               passHref
               className={ROUTES.home === path ? 'activePath' : ''}>
               <FaHouse />
@@ -45,28 +54,28 @@ const Header = () => {
           </li>
           <li>
             <Link
-              href={ROUTES.about}
+              href={`/${locale}${ROUTES.about}`}
               className={ROUTES.about === path ? 'activePath' : ''}>
               {about}
             </Link>
           </li>
           <li>
             <Link
-              href={ROUTES.projects}
+              href={`/${locale}${ROUTES.projects}`}
               className={ROUTES.projects === path ? 'activePath' : ''}>
               {work}
             </Link>
           </li>
           <li>
             <Link
-              href={ROUTES.certifications}
+              href={`/${locale}${ROUTES.certifications}`}
               className={ROUTES.certifications === path ? 'activePath' : ''}>
               {certifications}
             </Link>
           </li>
           <li>
             <Link
-              href={ROUTES.contact}
+              href={`/${locale}${ROUTES.contact}`}
               className={ROUTES.contact === path ? 'activePath' : ''}>
               {contact}
             </Link>
