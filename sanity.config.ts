@@ -11,7 +11,7 @@ export default defineConfig({
   dataset,
   title: 'Portfolio',
   apiVersion: '2023-12-08',
-  basePath: '/admin', // TODO: Disabled locale for admin page
+  basePath: '/en/admin',
   plugins: [
     deskTool(),
     visionTool(),
