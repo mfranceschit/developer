@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { getProject } from '@/sanity/sanity-utils';
 
-import en from '@/locales/en';
 import styles from './project-details.module.scss';
 import { ROUTES } from '@/constants/routes';
 import DynamicSizeImage from '@/components/DynamicSizeImage';
