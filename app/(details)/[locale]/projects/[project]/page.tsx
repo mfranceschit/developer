@@ -27,7 +27,7 @@ const Project: React.FC<ServerComponentProps> = async ({ params }) => {
 
   // TODO: Improve reusable code here
   const content = (await import(`@/locales/${params.locale}.ts`)).default;
-  const { stack, summary } = content.projects;
+  const { title, stack, summary } = content.projects;
 
   return (
     <section className="wrapper">
@@ -35,7 +35,7 @@ const Project: React.FC<ServerComponentProps> = async ({ params }) => {
         <ul>
           <li>
             <Link passHref href={ROUTES.projects}>
-              Projects
+              {title}
             </Link>
           </li>
           <li>{name}</li>
