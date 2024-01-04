@@ -12,7 +12,7 @@ const project = {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: { source: 'name', isUnique: () => true },
+      options: { source: 'name' },
     },
     {
       name: 'image',
