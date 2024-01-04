@@ -4,11 +4,6 @@ const project = {
   type: 'document',
   fields: [
     {
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-    },
-    {
       name: 'name',
       title: 'Name',
       type: 'string',
