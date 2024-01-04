@@ -30,7 +30,6 @@
             justify-content: space-between;
 
             h5 {
-                font-family: $font-type;
                 font-size: 14px;
                 margin-bottom: 10px;
             }
@@ -38,7 +37,6 @@
 
         .engravedText {
             font-size: 12px;
-            font-family: $font-type;
             -webkit-background-clip: text;
             -moz-background-clip: text;
             background-clip: text;

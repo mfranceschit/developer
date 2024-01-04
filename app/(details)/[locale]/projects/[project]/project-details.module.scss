@@ -13,7 +13,6 @@
     display: flex;
     gap: .3rem;
     list-style: none;
-    font-family: $font-type;
     color: $white;
 
     li:first-child {
@@ -29,7 +28,6 @@
 .projectInformation h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  font-family: $font-type;
   color: $white;
   text-align: left;
   line-height: 2.4rem;
@@ -69,7 +67,6 @@
   margin-bottom: 10px;
 
   span {
-    font-family: $font-type;
     font-size: 14px;
     font-weight: 500;
     background-color: $white;
@@ -94,13 +91,11 @@
 
   h2 {
     font-size: 40px;
-    font-family: $font-type;
     margin-bottom: 10px;
     color: $white;
   }
   
   h4 {
-    font-family: $font-type;
     font-size: 16px;
     font-weight: 600;
     color: $white;

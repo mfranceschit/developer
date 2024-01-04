@@ -12,7 +12,6 @@
     border-left: 0;
     border-bottom: 2px solid $base-red;
     line-height: 1.5;
-    font-family: $font-type;
     font-size: 18px;
     border-radius: 0;;
 }
@@ -28,7 +27,6 @@
     padding: 5px;
     width: 120px;
     background-color: white;
-    font-family: $font-type;
     font-size: 18px;
     color: $black;
 }
@@ -41,7 +39,6 @@
  .wrapper .contactForm {
     max-width: 730px;
     margin-left: 15px;
-    font-family: $font-type;
 }
 
 @media (max-width: 800px) {

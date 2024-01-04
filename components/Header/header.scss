@@ -36,13 +36,11 @@
     padding: 20px;
     cursor: pointer;
     text-align: left;
-    font-family: $font-type;
 }
 .sidebarMenuInner li span{
     display: block;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.50);
-    font-family: $font-type;
 }
 .sidebarMenuInner li a{
     color: $white;
@@ -50,7 +48,6 @@
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
-    font-family: $font-type;
 }
 
 input[type=checkbox] {

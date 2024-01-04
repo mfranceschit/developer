@@ -1,4 +1,11 @@
+import { DM_Sans } from 'next/font/google';
+
 import '@/styles/globals.scss';
+
+const dmsans = DM_Sans({
+  weight: ['500', '600', '700'],
+  subsets: ['latin'],
+});
 
 const ProjectDetailsLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -37,7 +44,7 @@ const ProjectDetailsLayout = ({ children }: { children: React.ReactNode }) => {
           href="/android-chrome-512x512.png"
         />
       </head>
-      <body>
+      <body className={dmsans.className}>
         <main className="details">{children}</main>
       </body>
     </html>
