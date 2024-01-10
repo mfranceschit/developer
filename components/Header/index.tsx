@@ -3,10 +3,9 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaHouse } from 'react-icons/fa6';
-import { useParams, usePathname } from 'next/navigation';
 
 import SocialButtons from '@/components/SocialButtons';
-import { ROUTES } from '@/constants/routes';
+import { useNavigationRoute } from '@/hooks/useNavigationRoute';
 import './header.scss';
 
 interface Props {
@@ -19,14 +18,12 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ menu }) => {
-  const { locale } = useParams();
-  const path = usePathname();
-  const { about, work, certifications, contact } = menu;
+  const { routes, currentPath, isContactPage } = useNavigationRoute(menu);
   const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
     setOpenMenu(false);
-  }, [path]);
+  }, [currentPath]);
 
   return (
     <header className="header">
@@ -44,46 +41,21 @@ const Header: React.FC<Props> = ({ menu }) => {
       </label>
       <div id="sidebarMenu">
         <ul className="sidebarMenuInner">
-          <li>
-            <Link
-              href={`/${locale}${ROUTES.home}`}
-              passHref
-              className={ROUTES.home === path ? 'activePath' : ''}>
-              <FaHouse />
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/${locale}${ROUTES.about}`}
-              className={ROUTES.about === path ? 'activePath' : ''}>
-              {about}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/${locale}${ROUTES.projects}`}
-              className={ROUTES.projects === path ? 'activePath' : ''}>
-              {work}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/${locale}${ROUTES.certifications}`}
-              className={ROUTES.certifications === path ? 'activePath' : ''}>
-              {certifications}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/${locale}${ROUTES.contact}`}
-              className={ROUTES.contact === path ? 'activePath' : ''}>
-              {contact}
-            </Link>
-          </li>
+          {routes.map(({ title, icon, route }, index) => (
+            <li key={index}>
+              <Link
+                href={route}
+                passHref
+                className={route === currentPath ? 'activePath' : ''}>
+                {title}
+                {icon && <FaHouse />}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         <div className="headerSocials">
-          {path !== ROUTES.contact && <SocialButtons size={24} />}
+          {isContactPage && <SocialButtons size={24} />}
         </div>
       </div>
     </header>
