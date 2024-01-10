@@ -30,7 +30,7 @@ const Badges: React.FC<{ entries: Badge[] }> = ({ entries }) => {
   const [selectedBadge, setSelectedBadge] = useState<Badge | null>(null);
 
   const selectBadge = (badge: Badge) => {
-    if (badge.id === selectedBadge?.id) {
+    if (badge._id === selectedBadge?._id) {
       setSelectedBadge(null);
     } else {
       setSelectedBadge(badge);
@@ -50,13 +50,15 @@ const Badges: React.FC<{ entries: Badge[] }> = ({ entries }) => {
           key={i}
           className={styles.badge}
           variants={badgeVariants}
-          animate={selectedBadge?.id !== badge.id ? 'selected' : 'notSelected'}
+          animate={
+            selectedBadge?._id !== badge._id ? 'selected' : 'notSelected'
+          }
           onClick={() => selectBadge(badge)}>
-          {selectedBadge?.id !== badge.id ? (
+          {selectedBadge?._id !== badge._id ? (
             <Image
               height={100}
               width={100}
-              src={`/images/${badge.img}`}
+              src={badge.image}
               alt={badge.name}
             />
           ) : (

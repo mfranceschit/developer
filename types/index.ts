@@ -1,9 +1,10 @@
 export interface Badge {
-  id: string;
-  img: string;
+  _id: string;
+  image: string;
   name: string;
   issued: string;
-  url: string;
+  url?: string;
+  date?: string;
 }
 
 export enum LOCALES {
