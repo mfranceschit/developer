@@ -1,5 +1,6 @@
 import { createClient, groq } from 'next-sanity';
 
+import { Badge } from '@/types';
 import { Project, ProjectDetail } from '@/types/Project';
 import clientConfig from '@/sanity/config/client-config';
 
@@ -47,6 +48,46 @@ export const getProject = async (
     "description": description[$locale],
     technologies
   }`,
+    { slug, locale },
+  );
+};
+
+export const getCertifications = async (
+  slug: string,
+  locale = 'en',
+): Promise<Badge[]> => {
+  const client = createClient(clientConfig);
+
+  return client.fetch(
+    groq`*[_type == "certification"]{
+      _id,
+      _createdAt,
+      name,
+      "image": image.asset->url,
+      date,
+      issued,
+      url,
+      "issued": issued[$locale],
+    }  | order(date desc)`,
+    { slug, locale },
+  );
+};
+
+export const getDegrees = async (
+  slug: string,
+  locale = 'en',
+): Promise<Badge[]> => {
+  const client = createClient(clientConfig);
+
+  return client.fetch(
+    groq`*[_type == "degree"]{
+      _id,
+      _createdAt,
+      "name": name[$locale],
+      "image": image.asset->url,
+      issued,
+      "issued": issued[$locale],
+    }`,
     { slug, locale },
   );
 };
