@@ -16,6 +16,19 @@ export const getProjects = async (): Promise<Project[]> => {
   );
 };
 
+export const getProjectName = async (
+  slug: string,
+): Promise<{ name: string }> => {
+  const client = createClient(clientConfig);
+
+  return client.fetch(
+    groq`*[_type == "project" && slug.current == $slug][0]{
+    name
+  }`,
+    { slug },
+  );
+};
+
 export const getProject = async (
   slug: string,
   locale = 'en',

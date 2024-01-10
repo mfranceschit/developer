@@ -1,10 +1,16 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { DM_Sans } from 'next/font/google';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Line from '@/components/Line';
 import '@/styles/globals.scss';
 import { ServerComponentProps } from '@/types';
+
+const dmsans = DM_Sans({
+  weight: ['500', '600', '700'],
+  subsets: ['latin'],
+});
 
 const RootLayout = async ({
   children,
@@ -48,7 +54,7 @@ const RootLayout = async ({
           href="/android-chrome-512x512.png"
         />
       </head>
-      <body>
+      <body className={dmsans.className}>
         <Header menu={content.menu} />
         <main className="main">{children}</main>
         <Footer />

@@ -4,11 +4,6 @@ const project = {
   type: 'document',
   fields: [
     {
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-    },
-    {
       name: 'name',
       title: 'Name',
       type: 'string',
@@ -17,7 +12,7 @@ const project = {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: { source: 'name', isUnique: () => true },
+      options: { source: 'name' },
     },
     {
       name: 'image',
