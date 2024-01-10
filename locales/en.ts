@@ -29,44 +29,6 @@ const en = {
     title: 'Certifications',
     certificatesTitle: 'Certificates',
     degreesTitle: 'Degrees',
-    certificates: [
-      {
-        id: nanoid(),
-        img: 'jsnad-openjs-node-js-application-developer.png',
-        name: 'JSNAD: OpenJS Node.js Application Developer',
-        issued: 'Issued on February 2023',
-        url: 'https://www.credly.com/badges/077b443b-d016-470a-a931-789098a38655',
-      },
-      {
-        id: nanoid(),
-        img: 'jsnsd-openjs-node-js-services-developer.png',
-        name: 'JSNSD: OpenJS Node.js Services Developer',
-        issued: 'Issued on January 2023',
-        url: 'https://www.credly.com/badges/3636c6a7-661e-45e2-8d0d-5dd3cddf489b',
-      },
-      {
-        id: nanoid(),
-        img: 'lfw211-node-js-application-development.png',
-        name: 'LFW211: Node.js Application Development',
-        issued: 'Issued on September 2022',
-        url: 'https://www.credly.com/badges/d44cffa0-19ac-415c-a0ff-ba9fa1860163',
-      },
-      {
-        id: nanoid(),
-        img: 'lfw212-node-js-services-development.png',
-        name: 'LFW212: Node.js Services Development',
-        issued: 'Issued on January 2023',
-        url: 'https://www.credly.com/badges/a6c1a3aa-406c-46bd-b738-1a88768a81f4',
-      },
-    ],
-    degrees: [
-      {
-        id: nanoid(),
-        img: 'ucab-logo.jpeg',
-        issued: 'Issued on November 2017',
-        name: 'Computer Engineer',
-      },
-    ],
   },
   contact: {
     title: 'Contact',
