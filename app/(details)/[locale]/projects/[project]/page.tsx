@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
-import { getProject, getProjectName } from '@/sanity/sanity-utils';
+import { getProject } from '@/sanity/sanity-utils';
 
 import styles from './project-details.module.scss';
 import { ROUTES } from '@/constants/routes';
@@ -11,7 +11,7 @@ import { ServerComponentProps } from '@/types';
 export async function generateMetadata({
   params: { locale, project: slug },
 }: ServerComponentProps): Promise<Metadata> {
-  const project = await getProjectName(slug, locale);
+  const project = await getProject(slug, locale);
   const { name } = project;
 
   return {
