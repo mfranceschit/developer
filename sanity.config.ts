@@ -11,7 +11,7 @@ export default defineConfig({
   dataset,
   title: 'Portfolio',
   apiVersion: '2023-12-08',
-  basePath: '/en/admin',
+  basePath: '/admin',
   plugins: [
     deskTool(),
     visionTool(),
