@@ -4,6 +4,7 @@ import Image from 'next/image';
 import AnimatedTitle from '@/components/AnimatedTitle';
 import en from '@/locales/en';
 // import { ServerComponentProps } from '@/types';
+import Logo from '@/components/Logo';
 import styles from './home.module.scss';
 
 // set dynamic metadata
@@ -26,7 +27,7 @@ const Home = () => {
         <AnimatedTitle>{title}</AnimatedTitle>
         <p className={styles.subtitle}>{subtitle}</p>
       </div>
-      <Image alt="Logo" width="200" height="200" src="/images/logo.png" />
+      <Logo />
     </section>
   );
 };

@@ -2,6 +2,11 @@ const degree = {
   name: 'degree',
   title: 'Degrees',
   type: 'document',
+  preview: {
+    select: {
+      title: 'name.en',
+    },
+  },
   fields: [
     {
       name: 'name',

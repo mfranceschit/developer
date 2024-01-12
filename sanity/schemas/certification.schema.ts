@@ -1,6 +1,6 @@
 const certification = {
   name: 'certification',
-  title: 'Certifications',
+  title: 'Certificates',
   type: 'document',
   fields: [
     {
