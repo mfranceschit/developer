@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { useImageSize } from '@/hooks/useImageSize';
 import styles from './dynamic-size-image.module.scss';
+import PlaceholderImage from '@/public/images/placeholder.png';
 
 interface Props {
   image: string;
@@ -19,7 +20,7 @@ const DynamicSizeImage: React.FC<Props> = ({ image, name, url }) => {
     <div className={styles.imageContainer}>
       <a rel="noopener noreferrer" target="_blank" href={url}>
         <Image
-          src={image}
+          src={image ?? PlaceholderImage}
           height={height}
           width={width}
           className={styles.cardImgPlaceholder}
