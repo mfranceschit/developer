@@ -4,7 +4,7 @@ const config = {
   projectId,
   dataset,
   apiVersion: '2023-12-08',
-  useCdn: true,
+  useCdn: false,
 };
 
 export default config;
