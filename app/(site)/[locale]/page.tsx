@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 
 import AnimatedTitle from '@/components/AnimatedTitle';
 import en from '@/locales/en';
