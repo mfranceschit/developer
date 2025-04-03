@@ -1,9 +1,9 @@
 {
   "name": "portfolio",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,17 +14,17 @@
     "@sanity/language-filter": "^3.2.1",
     "@sanity/vision": "^3.21.3",
     "@types/node": "20.4.1",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.6",
-    "@vercel/speed-insights": "^1.0.1",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.1",
+    "@vercel/speed-insights": "^1.2.0",
     "eslint": "8.44.0",
-    "eslint-config-next": "^14.0.4",
-    "framer-motion": "^10.12.18",
-    "next": "^14.0.4",
+    "eslint-config-next": "15.2.4",
+    "framer-motion": "^12.6.3",
+    "next": "15.2.4",
     "next-intl": "^3.4.0",
     "next-sanity": "^7.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-icons": "^4.10.1",
     "sanity": "^3.21.1",
     "styled-components": "^6.1.1",
@@ -32,5 +32,9 @@
   },
   "devDependencies": {
     "sass": "^1.63.6"
+  },
+  "resolutions": {
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.1"
   }
 }

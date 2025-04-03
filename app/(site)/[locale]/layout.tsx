@@ -12,10 +12,17 @@ const dmsans = DM_Sans({
   subsets: ['latin'],
 });
 
-const RootLayout = async ({
-  children,
-  params: { locale },
-}: { children: React.ReactNode } & ServerComponentProps) => {
+const RootLayout = async (props: { children: React.ReactNode } & ServerComponentProps) => {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const {
+    children
+  } = props;
+
   const content = (await import(`@/locales/${locale}.ts`)).default;
 
   return (

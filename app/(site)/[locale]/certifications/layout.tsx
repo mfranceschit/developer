@@ -1,12 +1,11 @@
 import React from 'react';
 import { Metadata } from 'next';
 
-import Title from '@/components/Title';
-import { ServerComponentProps } from '@/types';
 import en from '@/locales/en';
 import styles from './certifications.module.scss';
 
-interface CertificationsProps extends ServerComponentProps {
+interface CertificationsProps {
+  children: React.ReactNode;
   certificates: React.ReactNode;
   degrees: React.ReactNode;
 }
@@ -22,18 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Certifications: React.FC<CertificationsProps> = async ({
-  params: { locale },
-  certificates,
-  degrees,
-}) => {
-  // TODO: Improve reusable code here
-  const content = (await import(`@/locales/${locale}.ts`)).default;
-  const { title = '' } = content.certifications;
+const Certifications: React.FC<CertificationsProps> = async props => {
+  const { children, certificates, degrees } = props;
 
   return (
     <section className="wrapper">
-      <Title>{title}</Title>
+      {children}
       <div className={styles.certificationsWrapper}>
         {certificates}
         {degrees}
