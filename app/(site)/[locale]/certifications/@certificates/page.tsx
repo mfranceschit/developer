@@ -5,9 +5,11 @@ import { ServerComponentProps } from '@/types';
 import { getCertifications } from '@/sanity/sanity-utils';
 import styles from '../certifications.module.scss';
 
-const Certificates: React.FC<ServerComponentProps> = async ({
-  params: { locale },
-}) => {
+const Certificates: React.FC<ServerComponentProps> = async props => {
+  const params = await props.params;
+
+  const { locale } = params;
+
   // TODO: Improve reusable code here
   const content = (await import(`@/locales/${locale}.ts`)).default;
   const { certificatesTitle } = content.certifications;

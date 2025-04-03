@@ -13,6 +13,10 @@ export enum LOCALES {
   pt = 'pt',
 }
 
+type Params = Promise<{ locale: string; project: string }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
 export interface ServerComponentProps {
-  params: { locale: string; project: string };
+  searchParams: SearchParams;
+  params: Params;
 }

@@ -19,9 +19,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Projects: React.FC<ServerComponentProps> = async ({
-  params: { locale },
-}) => {
+const Projects: React.FC<ServerComponentProps> = async props => {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   // TODO: Improve reusable code here
   const content = (await import(`@/locales/${locale}.ts`)).default;
   const { title } = content.projects;

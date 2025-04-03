@@ -8,9 +8,13 @@ import { ROUTES } from '@/constants/routes';
 import DynamicSizeImage from '@/components/DynamicSizeImage';
 import { ServerComponentProps } from '@/types';
 
-export async function generateMetadata({
-  params: { locale, project: slug },
-}: ServerComponentProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: ServerComponentProps,
+): Promise<Metadata> {
+  const params = await props.params;
+
+  const { locale, project: slug } = params;
+
   const project = await getProject(slug, locale);
   const { name } = project;
 
@@ -19,7 +23,8 @@ export async function generateMetadata({
   };
 }
 
-const Project: React.FC<ServerComponentProps> = async ({ params }) => {
+const Project: React.FC<ServerComponentProps> = async props => {
+  const params = await props.params;
   const slug = params.project;
   const project = await getProject(slug, params.locale);
 
