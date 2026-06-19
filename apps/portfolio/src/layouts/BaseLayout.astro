@@ -11,7 +11,7 @@ interface Props {
   currentPath: string;
 }
 
-const { title, description = 'm.franceschit — developer', lang, currentPath } = Astro.props;
+const { title, description = 'mfranceschit — developer', lang, currentPath } = Astro.props;
 const tp = useTranslatedPath(lang);
 ---
 
@@ -27,7 +27,7 @@ const tp = useTranslatedPath(lang);
   </head>
   <body class="min-h-screen bg-white font-sans text-obsidian">
     <header class="flex items-center justify-between px-6 py-4">
-      <a href={tp('/')} class="font-semibold text-bellwether-blue">m.franceschit</a>
+      <a href={tp('/')} class="font-semibold text-bellwether-blue">mfranceschit</a>
       <nav class="flex items-center gap-6 text-sm">
         <a href={tp('/')} class="hover:text-very-berry transition-colors">Home</a>
         <a href={tp('/about')} class="hover:text-very-berry transition-colors">About</a>
