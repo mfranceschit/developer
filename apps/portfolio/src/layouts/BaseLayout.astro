@@ -1,16 +1,22 @@
 ---
 import '../styles/global.css';
+import LanguagePicker from '../components/LanguagePicker.astro';
+import { useTranslatedPath } from '../i18n/utils';
+import type { Locale } from '../i18n/utils';
 
 interface Props {
   title: string;
   description?: string;
+  lang: Locale;
+  currentPath: string;
 }
 
-const { title, description = 'm.franceschit — developer' } = Astro.props;
+const { title, description = 'm.franceschit — developer', lang, currentPath } = Astro.props;
+const tp = useTranslatedPath(lang);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +25,20 @@ const { title, description = 'm.franceschit — developer' } = Astro.props;
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
-  <body>
-    <slot />
+  <body class="min-h-screen bg-white font-sans text-obsidian">
+    <header class="flex items-center justify-between px-6 py-4">
+      <a href={tp('/')} class="font-semibold text-bellwether-blue">m.franceschit</a>
+      <nav class="flex items-center gap-6 text-sm">
+        <a href={tp('/')} class="hover:text-very-berry transition-colors">Home</a>
+        <a href={tp('/about')} class="hover:text-very-berry transition-colors">About</a>
+        <a href={tp('/projects')} class="hover:text-very-berry transition-colors">Projects</a>
+        <a href={tp('/certifications')} class="hover:text-very-berry transition-colors">Certifications</a>
+        <a href={tp('/contact')} class="hover:text-very-berry transition-colors">Contact</a>
+      </nav>
+      <LanguagePicker lang={lang} currentPath={currentPath} />
+    </header>
+    <main class="px-6 py-12">
+      <slot />
+    </main>
   </body>
 </html>

@@ -1,0 +1,24 @@
+---
+import { languages } from '../i18n/ui';
+
+interface Props {
+  lang: string;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+---
+
+<div class="flex gap-2 text-sm">
+  {
+    Object.entries(languages).map(([code, label]) => (
+      <a
+        href={`/${code}${currentPath}`}
+        aria-current={lang === code ? 'page' : undefined}
+        class={`transition-colors hover:text-very-berry ${lang === code ? 'font-semibold text-bellwether-blue' : 'text-gray-500'}`}
+      >
+        {label}
+      </a>
+    ))
+  }
+</div>

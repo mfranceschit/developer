@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { useTranslations, useTranslatedPath, locales } from '../../../i18n/utils';
+import type { Locale } from '../../../i18n/utils';
+import { getProjects, getProject, renderBlocks } from '../../../lib/sanity';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return locales.flatMap((locale) =>
+    projects.map((project) => ({
+      params: { locale, slug: project.slug },
+    })),
+  );
+}
+
+const { locale, slug } = Astro.params as { locale: Locale; slug: string };
+const t = useTranslations(locale);
+const tp = useTranslatedPath(locale);
+const project = await getProject(slug, locale);
+const descriptionParagraphs = renderBlocks(project.description ?? []);
+---
+
+<BaseLayout title={project.name} lang={locale} currentPath={`/projects/${slug}`}>
+  <article class="max-w-2xl mx-auto">
+    <a href={tp('/projects')} class="text-sm text-gray-500 hover:text-very-berry mb-6 inline-block">
+      ← {t('projects.title')}
+    </a>
+    <h1 class="text-3xl font-bold text-bellwether-blue mb-6">{project.name}</h1>
+
+    {
+      project.image && (
+        <img
+          src={project.image}
+          alt={project.name}
+          class="w-full rounded-lg mb-8 object-cover aspect-video"
+        />
+      )
+    }
+
+    {
+      descriptionParagraphs.length > 0 && (
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold mb-3">{t('projects.summary')}</h2>
+          <div class="flex flex-col gap-3 text-gray-700 leading-relaxed">
+            {descriptionParagraphs.map((p) => <p>{p}</p>)}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      project.technologies?.length > 0 && (
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold mb-3">{t('projects.stack')}</h2>
+          <ul class="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <li class="px-3 py-1 bg-gray-100 rounded-full text-sm">{tech}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="flex gap-4">
+      {
+        project.url && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-2 bg-bellwether-blue text-white rounded-lg text-sm hover:bg-opacity-90 transition-colors"
+          >
+            Live
+          </a>
+        )
+      }
+      {
+        project.repository && (
+          <a
+            href={project.repository}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-2 border border-bellwether-blue text-bellwether-blue rounded-lg text-sm hover:bg-bellwether-blue hover:text-white transition-colors"
+          >
+            Repository
+          </a>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>

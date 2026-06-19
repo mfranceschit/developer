@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, getStaticLocalePaths } from '../../i18n/utils';
+import type { Locale } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const formspreeEndpoint = `https://formspree.io/f/${import.meta.env.FORMSPREE_KEY}`;
+---
+
+<BaseLayout
+  title={t('meta.contact.title')}
+  description={t('meta.contact.description')}
+  lang={locale}
+  currentPath="/contact"
+>
+  <section class="max-w-lg mx-auto">
+    <h1 class="text-3xl font-bold text-bellwether-blue mb-4">{t('contact.title')}</h1>
+    <p class="text-gray-500 mb-8">{t('contact.description')}</p>
+
+    <form action={formspreeEndpoint} method="POST" class="flex flex-col gap-4">
+      <div class="flex flex-col gap-1">
+        <label for="name" class="text-sm font-medium">{t('contact.name')}</label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          required
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-bellwether-blue"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="email" class="text-sm font-medium">{t('contact.email')}</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-bellwether-blue"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="subject" class="text-sm font-medium">{t('contact.subject')}</label>
+        <input
+          id="subject"
+          type="text"
+          name="subject"
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-bellwether-blue"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="message" class="text-sm font-medium">{t('contact.message')}</label>
+        <textarea
+          id="message"
+          name="message"
+          rows={5}
+          required
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-bellwether-blue resize-none"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="px-6 py-3 bg-very-berry text-white rounded-lg font-medium hover:bg-opacity-90 transition-colors"
+      >
+        {t('contact.cta')}
+      </button>
+    </form>
+  </section>
+</BaseLayout>
