@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, getStaticLocalePaths } from '../../i18n/utils';
+import type { Locale } from '../../i18n/utils';
+import { getCertifications, getDegrees } from '../../lib/sanity';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const [certifications, degrees] = await Promise.all([
+  getCertifications(locale),
+  getDegrees(locale),
+]);
+---
+
+<BaseLayout
+  title={t('meta.certifications.title')}
+  description={t('meta.certifications.description')}
+  lang={locale}
+  currentPath="/certifications"
+>
+  <section class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold text-bellwether-blue mb-10">{t('certifications.title')}</h1>
+
+    <h2 class="text-xl font-semibold mb-6">{t('certifications.certificates')}</h2>
+    <ul class="flex flex-col gap-4 mb-12">
+      {
+        certifications.map((cert) => (
+          <li class="flex items-center gap-4 p-4 border border-gray-200 rounded-lg">
+            {cert.image && (
+              <img src={cert.image} alt={cert.name} class="w-16 h-16 object-contain rounded" />
+            )}
+            <div class="flex-1">
+              <p class="font-medium">{cert.name}</p>
+              {cert.issued && <p class="text-sm text-gray-500">{cert.issued}</p>}
+              {cert.date && <p class="text-xs text-gray-400">{cert.date}</p>}
+            </div>
+            {cert.url && (
+              <a
+                href={cert.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-silver-birch hover:text-very-berry transition-colors"
+              >
+                View →
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2 class="text-xl font-semibold mb-6">{t('certifications.degrees')}</h2>
+    <ul class="flex flex-col gap-4">
+      {
+        degrees.map((degree) => (
+          <li class="flex items-center gap-4 p-4 border border-gray-200 rounded-lg">
+            {degree.image && (
+              <img src={degree.image} alt={degree.name} class="w-16 h-16 object-contain rounded" />
+            )}
+            <div class="flex-1">
+              <p class="font-medium">{degree.name}</p>
+              {degree.issued && <p class="text-sm text-gray-500">{degree.issued}</p>}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

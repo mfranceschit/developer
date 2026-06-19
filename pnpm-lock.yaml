@@ -35,6 +35,9 @@ importers:
       astro:
         specifier: ^5.0.0
         version: 5.18.2(@types/node@26.0.0)(jiti@1.21.7)(rollup@4.62.2)(typescript@5.9.3)(yaml@2.9.0)
+      groq:
+        specifier: ^6.1.0
+        version: 6.1.0
       react:
         specifier: ^19.0.0
         version: 19.2.7
@@ -4311,6 +4314,10 @@ packages:
   groq@3.99.0:
     resolution: {integrity: sha512-ZwKAWzvVCw51yjmIf5484KgsAzZAlGTM4uy9lki4PjAYxcEME2Xf93d31LhHzgUAr2JI79H+cNKoRjDHdv1BXQ==}
     engines: {node: '>=18'}
+
+  groq@6.1.0:
+    resolution: {integrity: sha512-r4Bpy/onjT+Bdrn2zfN5C/iwXxhYe8xRoF8bOXUldTCxut1vNwXDCOxORsEDB9ws2btHU6dfhWuzu9rr6+NIbw==}
+    engines: {node: '>=22.12'}
 
   gunzip-maybe@1.4.2:
     resolution: {integrity: sha512-4haO1M4mLO91PW57BMsDFf75UmwoRX0GkdD+Faw+Lr+r/OZrOCS0pIBwOL1xCKQqnQzbNFGgK2V2CpBUPeFNTw==}
@@ -12188,6 +12195,8 @@ snapshots:
       - supports-color
 
   groq@3.99.0: {}
+
+  groq@6.1.0: {}
 
   gunzip-maybe@1.4.2:
     dependencies:
