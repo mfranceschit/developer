@@ -5,14 +5,15 @@ import tailwind from '@astrojs/tailwind';
 import sanity from '@sanity/astro';
 
 export default defineConfig({
+  output: 'static',
   integrations: [
     react(),
     svelte(),
     tailwind(),
     sanity({
-      projectId: import.meta.env.SANITY_PROJECT_ID,
-      dataset: import.meta.env.SANITY_DATASET,
-      apiVersion: import.meta.env.SANITY_API_VERSION ?? '2023-12-08',
+      projectId: process.env.SANITY_PROJECT_ID,
+      dataset: process.env.SANITY_DATASET,
+      apiVersion: process.env.SANITY_API_VERSION ?? '2023-12-08',
       useCdn: false,
     }),
   ],

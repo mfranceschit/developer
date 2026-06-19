@@ -1,0 +1,2 @@
+name = "mfranceschit-storybook"
+pages_build_output_dir = "storybook-static"

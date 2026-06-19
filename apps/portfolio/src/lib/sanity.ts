@@ -1,10 +1,12 @@
 import { createClient } from '@sanity/client';
 import groq from 'groq';
 
+// import.meta.env is replaced with void 0 by Vite for non-PUBLIC server vars in SSR chunks;
+// process.env is the correct runtime source for server-only secrets.
 export const sanityClient = createClient({
-  projectId: import.meta.env.SANITY_PROJECT_ID,
-  dataset: import.meta.env.SANITY_DATASET,
-  apiVersion: import.meta.env.SANITY_API_VERSION ?? '2023-12-08',
+  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_DATASET,
+  apiVersion: process.env.SANITY_API_VERSION ?? '2023-12-08',
   useCdn: false,
 });
 

@@ -20,6 +20,10 @@
     },
     "build-storybook": {
       "outputs": ["storybook-static/**"]
+    },
+    "deploy": {
+      "dependsOn": ["build"],
+      "cache": false
     }
   }
 }
