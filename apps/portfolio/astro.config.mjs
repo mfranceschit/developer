@@ -1,8 +1,9 @@
+import path from 'node:path';
 import { existsSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import svelte from '@astrojs/svelte';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import sanity from '@sanity/astro';
 
 if (existsSync('.env')) {
@@ -14,7 +15,6 @@ export default defineConfig({
   integrations: [
     react(),
     svelte(),
-    tailwind(),
     sanity({
       projectId: process.env.SANITY_PROJECT_ID,
       dataset: process.env.SANITY_DATASET,
@@ -22,4 +22,12 @@ export default defineConfig({
       useCdn: false,
     }),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '@': path.resolve('./src'),
+      },
+    },
+  },
 });
