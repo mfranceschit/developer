@@ -1,8 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { useTranslations, getStaticLocalePaths } from '../../i18n/utils';
-import type { Locale } from '../../i18n/utils';
-import { getCertifications, getDegrees } from '../../lib/sanity';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Card } from '@mfranceschit/ui';
+import { useTranslations, getStaticLocalePaths } from '@/i18n/utils';
+import type { Locale } from '@/i18n/utils';
+import { getCertifications, getDegrees } from '@/lib/sanity';
 
 export function getStaticPaths() {
   return getStaticLocalePaths();
@@ -22,50 +23,90 @@ const [certifications, degrees] = await Promise.all([
   lang={locale}
   currentPath="/certifications"
 >
-  <section class="max-w-2xl mx-auto">
-    <h1 class="text-3xl font-bold text-bellwether-blue mb-10">{t('certifications.title')}</h1>
+  <section class="max-w-2xl mx-auto px-6 pt-14 pb-20">
+    <h1 class="text-[35px] font-bold text-bellwether-blue mb-10" style="letter-spacing: -0.015em;">
+      {t('certifications.title')}
+    </h1>
 
-    <h2 class="text-xl font-semibold mb-6">{t('certifications.certificates')}</h2>
-    <ul class="flex flex-col gap-4 mb-12">
+    <h2 class="text-[22px] font-semibold text-[var(--mf-gray-900)] mb-3.5">
+      {t('certifications.certificates')}
+    </h2>
+    <ul class="flex flex-col gap-3 mb-9">
       {
         certifications.map((cert) => (
-          <li class="flex items-center gap-4 p-4 border border-gray-200 rounded-lg">
-            {cert.image && (
-              <img src={cert.image} alt={cert.name} class="w-16 h-16 object-contain rounded" />
-            )}
-            <div class="flex-1">
-              <p class="font-medium">{cert.name}</p>
-              {cert.issued && <p class="text-sm text-gray-500">{cert.issued}</p>}
-              {cert.date && <p class="text-xs text-gray-400">{cert.date}</p>}
+          <Card as="li">
+            <div class="flex items-center gap-4 p-4">
+              {cert.image ? (
+                <img
+                  src={cert.image}
+                  alt={cert.name}
+                  class="w-12 h-12 object-contain rounded-md shrink-0"
+                />
+              ) : (
+                <div
+                  class="w-12 h-12 rounded-md shrink-0 flex items-center justify-center"
+                  style="background: var(--mf-sand);"
+                >
+                  <img src="/monogram-navy.svg" alt="MFT" style="height: 28px; width: auto;" />
+                </div>
+              )}
+              <div class="flex-1 min-w-0">
+                <p class="font-semibold text-[var(--mf-gray-900)] text-sm">{cert.name}</p>
+                {cert.issued && (
+                  <p class="text-xs text-[var(--text-muted)] mt-0.5">{cert.issued}</p>
+                )}
+              </div>
+              <div class="flex items-center gap-3 shrink-0">
+                {cert.date && (
+                  <span class="text-xs text-[var(--text-faint)] tabular-nums">{cert.date}</span>
+                )}
+                {cert.url && (
+                  <a
+                    href={cert.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-sm text-silver-birch no-underline hover:text-very-berry transition-colors duration-[120ms]"
+                  >
+                    {t('projects.view')} →
+                  </a>
+                )}
+              </div>
             </div>
-            {cert.url && (
-              <a
-                href={cert.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-sm text-silver-birch hover:text-very-berry transition-colors"
-              >
-                View →
-              </a>
-            )}
-          </li>
+          </Card>
         ))
       }
     </ul>
 
-    <h2 class="text-xl font-semibold mb-6">{t('certifications.degrees')}</h2>
-    <ul class="flex flex-col gap-4">
+    <h2 class="text-[22px] font-semibold text-[var(--mf-gray-900)] mb-3.5">
+      {t('certifications.degrees')}
+    </h2>
+    <ul class="flex flex-col gap-3">
       {
         degrees.map((degree) => (
-          <li class="flex items-center gap-4 p-4 border border-gray-200 rounded-lg">
-            {degree.image && (
-              <img src={degree.image} alt={degree.name} class="w-16 h-16 object-contain rounded" />
-            )}
-            <div class="flex-1">
-              <p class="font-medium">{degree.name}</p>
-              {degree.issued && <p class="text-sm text-gray-500">{degree.issued}</p>}
+          <Card as="li">
+            <div class="flex items-center gap-4 p-4">
+              {degree.image ? (
+                <img
+                  src={degree.image}
+                  alt={degree.name}
+                  class="w-12 h-12 object-contain rounded-md shrink-0"
+                />
+              ) : (
+                <div
+                  class="w-12 h-12 rounded-md shrink-0 flex items-center justify-center"
+                  style="background: var(--mf-sand);"
+                >
+                  <img src="/monogram-navy.svg" alt="MFT" style="height: 28px; width: auto;" />
+                </div>
+              )}
+              <div class="flex-1 min-w-0">
+                <p class="font-semibold text-[var(--mf-gray-900)] text-sm">{degree.name}</p>
+                {degree.issued && (
+                  <p class="text-xs text-[var(--text-muted)] mt-0.5">{degree.issued}</p>
+                )}
+              </div>
             </div>
-          </li>
+          </Card>
         ))
       }
     </ul>
