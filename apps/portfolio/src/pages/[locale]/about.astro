@@ -1,8 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { useTranslations, getStaticLocalePaths } from '../../i18n/utils';
-import type { Locale } from '../../i18n/utils';
-import { aboutDescriptions } from '../../i18n/ui';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Badge } from '@mfranceschit/ui';
+import { useTranslations, getStaticLocalePaths } from '@/i18n/utils';
+import type { Locale } from '@/i18n/utils';
+import { aboutDescriptions } from '@/i18n/ui';
 
 export function getStaticPaths() {
   return getStaticLocalePaths();
@@ -11,13 +12,26 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const paragraphs = aboutDescriptions[locale];
+
+const stack = [
+  'JavaScript', 'TypeScript', 'React', 'Node.js', 'Astro',
+  'AWS', 'GCP', 'Azure', 'Terraform', 'Docker', 'New Relic',
+];
 ---
 
 <BaseLayout title={t('meta.about.title')} description={t('meta.about.description')} lang={locale} currentPath="/about">
-  <section class="max-w-2xl mx-auto">
-    <h1 class="text-3xl font-bold text-bellwether-blue mb-8">{t('about.title')}</h1>
-    <div class="flex flex-col gap-4 text-gray-700 leading-relaxed">
+  <section class="max-w-2xl mx-auto px-6 pt-14 pb-20">
+    <h1 class="text-[35px] font-bold text-bellwether-blue mb-7" style="letter-spacing: -0.015em;">
+      {t('about.title')}
+    </h1>
+    <div class="flex flex-col gap-4 text-[var(--mf-gray-700)] leading-[1.7] text-base">
       {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+    <h3 class="text-[22px] font-semibold text-[var(--mf-gray-900)] mt-10 mb-3.5">
+      {t('projects.stack')}
+    </h3>
+    <div class="flex flex-wrap gap-2">
+      {stack.map((tech) => <Badge tone="blue">{tech}</Badge>)}
     </div>
   </section>
 </BaseLayout>

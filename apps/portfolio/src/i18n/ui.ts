@@ -11,7 +11,7 @@ export type Locale = keyof typeof languages;
 export const ui = {
   en: {
     'nav.home': 'Home',
-    'nav.about': 'About Me',
+    'nav.about': 'About',
     'nav.projects': 'Projects',
     'nav.certifications': 'Certifications',
     'nav.contact': 'Contact',
@@ -32,6 +32,7 @@ export const ui = {
     'contact.subject': 'Subject',
     'contact.message': 'Message',
     'contact.send': 'Send',
+    'projects.view': 'View',
     'meta.home.title': 'Marco Franceschi',
     'meta.home.description':
       'A seasoned full-stack developer with expertise in building high-performance web applications.',
@@ -71,6 +72,7 @@ export const ui = {
     'contact.subject': 'Asunto',
     'contact.message': 'Mensaje',
     'contact.send': 'Enviar',
+    'projects.view': 'Ver',
     'meta.home.title': 'Marco Franceschi',
     'meta.home.description':
       'Desarrollador full-stack con experiencia en aplicaciones web de alto rendimiento.',
@@ -109,6 +111,7 @@ export const ui = {
     'contact.subject': 'Assunto',
     'contact.message': 'Mensagem',
     'contact.send': 'Enviar',
+    'projects.view': 'Ver',
     'meta.home.title': 'Marco Franceschi',
     'meta.home.description':
       'Desenvolvedor full-stack com expertise em aplicações web de alto desempenho.',

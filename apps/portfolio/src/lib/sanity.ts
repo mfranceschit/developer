@@ -14,6 +14,7 @@ export interface Project {
   _id: string;
   name: string;
   slug: string;
+  technologies: string[];
 }
 
 export interface ProjectDetail {
@@ -60,7 +61,8 @@ export async function getProjects(): Promise<Project[]> {
     groq`*[_type == "project"]{
       _id,
       name,
-      "slug": slug.current
+      "slug": slug.current,
+      technologies
     }`,
   );
 }
