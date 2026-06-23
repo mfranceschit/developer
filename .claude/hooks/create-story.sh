@@ -29,14 +29,10 @@ STORY_PATH="${FILE_PATH%.tsx}.stories.tsx"
 # Idempotent: bail if story already exists
 [ -f "$STORY_PATH" ] && exit 0
 
-COMPONENT_NAME=$(basename "$FILE_PATH" .tsx)
+PROMPT="Create a Storybook story file for the component at ${FILE_PATH@Q}. Write it to ${STORY_PATH@Q}. Use the storybook MCP to read an existing story (e.g. packages/ui/src/components/Button/Button.stories.tsx) for structure, Meta typing, StoryObj typing, and export naming conventions. Mirror the same import style, meta shape, and story export pattern. If the MCP is unavailable, infer story variants from the component's props."
 
-claude --print \
-  "Create a Storybook story file for the component at $FILE_PATH. \
-Write it to $STORY_PATH. \
-Use the storybook MCP to read an existing story (e.g. packages/ui/src/components/Button/Button.stories.tsx) for structure, Meta typing, StoryObj typing, and export naming conventions. \
-Mirror the same import style, meta shape, and story export pattern. \
-If the MCP is unavailable, infer story variants from the component's props." \
-  2>/dev/null
-
-echo "Story created: $(basename "$STORY_PATH")"
+if claude --print "$PROMPT" 2>/dev/null; then
+  echo "Story created: $(basename "$STORY_PATH")"
+else
+  echo "Story generation failed for: $(basename "$STORY_PATH")" >&2
+fi
