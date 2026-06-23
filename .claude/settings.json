@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/create-story.sh",
+            "statusMessage": "Checking if story needed..."
+          }
+        ]
+      }
+    ]
+  }
+}
