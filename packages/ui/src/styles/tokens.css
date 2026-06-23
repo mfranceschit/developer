@@ -44,6 +44,12 @@
   --mf-gray-100: #f3f4f6;
   --mf-gray-50: #f9fafb;
 
+  /* Status */
+  --mf-success: #1f8a5b;
+  --mf-warning: #c9851f;
+  --mf-danger: #ae2b53;
+  --mf-info: #3067f6;
+
   /* Text */
   --text-strong: var(--mf-bellwether-blue);
   --text-body: var(--mf-gray-800);
