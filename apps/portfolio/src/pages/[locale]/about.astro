@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Badge } from '@mfranceschit/ui';
 import { useTranslations, getStaticLocalePaths } from '@/i18n/utils';
 import type { Locale } from '@/i18n/utils';
 import { aboutDescriptions } from '@/i18n/ui';
@@ -20,18 +19,25 @@ const stack = [
 ---
 
 <BaseLayout title={t('meta.about.title')} description={t('meta.about.description')} lang={locale} currentPath="/about">
-  <section class="max-w-2xl mx-auto px-6 pt-14 pb-20">
-    <h1 class="text-[35px] font-bold text-bellwether-blue mb-7" style="letter-spacing: -0.015em;">
+  <section class="mx-auto max-w-[720px]" style="padding: 56px 24px 120px;">
+    <h1 class="mb-[30px] text-[44px] font-bold text-white" style="letter-spacing: -0.015em;">
       {t('about.title')}
     </h1>
-    <div class="flex flex-col gap-4 text-[var(--mf-gray-700)] leading-[1.7] text-base">
+    <div class="flex flex-col gap-4 text-[16px] leading-[1.7] text-[rgba(222,228,240,0.82)]">
       {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
     </div>
-    <h3 class="text-[22px] font-semibold text-[var(--mf-gray-900)] mt-10 mb-3.5">
-      {t('projects.stack')}
-    </h3>
+    <h3 class="mb-3.5 mt-10 text-[22px] font-semibold text-[#F4F6FB]">{t('projects.stack')}</h3>
     <div class="flex flex-wrap gap-2">
-      {stack.map((tech) => <Badge tone="blue">{tech}</Badge>)}
+      {
+        stack.map((tech) => (
+          <span
+            class="rounded-sm text-[13px] font-medium text-[#9DB9FF]"
+            style="padding: 5px 12px; background: rgba(48,103,246,0.16); border: 1px solid rgba(48,103,246,0.35);"
+          >
+            {tech}
+          </span>
+        ))
+      }
     </div>
   </section>
 </BaseLayout>
