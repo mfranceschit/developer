@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Card } from '@mfranceschit/ui';
 import { useTranslations, getStaticLocalePaths } from '@/i18n/utils';
 import type { Locale } from '@/i18n/utils';
 import { getCertifications, getDegrees } from '@/lib/sanity';
@@ -17,98 +16,87 @@ const [certifications, degrees] = await Promise.all([
 ]);
 ---
 
-<BaseLayout
-  title={t('meta.certifications.title')}
-  description={t('meta.certifications.description')}
-  lang={locale}
-  currentPath="/certifications"
->
-  <section class="max-w-2xl mx-auto px-6 pt-14 pb-20">
-    <h1 class="text-[35px] font-bold text-bellwether-blue mb-10" style="letter-spacing: -0.015em;">
+<BaseLayout title={t('meta.certifications.title')} description={t('meta.certifications.description')} lang={locale} currentPath="/certifications">
+  <section class="mx-auto max-w-[720px]" style="padding: 56px 24px 120px;">
+    <h1 class="mb-[30px] text-[44px] font-bold text-white" style="letter-spacing: -0.015em;">
       {t('certifications.title')}
     </h1>
 
-    <h2 class="text-[22px] font-semibold text-[var(--mf-gray-900)] mb-3.5">
-      {t('certifications.certificates')}
-    </h2>
-    <ul class="flex flex-col gap-3 mb-9">
+    <h2 class="mb-3.5 text-[22px] font-semibold text-[#F4F6FB]">{t('certifications.certificates')}</h2>
+    <ul class="m-0 flex list-none flex-col gap-3 p-0" style="margin-bottom: 38px;">
       {
         certifications.map((cert) => (
-          <Card as="li">
-            <div class="flex items-center gap-4 p-4">
-              {cert.image ? (
-                <img
-                  src={cert.image}
-                  alt={cert.name}
-                  class="w-12 h-12 object-contain rounded-md shrink-0"
-                />
-              ) : (
-                <div
-                  class="w-12 h-12 rounded-md shrink-0 flex items-center justify-center"
-                  style="background: var(--mf-sand);"
-                >
-                  <img src="/monogram-navy.svg" alt="MFT" style="height: 28px; width: auto;" />
-                </div>
-              )}
-              <div class="flex-1 min-w-0">
-                <p class="font-semibold text-[var(--mf-gray-900)] text-sm">{cert.name}</p>
-                {cert.issued && (
-                  <p class="text-xs text-[var(--text-muted)] mt-0.5">{cert.issued}</p>
-                )}
+          <li
+            data-pluck
+            class="flex items-center gap-4 rounded-md transition-colors duration-200"
+            style="padding: 16px 18px; background: rgba(14,23,51,0.55); border: 1px solid rgba(255,255,255,0.10);"
+          >
+            {cert.image ? (
+              <img src={cert.image} alt={cert.name} class="h-12 w-12 shrink-0 rounded-[6px] object-contain" />
+            ) : (
+              <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-[6px]"
+                style="background: #D3CFC7;"
+              >
+                <img src="/monogram-navy.svg" alt="" aria-hidden="true" style="height: 28px; width: auto;" />
               </div>
-              <div class="flex items-center gap-3 shrink-0">
-                {cert.date && (
-                  <span class="text-xs text-[var(--text-faint)] tabular-nums">{cert.date}</span>
-                )}
-                {cert.url && (
-                  <a
-                    href={cert.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-sm text-silver-birch no-underline hover:text-very-berry transition-colors duration-[120ms]"
-                  >
-                    {t('projects.view')} →
-                  </a>
-                )}
-              </div>
+            )}
+            <div class="min-w-0 flex-1">
+              <p class="text-[14px] font-semibold text-[#F4F6FB]">{cert.name}</p>
+              {cert.issued && <p class="mt-0.5 text-[12px] text-[rgba(211,207,199,0.6)]">{cert.issued}</p>}
             </div>
-          </Card>
+            <div class="flex shrink-0 items-center" style="gap: 14px;">
+              {cert.date && (
+                <span class="text-[12px] tabular-nums text-[rgba(156,163,175,0.7)]">{cert.date}</span>
+              )}
+              {cert.url && (
+                <a
+                  href={cert.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-[13px] font-medium text-[#7FA3FF] no-underline"
+                >
+                  {t('projects.view')} →
+                </a>
+              )}
+            </div>
+          </li>
         ))
       }
     </ul>
 
-    <h2 class="text-[22px] font-semibold text-[var(--mf-gray-900)] mb-3.5">
-      {t('certifications.degrees')}
-    </h2>
-    <ul class="flex flex-col gap-3">
+    <h2 class="mb-3.5 text-[22px] font-semibold text-[#F4F6FB]">{t('certifications.degrees')}</h2>
+    <ul class="m-0 flex list-none flex-col gap-3 p-0">
       {
         degrees.map((degree) => (
-          <Card as="li">
-            <div class="flex items-center gap-4 p-4">
-              {degree.image ? (
-                <img
-                  src={degree.image}
-                  alt={degree.name}
-                  class="w-12 h-12 object-contain rounded-md shrink-0"
-                />
-              ) : (
-                <div
-                  class="w-12 h-12 rounded-md shrink-0 flex items-center justify-center"
-                  style="background: var(--mf-sand);"
-                >
-                  <img src="/monogram-navy.svg" alt="MFT" style="height: 28px; width: auto;" />
-                </div>
-              )}
-              <div class="flex-1 min-w-0">
-                <p class="font-semibold text-[var(--mf-gray-900)] text-sm">{degree.name}</p>
-                {degree.issued && (
-                  <p class="text-xs text-[var(--text-muted)] mt-0.5">{degree.issued}</p>
-                )}
+          <li
+            data-pluck
+            class="flex items-center gap-4 rounded-md transition-colors duration-200"
+            style="padding: 16px 18px; background: rgba(14,23,51,0.55); border: 1px solid rgba(255,255,255,0.10);"
+          >
+            {degree.image ? (
+              <img src={degree.image} alt={degree.name} class="h-12 w-12 shrink-0 rounded-[6px] object-contain" />
+            ) : (
+              <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-[6px]"
+                style="background: #D3CFC7;"
+              >
+                <img src="/monogram-navy.svg" alt="" aria-hidden="true" style="height: 28px; width: auto;" />
               </div>
+            )}
+            <div class="min-w-0 flex-1">
+              <p class="text-[14px] font-semibold text-[#F4F6FB]">{degree.name}</p>
+              {degree.issued && <p class="mt-0.5 text-[12px] text-[rgba(211,207,199,0.6)]">{degree.issued}</p>}
             </div>
-          </Card>
+          </li>
         ))
       }
     </ul>
   </section>
 </BaseLayout>
+
+<style>
+  li[data-pluck]:hover {
+    border-color: rgba(48, 103, 246, 0.55) !important;
+  }
+</style>
