@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Button } from '@mfranceschit/ui';
 import { useTranslations, getStaticLocalePaths } from '@/i18n/utils';
 import type { Locale } from '@/i18n/utils';
 
@@ -11,81 +10,77 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const formspreeEndpoint = `https://formspree.io/f/${import.meta.env.FORMSPREE_KEY}`;
+
+const fieldClass =
+  'rounded-md text-[14px] text-[#EEF1F7] placeholder:text-[rgba(156,163,175,0.55)] outline-none transition-all duration-200 mf-field';
 ---
 
-<BaseLayout
-  title={t('meta.contact.title')}
-  description={t('meta.contact.description')}
-  lang={locale}
-  currentPath="/contact"
->
-  <section class="max-w-lg mx-auto px-6 pt-14 pb-20">
-    <h1 class="text-[35px] font-bold text-bellwether-blue mb-4" style="letter-spacing: -0.015em;">
+<BaseLayout title={t('meta.contact.title')} description={t('meta.contact.description')} lang={locale} currentPath="/contact">
+  <section class="mx-auto max-w-[540px]" style="padding: 56px 24px 120px;">
+    <h1 class="mb-4 text-[44px] font-bold text-white" style="letter-spacing: -0.015em;">
       {t('contact.title')}
     </h1>
-    <p class="text-[var(--text-muted)] mb-7 text-base">{t('contact.description')}</p>
+    <p class="mb-[30px] text-[16px] text-[rgba(211,207,199,0.7)]">{t('contact.description')}</p>
 
     <div id="form-view">
-      <form id="contact-form" action={formspreeEndpoint} method="POST" class="flex flex-col gap-4">
-        <div class="flex flex-col gap-1">
-          <label for="name" class="text-sm font-medium text-[var(--mf-gray-700)]">
-            {t('contact.name')} <span class="text-very-berry">*</span>
+      <form id="contact-form" action={formspreeEndpoint} method="POST" class="flex flex-col" style="gap: 18px;">
+        <div class="flex flex-col" style="gap: 6px;">
+          <label for="name" class="text-[13.5px] font-medium text-[rgba(222,228,240,0.85)]">
+            {t('contact.name')} <span class="text-[#D98AA1]">*</span>
           </label>
-          <input
-            id="name" type="text" name="name" required placeholder="Your name"
-            class="px-4 py-2.5 border border-[var(--border-default)] rounded-lg text-sm text-[var(--mf-gray-900)] placeholder:text-[var(--text-faint)] focus:outline-hidden focus:border-bellwether-blue focus:shadow-focus transition-all duration-[120ms]"
-          />
+          <input id="name" type="text" name="name" required placeholder="Your name" data-pluck class={fieldClass} />
         </div>
 
-        <div class="flex flex-col gap-1">
-          <label for="email" class="text-sm font-medium text-[var(--mf-gray-700)]">
-            {t('contact.email')} <span class="text-very-berry">*</span>
+        <div class="flex flex-col" style="gap: 6px;">
+          <label for="email" class="text-[13.5px] font-medium text-[rgba(222,228,240,0.85)]">
+            {t('contact.email')} <span class="text-[#D98AA1]">*</span>
           </label>
-          <input
-            id="email" type="email" name="email" required placeholder="you@example.com"
-            class="px-4 py-2.5 border border-[var(--border-default)] rounded-lg text-sm text-[var(--mf-gray-900)] placeholder:text-[var(--text-faint)] focus:outline-hidden focus:border-bellwether-blue focus:shadow-focus transition-all duration-[120ms]"
-          />
+          <input id="email" type="email" name="email" required placeholder="you@example.com" data-pluck class={fieldClass} />
         </div>
 
-        <div class="flex flex-col gap-1">
-          <label for="subject" class="text-sm font-medium text-[var(--mf-gray-700)]">
+        <div class="flex flex-col" style="gap: 6px;">
+          <label for="subject" class="text-[13.5px] font-medium text-[rgba(222,228,240,0.85)]">
             {t('contact.subject')}
           </label>
-          <input
-            id="subject" type="text" name="subject" placeholder="What's this about?"
-            class="px-4 py-2.5 border border-[var(--border-default)] rounded-lg text-sm text-[var(--mf-gray-900)] placeholder:text-[var(--text-faint)] focus:outline-hidden focus:border-bellwether-blue focus:shadow-focus transition-all duration-[120ms]"
-          />
+          <input id="subject" type="text" name="subject" placeholder="What's this about?" data-pluck class={fieldClass} />
         </div>
 
-        <div class="flex flex-col gap-1">
-          <label for="message" class="text-sm font-medium text-[var(--mf-gray-700)]">
-            {t('contact.message')} <span class="text-very-berry">*</span>
+        <div class="flex flex-col" style="gap: 6px;">
+          <label for="message" class="text-[13.5px] font-medium text-[rgba(222,228,240,0.85)]">
+            {t('contact.message')} <span class="text-[#D98AA1]">*</span>
           </label>
           <textarea
-            id="message" name="message" rows={5} required placeholder="Tell me about your project…"
-            class="px-4 py-2.5 border border-[var(--border-default)] rounded-lg text-sm text-[var(--mf-gray-900)] placeholder:text-[var(--text-faint)] focus:outline-hidden focus:border-bellwether-blue focus:shadow-focus transition-all duration-[120ms] resize-none"
+            id="message"
+            name="message"
+            rows={5}
+            required
+            placeholder="Tell me about your project…"
+            data-pluck
+            class={`${fieldClass} resize-none`}
+            style="min-height: 110px;"
           ></textarea>
         </div>
 
-        <div class="mt-2">
-          <Button variant="accent" size="lg" type="submit">{t('contact.cta')}</Button>
-        </div>
+        <button
+          type="submit"
+          class="rounded-md text-[15px] font-semibold text-white transition-shadow duration-200 mf-submit"
+          style="padding: 13px 28px; margin-top: 6px; background: linear-gradient(135deg, #C03E66, #AE2B53); box-shadow: 0 0 28px rgba(174,43,83,0.45);"
+        >
+          {t('contact.cta')}
+        </button>
       </form>
     </div>
 
     <div id="success-view" class="hidden">
-      <div class="p-7 border border-[var(--border-subtle)] rounded-lg shadow-xs text-center">
-        <div
-          class="w-16 h-16 rounded-md mx-auto mb-4 flex items-center justify-center"
-          style="background: var(--mf-berry-50);"
-        >
-          <img src="/monogram-navy.svg" alt="MFT" style="height: 36px; width: auto;" />
+      <div class="rounded-md text-center" style="padding: 28px; background: rgba(14,23,51,0.55); border: 1px solid rgba(255,255,255,0.10);">
+        <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-md" style="background: #D3CFC7;">
+          <img src="/monogram-navy.svg" alt="" aria-hidden="true" style="height: 36px; width: auto;" />
         </div>
-        <h3 class="text-[22px] font-semibold text-[var(--mf-gray-900)] mb-1.5">Message sent</h3>
-        <p class="text-[var(--text-muted)] text-sm">Thanks — I'll get back to you soon.</p>
+        <h3 class="mb-1.5 text-[22px] font-semibold text-[#F4F6FB]">Message sent</h3>
+        <p class="text-[14px] text-[rgba(211,207,199,0.7)]">Thanks — I'll get back to you soon.</p>
         <button
           id="send-another"
-          class="mt-4 text-sm text-[var(--text-muted)] hover:text-bellwether-blue transition-colors duration-[120ms] focus:outline-hidden"
+          class="mt-4 text-[14px] text-[rgba(211,207,199,0.7)] outline-none transition-colors duration-200 hover:text-white"
         >
           Send another
         </button>
@@ -93,6 +88,21 @@ const formspreeEndpoint = `https://formspree.io/f/${import.meta.env.FORMSPREE_KE
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .mf-field {
+    padding: 11px 16px;
+    background: rgba(14, 23, 51, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .mf-field:focus {
+    border-color: #3067f6;
+    box-shadow: 0 0 0 3px rgba(48, 103, 246, 0.25);
+  }
+  .mf-submit:hover {
+    box-shadow: 0 0 40px rgba(174, 43, 83, 0.6);
+  }
+</style>
 
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
