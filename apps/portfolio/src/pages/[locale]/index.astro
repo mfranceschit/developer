@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Button } from '@mfranceschit/ui';
+import HeroWave from '@/components/islands/HeroWave.svelte';
 import { useTranslations, useTranslatedPath, getStaticLocalePaths } from '@/i18n/utils';
 import type { Locale } from '@/i18n/utils';
 
@@ -13,22 +13,49 @@ const t = useTranslations(locale);
 const tp = useTranslatedPath(locale);
 ---
 
-<BaseLayout title={t('meta.home.title')} description={t('meta.home.description')} lang={locale} currentPath="/">
+<BaseLayout title={t('meta.home.title')} description={t('meta.home.description')} lang={locale} currentPath="/" variant="hero">
+  <HeroWave client:load waveEnergy={0.75} />
   <section
-    class="flex flex-col items-center justify-center text-center gap-6 px-6"
-    style="min-height: calc(100vh - 64px); padding-top: 40px; padding-bottom: 60px;"
+    class="relative z-10 flex flex-col items-center justify-center px-6 text-center"
+    style="min-height: calc(100vh - 64px); gap: 22px; padding-bottom: 200px;"
   >
-    <img src="/monogram-navy.svg" alt="MFT monogram" style="height: 88px; width: auto;" />
-    <div class="mf-wordmark text-[40px] font-bold text-bellwether-blue" style="letter-spacing: 0.06em;">
-      mfranceschit
+    <img
+      id="hero-logo"
+      src="/monogram-beige.svg"
+      alt=""
+      aria-hidden="true"
+      style="height: 80px; width: auto; filter: drop-shadow(0 0 28px rgba(48,103,246,0.45));"
+    />
+    <div id="hero-content" class="flex flex-col items-center" style="gap: 22px;">
+      <div class="mf-wordmark text-[42px] font-bold text-white" style="letter-spacing: 0.14em;">
+        mfranceschit
+      </div>
+      <div>
+        <h1 class="text-[25px] font-semibold text-[rgba(238,241,247,0.95)]">{t('home.title')}</h1>
+        <p class="mt-1 text-[17px] text-[rgba(211,207,199,0.72)]">{t('home.subtitle')}</p>
+      </div>
+      <div class="flex items-center" style="gap: 14px; margin-top: 8px;">
+        <a
+          href={tp('/projects')}
+          class="rounded-lg text-[15px] font-semibold text-[#EEF1F7] no-underline"
+          style="padding: 13px 26px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(8px);"
+        >
+          {t('nav.projects')}
+        </a>
+        <a
+          href={tp('/contact')}
+          class="rounded-lg text-[15px] font-semibold text-white no-underline"
+          style="padding: 13px 26px; background: linear-gradient(135deg, #C03E66, #AE2B53); box-shadow: 0 0 28px rgba(174,43,83,0.45);"
+        >
+          {t('contact.cta')}
+        </a>
+      </div>
     </div>
-    <div>
-      <h1 class="text-2xl font-semibold text-[var(--mf-gray-900)] mb-1.5">{t('home.title')}</h1>
-      <p class="text-lg text-[var(--text-muted)]">{t('home.subtitle')}</p>
-    </div>
-    <div class="flex gap-3 mt-2">
-      <Button variant="primary" size="lg" href={tp('/projects')}>{t('nav.projects')}</Button>
-      <Button variant="accent" size="lg" href={tp('/contact')}>{t('contact.cta')}</Button>
+    <div
+      class="fixed bottom-4 right-5 text-[12px] font-medium text-[rgba(211,207,199,0.45)]"
+      style="letter-spacing: 0.16em;"
+    >
+      72 BPM · ANDANTE
     </div>
   </section>
 </BaseLayout>
