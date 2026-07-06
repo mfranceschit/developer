@@ -15,6 +15,7 @@ const { lang, currentPath } = Astro.props;
       <a
         href={`/${code}${currentPath}`}
         aria-current={lang === code ? 'page' : undefined}
+        data-pluck
         class={`transition-colors duration-200 font-sans ${
           lang === code
             ? 'font-semibold text-white'
