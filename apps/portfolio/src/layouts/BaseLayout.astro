@@ -35,7 +35,7 @@ const navLinks = [
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -44,25 +44,20 @@ const navLinks = [
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
-  <body
-    class="min-h-screen font-sans text-[#EEF1F7]"
-    style="background: linear-gradient(180deg, #0E1733 0%, #0B1226 100%); background-attachment: fixed;"
-  >
+  <body class="min-h-screen bg-[image:var(--gradient-page)] bg-fixed font-sans text-[var(--text-heading-strong)]">
     {variant === 'interior' && <TramaBackground client:visible waveEnergy={0.75} />}
     <header
-      class="fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between gap-6 px-7"
-      style={isHero
-        ? 'background: rgba(14,23,51,0.45); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.08);'
-        : 'background: rgba(14,23,51,0.94);'}
+      class:list={[
+        'fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between gap-6 px-7',
+        isHero
+          ? 'border-b border-[var(--border-hairline)] bg-[var(--surface-header-glass)] backdrop-blur-[14px]'
+          : 'bg-[var(--surface-header)]',
+      ]}
     >
-      <a
-        href={tp('/')}
-        class="mf-wordmark text-[15px] font-semibold text-white no-underline"
-        style="letter-spacing: 0.3em;"
-      >
+      <a href={tp('/')} class="mf-wordmark text-[15px] font-semibold text-white no-underline">
         mfranceschit
       </a>
-      <nav class="flex items-center" style="gap: 26px;">
+      <nav class="flex items-center gap-[26px]">
         {
           navLinks.map(({ href, label }) => {
             const active =
@@ -75,7 +70,7 @@ const navLinks = [
                   'border-b-2 py-1 text-[13.5px] no-underline transition-colors duration-200',
                   active
                     ? 'border-very-berry font-semibold text-white'
-                    : 'border-transparent font-normal text-[rgba(211,207,199,0.62)] hover:text-white',
+                    : 'border-transparent font-normal text-[var(--text-nav)] hover:text-white',
                 ]}
               >
                 {label}

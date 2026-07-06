@@ -58,14 +58,22 @@
   --text-inverse: var(--mf-white);
   --text-link: var(--mf-silver-birch);
   --text-accent: var(--mf-very-berry);
+  --text-placeholder: var(--mf-gray-400);
 
   /* Surfaces */
   --surface-page: var(--mf-white);
   --surface-card: var(--mf-white);
+  --surface-field: var(--mf-white);
   --surface-sunken: var(--mf-gray-50);
   --surface-sand: var(--mf-sand);
   --surface-ink: var(--mf-bellwether-blue);
   --surface-ink-deep: var(--mf-blue-900);
+
+  /* Form */
+  --text-required: var(--mf-very-berry);
+  --text-field: var(--text-body);
+  --field-pad-x: 14px;
+  --field-pad-y: 9px;
 
   /* Interaction — primary (Bellwether Blue) */
   --primary: var(--mf-bellwether-blue);
@@ -154,6 +162,83 @@
   --duration-slow: 280ms;
 }
 
+/* Dark theme — "Marea" liquid-sound surface (apps/portfolio) */
+[data-theme='dark'] {
+  --mf-blue-950: #0b1226;
+
+  --text-strong: var(--mf-white);
+  --text-body: rgba(222, 228, 240, 0.82);
+  --text-muted: rgba(211, 207, 199, 0.7);
+  --text-faint: rgba(156, 163, 175, 0.7);
+  --text-inverse: var(--mf-white);
+  --text-link: var(--mf-silver-birch);
+  --text-accent: var(--mf-berry-300);
+
+  --text-heading: #f4f6fb;
+  --text-heading-strong: #eef1f7;
+  --text-tertiary: rgba(211, 207, 199, 0.6);
+  --text-caption: rgba(211, 207, 199, 0.45);
+  --text-placeholder: rgba(156, 163, 175, 0.55);
+  --text-nav: rgba(211, 207, 199, 0.62);
+  --text-chip: rgba(222, 228, 240, 0.7);
+  --text-hero-heading: rgba(238, 241, 247, 0.95);
+  --text-hero-subtitle: rgba(211, 207, 199, 0.72);
+
+  --surface-page: var(--mf-blue-900);
+  --gradient-page: linear-gradient(180deg, var(--mf-blue-900) 0%, var(--mf-blue-950) 100%);
+  --surface-card: rgba(14, 23, 51, 0.55);
+  --surface-field: rgba(14, 23, 51, 0.6);
+  --surface-header: rgba(14, 23, 51, 0.94);
+  --surface-header-glass: rgba(14, 23, 51, 0.45);
+  --surface-sunken: var(--mf-blue-950);
+  --surface-ink: var(--mf-blue-900);
+  --surface-ink-deep: var(--mf-blue-950);
+  --gradient-cover: linear-gradient(135deg, var(--mf-blue-800), var(--mf-blue-900));
+
+  --text-required: var(--mf-berry-300);
+  --text-field: #eef1f7;
+  --field-pad-x: 16px;
+  --field-pad-y: 11px;
+
+  --primary: var(--mf-white);
+  --primary-hover: rgba(255, 255, 255, 0.9);
+  --primary-pressed: rgba(255, 255, 255, 0.75);
+  --primary-soft: rgba(255, 255, 255, 0.07);
+
+  --accent: var(--mf-berry-600);
+  --accent-hover: var(--mf-berry-500);
+  --accent-pressed: var(--mf-berry-700);
+  --accent-soft: rgba(48, 103, 246, 0.16);
+  --gradient-accent: linear-gradient(135deg, var(--mf-berry-500), var(--mf-berry-600));
+
+  --accent-birch-100: #cfe0ff;
+  --accent-birch-300: #9db9ff;
+  --accent-birch-500: #7fa3ff;
+
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-default: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-hover-accent: rgba(48, 103, 246, 0.55);
+  --border-chip-accent: rgba(48, 103, 246, 0.35);
+  --border-hover-accent-strong: rgba(48, 103, 246, 0.7);
+  --border-glow-accent: rgba(48, 103, 246, 0.45);
+  --focus-ring: var(--mf-silver-birch);
+
+  --surface-btn-accent: rgba(48, 103, 246, 0.18);
+  --surface-btn-accent-hover: rgba(48, 103, 246, 0.28);
+  --surface-btn-neutral: rgba(255, 255, 255, 0.05);
+  --surface-btn-neutral-hover: rgba(255, 255, 255, 0.09);
+  --border-btn-neutral: rgba(255, 255, 255, 0.16);
+
+  --shadow-focus: 0 0 0 3px rgba(48, 103, 246, 0.25);
+  --shadow-glow-accent-cta: 0 0 28px rgba(174, 43, 83, 0.45);
+  --shadow-glow-accent-cta-hover: 0 0 40px rgba(174, 43, 83, 0.6);
+  --shadow-glow-primary: 0 0 34px rgba(48, 103, 246, 0.18);
+  --shadow-glow-monogram: 0 0 28px rgba(48, 103, 246, 0.45);
+  --shadow-glow-monogram-sm: 0 0 20px rgba(48, 103, 246, 0.4);
+}
+
 ::selection {
   background: var(--mf-berry-100);
   color: var(--mf-berry-800);
@@ -199,6 +284,11 @@
   --color-berry-800: var(--mf-berry-800);
 
   --font-sans: 'Inter', system-ui, sans-serif;
+
+  --tracking-tighter: -0.03em;
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
 
   --shadow-xs: 0 1px 2px rgba(27, 43, 91, 0.06);
   --shadow-sm: 0 1px 3px rgba(27, 43, 91, 0.08), 0 1px 2px rgba(27, 43, 91, 0.06);

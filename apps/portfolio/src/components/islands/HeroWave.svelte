@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { createCanvasScene, type Scene, type SceneCtx } from '@/lib/canvas/canvas-loop';
   import { accents, beatEnv, gauss, rgba, BEAT_PERIOD, type AccentMode } from '@/lib/canvas/wave-math';
+  import { colors } from '@mfranceschit/ui';
 
   interface Props {
     waveSpeed?: number;
@@ -59,7 +60,7 @@
       c.closePath();
       const g = c.createLinearGradient(0, base - 60 * sc, 0, h);
       g.addColorStop(0, rgba(col, 0.15 * layerAlpha));
-      g.addColorStop(1, 'rgba(10,16,38,0)');
+      g.addColorStop(1, rgba(colors.blue[950], 0));
       c.fillStyle = g;
       c.fill();
       c.strokeStyle = rgba(
@@ -82,7 +83,7 @@
       const gy = y0 - 30 * sc;
       const g2 = c.createRadialGradient(cx, gy, 0, cx, gy, 150 * sc);
       g2.addColorStop(0, rgba(B, 0.16 * sw));
-      g2.addColorStop(1, 'rgba(174,43,83,0)');
+      g2.addColorStop(1, rgba(B, 0));
       c.fillStyle = g2;
       c.beginPath();
       c.arc(cx, gy, 150 * sc, 0, Math.PI * 2);

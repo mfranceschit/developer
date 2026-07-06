@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Button, Badge } from '@mfranceschit/ui';
 import { useTranslations, useTranslatedPath, locales } from '@/i18n/utils';
 import type { Locale } from '@/i18n/utils';
 import { getProjects, getProject, renderBlocks } from '@/lib/sanity';
@@ -21,23 +22,20 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
 ---
 
 <BaseLayout title={project.name} lang={locale} currentPath={`/projects/${slug}`}>
-  <article class="mx-auto max-w-[720px]" style="padding: 48px 24px 120px;">
+  <article class="mx-auto max-w-[720px] px-6 pb-[120px] pt-12">
     <a
       href={tp('/projects')}
       data-pluck
-      class="mb-[22px] inline-block text-[14px] text-[rgba(211,207,199,0.6)] no-underline transition-colors duration-200 hover:text-[#7FA3FF]"
+      class="mb-[22px] inline-block text-[14px] text-[var(--text-tertiary)] no-underline transition-colors duration-200 hover:text-[var(--accent-birch-500)]"
     >
       ← {t('projects.title')}
     </a>
 
-    <h1 class="mb-6 text-[40px] font-bold text-white" style="letter-spacing: -0.015em; line-height: 1.15;">
+    <h1 class="mb-6 text-[40px] font-bold leading-[1.15] tracking-tight text-white">
       {project.name}
     </h1>
 
-    <div
-      class="mb-7 flex h-[220px] items-center justify-center rounded-md"
-      style="background: linear-gradient(135deg, #142142, #0E1733); border: 1px solid rgba(255,255,255,0.10);"
-    >
+    <div class="mb-[30px] flex h-[220px] items-center justify-center rounded-md border border-[var(--border-subtle)] bg-[image:var(--gradient-cover)]">
       {
         project.image ? (
           <img src={project.image} alt={project.name} class="h-full w-full rounded-md object-cover" />
@@ -46,7 +44,7 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
             src="/monogram-beige.svg"
             alt=""
             aria-hidden="true"
-            style="height: 68px; width: auto; opacity: 0.85; filter: drop-shadow(0 0 20px rgba(48,103,246,0.4));"
+            class="h-[68px] w-auto opacity-85 [filter:drop-shadow(var(--shadow-glow-monogram-sm))]"
           />
         )
       }
@@ -54,9 +52,9 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
 
     {
       descriptionParagraphs.length > 0 && (
-        <section class="mb-7">
-          <h3 class="mb-2 text-[22px] font-semibold text-[#F4F6FB]">{t('projects.summary')}</h3>
-          <div class="flex flex-col gap-3 text-[16px] leading-[1.7] text-[rgba(222,228,240,0.82)]">
+        <section class="mb-[30px]">
+          <h3 class="mb-[10px] text-[22px] font-semibold text-[var(--text-heading)]">{t('projects.summary')}</h3>
+          <div class="flex flex-col gap-3 text-[16px] leading-[1.7] text-[var(--text-body)]">
             {descriptionParagraphs.map((p) => <p>{p}</p>)}
           </div>
         </section>
@@ -65,16 +63,14 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
 
     {
       project.technologies?.length > 0 && (
-        <section class="mb-7">
-          <h3 class="mb-3 text-[22px] font-semibold text-[#F4F6FB]">{t('projects.stack')}</h3>
+        <section class="mb-[30px]">
+          <h3 class="mb-[14px] text-[22px] font-semibold text-[var(--text-heading)]">{t('projects.stack')}</h3>
           <div class="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
-              <span
-                data-pluck
-                class="rounded-sm text-[13px] font-medium text-[#9DB9FF] transition-colors duration-200 hover:border-[rgba(48,103,246,0.7)]"
-                style="padding: 5px 12px; background: rgba(48,103,246,0.16); border: 1px solid rgba(48,103,246,0.35);"
-              >
-                {tech}
+              <span data-pluck>
+                <Badge tone="tint-accent" pill={false}>
+                  {tech}
+                </Badge>
               </span>
             ))}
           </div>
@@ -82,35 +78,17 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
       )
     }
 
-    <div class="flex" style="gap: 14px;">
-      {
-        project.url && (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-pluck
-            class="rounded-md text-[#CFE0FF] no-underline transition-colors duration-200 hover:bg-[rgba(48,103,246,0.28)]"
-            style="padding: 11px 22px; background: rgba(48,103,246,0.18); border: 1px solid rgba(48,103,246,0.45);"
-          >
-            ↗ Live site
-          </a>
-        )
-      }
-      {
-        project.repository && (
-          <a
-            href={project.repository}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-pluck
-            class="rounded-md text-[#EEF1F7] no-underline transition-colors duration-200 hover:bg-[rgba(255,255,255,0.09)]"
-            style="padding: 11px 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.16);"
-          >
-            ★ Repository
-          </a>
-        )
-      }
+    <div class="flex gap-[14px]">
+      {project.url && (
+        <Button variant="tint-accent" href={project.url} target="_blank" rel="noopener noreferrer" data-pluck>
+          ↗ Live site
+        </Button>
+      )}
+      {project.repository && (
+        <Button variant="tint-neutral" href={project.repository} target="_blank" rel="noopener noreferrer" data-pluck>
+          ★ Repository
+        </Button>
+      )}
     </div>
   </article>
 </BaseLayout>
