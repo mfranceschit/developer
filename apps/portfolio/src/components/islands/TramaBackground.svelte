@@ -19,12 +19,8 @@
   let currentW = 1;
   let currentH = 1;
 
-  const img = new Image();
+  let img: HTMLImageElement;
   let imgReady = false;
-  img.onload = () => {
-    imgReady = true;
-  };
-  img.src = '/monogram-beige.svg';
 
   function buildTiles(w: number, h: number): Tile[] {
     const out: Tile[] = [];
@@ -56,7 +52,7 @@
     currentW = w;
     currentH = h;
     const E = waveEnergy;
-    if (!imgReady || !img.naturalWidth) return;
+    if (!imgReady || !img?.naturalWidth) return;
     if (!tiles) tiles = buildTiles(w, h);
     for (let i = rings.length - 1; i >= 0; i--) {
       const ring = rings[i];
@@ -79,7 +75,7 @@
       }
       for (const ring of rings) {
         const d = Math.hypot(tl.x - ring.x, tl.y - ring.y);
-        const wv = Math.exp(-((d - ring.r) / 46) ** 2) * ring.a;
+        const wv = Math.exp(-(((d - ring.r) / 46) ** 2)) * ring.a;
         if (wv > 0.01) {
           const ang = Math.atan2(tl.y - ring.y, tl.x - ring.x);
           dx += Math.cos(ang) * wv * 13;
@@ -106,6 +102,12 @@
   }
 
   onMount(() => {
+    img = new Image();
+    img.onload = () => {
+      imgReady = true;
+    };
+    img.src = '/monogram-beige.svg';
+
     const scene: Scene = createCanvasScene({
       canvas,
       draw,

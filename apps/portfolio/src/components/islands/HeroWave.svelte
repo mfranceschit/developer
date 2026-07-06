@@ -14,8 +14,7 @@
   let canvas: HTMLCanvasElement;
   let logoEl: HTMLElement | null = null;
   let contentEl: HTMLElement | null = null;
-
-  const plucks: { x: number; t0: number; amp: number }[] = [];
+  let reduceMotionActive = false;
 
   function draw(s: SceneCtx) {
     const { ctx: c, t, w, h } = s;
@@ -33,7 +32,6 @@
       if (ph < 1.1) sw = Math.sin(Math.PI * (ph / 1.1));
     }
     const cx = w / 2;
-    for (let i = plucks.length - 1; i >= 0; i--) if (t - plucks[i].t0 >= 2.5) plucks.splice(i, 1);
     const yFor = (L: number, x: number) => {
       const base = y0 + L * h * 0.05 * eased;
       const grow = L === 0 ? Math.min(1, Math.max(0, (t - 0.35) / 0.7)) : eased;
@@ -45,10 +43,6 @@
       if (s.px > -100) y -= gauss(x, s.px, 150 * sc) * 18 * E * sc;
       if (t > 0.5 && t < 1.9 && L === 0) {
         y += Math.exp(-2.8 * (t - 0.5)) * Math.sin((t - 0.5) * 32) * 36 * sc * gauss(x, cx, w / 4);
-      }
-      for (const p of plucks) {
-        const age = t - p.t0;
-        y += Math.exp(-3 * age) * Math.sin(age * 28) * p.amp * sc * gauss(x, p.x, 110 * sc);
       }
       if (L === 0 && sw > 0) y -= gauss(x, cx, 170 * sc) * 30 * sc * sw;
       return y;
@@ -94,14 +88,14 @@
       c.arc(cx, gy, 150 * sc, 0, Math.PI * 2);
       c.fill();
     }
-    if (logoEl) {
+    if (logoEl && !reduceMotionActive) {
       const sz = 28;
       logoEl.style.filter =
         `drop-shadow(0 0 ${(sz + 18 * sw).toFixed(1)}px rgba(48,103,246,${(0.45 * (1 - 0.4 * sw)).toFixed(2)})) ` +
         `drop-shadow(0 0 ${(26 * sw).toFixed(1)}px rgba(174,43,83,${(0.6 * sw).toFixed(2)}))`;
       logoEl.style.transform = `scale(${(1 + 0.045 * sw).toFixed(3)})`;
     }
-    if (contentEl) {
+    if (contentEl && !reduceMotionActive) {
       const o = Math.min(1, Math.max(0, (t - 0.95) / 0.55));
       const oe = o * o * (3 - 2 * o);
       contentEl.style.opacity = oe.toFixed(3);
@@ -112,10 +106,11 @@
   onMount(() => {
     logoEl = document.getElementById('hero-logo');
     contentEl = document.getElementById('hero-content');
+    reduceMotionActive =
+      reduceMotion ?? window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scene: Scene = createCanvasScene({ canvas, draw, reduceMotion, pointerTarget: window });
     const restart = () => {
       scene.resetTime();
-      plucks.length = 0;
     };
     window.addEventListener('pointerdown', restart, { passive: true });
     return () => {

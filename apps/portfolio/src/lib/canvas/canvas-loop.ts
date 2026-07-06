@@ -22,8 +22,9 @@ export interface Scene {
 
 export function createCanvasScene(opts: SceneOptions): Scene {
   const { canvas, draw, onResize } = opts;
-  const ctx = canvas.getContext('2d')!;
-  if (!ctx) return { destroy() {}, resetTime() {} };
+  const maybeCtx = canvas.getContext('2d');
+  if (!maybeCtx) return { destroy() {}, resetTime() {} };
+  const ctx: CanvasRenderingContext2D = maybeCtx;
 
   const target: HTMLElement | Window = opts.pointerTarget ?? canvas;
   const reduce =
