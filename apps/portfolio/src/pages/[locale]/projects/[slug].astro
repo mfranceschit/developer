@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Button, Badge } from '@mfranceschit/ui';
 import { useTranslations, useTranslatedPath, locales } from '@/i18n/utils';
 import type { Locale } from '@/i18n/utils';
 import { getProjects, getProject, renderBlocks } from '@/lib/sanity';
@@ -22,34 +21,32 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
 ---
 
 <BaseLayout title={project.name} lang={locale} currentPath={`/projects/${slug}`}>
-  <article class="max-w-2xl mx-auto px-6 pt-10 pb-20">
+  <article class="mx-auto max-w-[720px]" style="padding: 48px 24px 120px;">
     <a
       href={tp('/projects')}
-      class="inline-block text-sm text-[var(--text-muted)] no-underline mb-6 hover:text-very-berry transition-colors duration-[120ms]"
+      data-pluck
+      class="mb-[22px] inline-block text-[14px] text-[rgba(211,207,199,0.6)] no-underline transition-colors duration-200 hover:text-[#7FA3FF]"
     >
       ← {t('projects.title')}
     </a>
 
-    <h1 class="text-[35px] font-bold text-bellwether-blue mb-6" style="letter-spacing: -0.015em; line-height: 1.15;">
+    <h1 class="mb-6 text-[40px] font-bold text-white" style="letter-spacing: -0.015em; line-height: 1.15;">
       {project.name}
     </h1>
 
     <div
-      class="h-[220px] rounded-lg flex items-center justify-center mb-7"
-      style="background: linear-gradient(135deg, var(--mf-blue-700), var(--mf-blue-900));"
+      class="mb-7 flex h-[220px] items-center justify-center rounded-md"
+      style="background: linear-gradient(135deg, #142142, #0E1733); border: 1px solid rgba(255,255,255,0.10);"
     >
       {
         project.image ? (
-          <img
-            src={project.image}
-            alt={project.name}
-            class="max-h-full w-full object-cover rounded-lg opacity-90"
-          />
+          <img src={project.image} alt={project.name} class="h-full w-full rounded-md object-cover" />
         ) : (
           <img
-            src="/monogram-navy.svg"
-            alt="MFT monogram"
-            style="height: 72px; width: auto; opacity: 0.7; filter: brightness(0) invert(1);"
+            src="/monogram-beige.svg"
+            alt=""
+            aria-hidden="true"
+            style="height: 68px; width: auto; opacity: 0.85; filter: drop-shadow(0 0 20px rgba(48,103,246,0.4));"
           />
         )
       }
@@ -58,8 +55,8 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
     {
       descriptionParagraphs.length > 0 && (
         <section class="mb-7">
-          <h3 class="text-[22px] font-semibold text-[var(--mf-gray-900)] mb-2">{t('projects.summary')}</h3>
-          <div class="flex flex-col gap-3 text-[var(--mf-gray-700)] leading-[1.7] text-base">
+          <h3 class="mb-2 text-[22px] font-semibold text-[#F4F6FB]">{t('projects.summary')}</h3>
+          <div class="flex flex-col gap-3 text-[16px] leading-[1.7] text-[rgba(222,228,240,0.82)]">
             {descriptionParagraphs.map((p) => <p>{p}</p>)}
           </div>
         </section>
@@ -69,25 +66,51 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
     {
       project.technologies?.length > 0 && (
         <section class="mb-7">
-          <h3 class="text-[22px] font-semibold text-[var(--mf-gray-900)] mb-3">{t('projects.stack')}</h3>
+          <h3 class="mb-3 text-[22px] font-semibold text-[#F4F6FB]">{t('projects.stack')}</h3>
           <div class="flex flex-wrap gap-2">
-            {project.technologies.map((tech) => <Badge tone="blue">{tech}</Badge>)}
+            {project.technologies.map((tech) => (
+              <span
+                data-pluck
+                class="rounded-sm text-[13px] font-medium text-[#9DB9FF] transition-colors duration-200 hover:border-[rgba(48,103,246,0.7)]"
+                style="padding: 5px 12px; background: rgba(48,103,246,0.16); border: 1px solid rgba(48,103,246,0.35);"
+              >
+                {tech}
+              </span>
+            ))}
           </div>
         </section>
       )
     }
 
-    <div class="flex gap-3">
-      {project.url && (
-        <Button variant="primary" href={project.url} target="_blank" rel="noopener noreferrer">
-          ↗ Live site
-        </Button>
-      )}
-      {project.repository && (
-        <Button variant="outline" href={project.repository} target="_blank" rel="noopener noreferrer">
-          ★ Repository
-        </Button>
-      )}
+    <div class="flex" style="gap: 14px;">
+      {
+        project.url && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-pluck
+            class="rounded-md text-[#CFE0FF] no-underline transition-colors duration-200 hover:bg-[rgba(48,103,246,0.28)]"
+            style="padding: 11px 22px; background: rgba(48,103,246,0.18); border: 1px solid rgba(48,103,246,0.45);"
+          >
+            ↗ Live site
+          </a>
+        )
+      }
+      {
+        project.repository && (
+          <a
+            href={project.repository}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-pluck
+            class="rounded-md text-[#EEF1F7] no-underline transition-colors duration-200 hover:bg-[rgba(255,255,255,0.09)]"
+            style="padding: 11px 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.16);"
+          >
+            ★ Repository
+          </a>
+        )
+      }
     </div>
   </article>
 </BaseLayout>
