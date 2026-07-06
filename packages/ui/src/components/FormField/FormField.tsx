@@ -28,7 +28,7 @@ export function FormField({
       {label && (
         <Field.Label className="font-sans text-sm font-medium text-[var(--text-body)]">
           {label}
-          {required && <Field.RequiredIndicator className="ml-0.5 text-[var(--accent)]">*</Field.RequiredIndicator>}
+          {required && <Field.RequiredIndicator className="ml-0.5 text-[var(--text-required)]">*</Field.RequiredIndicator>}
         </Field.Label>
       )}
       {children}

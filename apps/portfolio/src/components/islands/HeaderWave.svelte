@@ -93,7 +93,7 @@
       const gy = yFor(fillW);
       const g = c.createRadialGradient(gx, gy, 0, gx, gy, 22);
       g.addColorStop(0, rgba(B, 0.5));
-      g.addColorStop(1, 'rgba(174,43,83,0)');
+      g.addColorStop(1, rgba(B, 0));
       c.fillStyle = g;
       c.beginPath();
       c.arc(gx, gy, 22, 0, Math.PI * 2);

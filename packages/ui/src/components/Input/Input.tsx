@@ -2,10 +2,11 @@ import { Field } from '@ark-ui/react';
 import type { InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 
 const base =
-  'w-full px-[14px] py-[9px] font-sans text-sm text-[var(--text-body)] bg-[var(--surface-card)] ' +
+  'w-full px-[var(--field-pad-x)] py-[var(--field-pad-y)] font-sans text-sm text-[var(--text-field)] bg-[var(--surface-field)] ' +
+  'placeholder:text-[var(--text-placeholder)] ' +
   'border border-[var(--border-default)] rounded-md outline-none ' +
   'transition-[border-color,box-shadow] duration-[120ms] ' +
-  'focus:border-[var(--primary)] focus:shadow-focus ' +
+  'focus:border-[var(--focus-ring)] focus:shadow-focus ' +
   'data-[invalid]:border-[var(--mf-very-berry)] ' +
   'disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed';
 

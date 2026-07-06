@@ -1,3 +1,5 @@
+import { colors } from '@mfranceschit/ui';
+
 export type AccentMode = 'dual' | 'birch' | 'berry';
 
 export const BEAT_PERIOD = 60 / 72;
@@ -18,7 +20,7 @@ export function rgba(hex: string, a: number): string {
 }
 
 export function accents(mode: AccentMode): [string, string] {
-  if (mode === 'birch') return ['#3067F6', '#3067F6'];
-  if (mode === 'berry') return ['#AE2B53', '#AE2B53'];
-  return ['#3067F6', '#AE2B53'];
+  if (mode === 'birch') return [colors.silverBirch, colors.silverBirch];
+  if (mode === 'berry') return [colors.veryBerry, colors.veryBerry];
+  return [colors.silverBirch, colors.veryBerry];
 }
