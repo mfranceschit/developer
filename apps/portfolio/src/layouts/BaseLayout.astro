@@ -1,6 +1,8 @@
 ---
 import '@/styles/global.css';
 import LanguagePicker from '@/components/LanguagePicker.astro';
+import HeaderWave from '@/components/islands/HeaderWave.svelte';
+import TramaBackground from '@/components/islands/TramaBackground.svelte';
 import { useTranslatedPath, useTranslations } from '@/i18n/utils';
 import type { Locale } from '@/i18n/utils';
 
@@ -9,11 +11,19 @@ interface Props {
   description?: string;
   lang: Locale;
   currentPath: string;
+  variant?: 'hero' | 'interior';
 }
 
-const { title, description = 'mfranceschit — developer', lang, currentPath } = Astro.props;
+const {
+  title,
+  description = 'mfranceschit — developer',
+  lang,
+  currentPath,
+  variant = 'interior',
+} = Astro.props;
 const tp = useTranslatedPath(lang);
 const t = useTranslations(lang);
+const isHero = variant === 'hero';
 
 const navLinks = [
   { href: '/', label: t('nav.home') },
@@ -34,15 +44,25 @@ const navLinks = [
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
-  <body class="min-h-screen bg-white font-sans">
+  <body
+    class="min-h-screen font-sans text-[#EEF1F7]"
+    style="background: linear-gradient(180deg, #0E1733 0%, #0B1226 100%); background-attachment: fixed;"
+  >
+    {variant === 'interior' && <TramaBackground client:visible waveEnergy={0.75} />}
     <header
-      class="sticky top-0 z-10 h-16 flex items-center justify-between gap-6 px-7 border-b border-[var(--border-subtle)]"
-      style="background: rgba(255,255,255,0.82); backdrop-filter: blur(10px);"
+      class="fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between gap-6 px-7"
+      style={isHero
+        ? 'background: rgba(14,23,51,0.45); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.08);'
+        : 'background: rgba(14,23,51,0.94);'}
     >
-      <a href={tp('/')} class="mf-wordmark text-[18px] text-bellwether-blue no-underline">
+      <a
+        href={tp('/')}
+        class="mf-wordmark text-[15px] font-semibold text-white no-underline"
+        style="letter-spacing: 0.3em;"
+      >
         mfranceschit
       </a>
-      <nav class="flex items-center gap-6">
+      <nav class="flex items-center" style="gap: 26px;">
         {
           navLinks.map(({ href, label }) => {
             const active =
@@ -50,11 +70,12 @@ const navLinks = [
             return (
               <a
                 href={tp(href)}
+                data-pluck
                 class:list={[
-                  'text-sm transition-colors duration-[120ms] py-1 border-b-2 no-underline',
+                  'border-b-2 py-1 text-[13.5px] no-underline transition-colors duration-200',
                   active
-                    ? 'font-semibold text-bellwether-blue border-very-berry'
-                    : 'font-normal text-[var(--mf-gray-600)] border-transparent hover:text-very-berry',
+                    ? 'border-very-berry font-semibold text-white'
+                    : 'border-transparent font-normal text-[rgba(211,207,199,0.62)] hover:text-white',
                 ]}
               >
                 {label}
@@ -65,7 +86,8 @@ const navLinks = [
       </nav>
       <LanguagePicker lang={lang} currentPath={currentPath} />
     </header>
-    <main>
+    {variant === 'interior' && <HeaderWave client:load waveEnergy={0.75} />}
+    <main class="relative z-10 pt-16">
       <slot />
     </main>
   </body>
