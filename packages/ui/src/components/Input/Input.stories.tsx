@@ -1,5 +1,6 @@
 import { Field } from '@ark-ui/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { darkPanel } from '../../storybook/decorators';
 import { Input } from './Input';
 
 const meta: Meta<typeof Input> = {
@@ -37,4 +38,15 @@ export const Disabled: Story = {
 
 export const Textarea: Story = {
   args: { as: 'textarea', placeholder: 'Tell me about your project…' },
+};
+
+/* Dark "Marea" surface — field colors and padding follow the theme tokens. */
+export const Dark: Story = {
+  args: { placeholder: 'you@example.com' },
+  decorators: [darkPanel],
+};
+
+export const DarkTextarea: Story = {
+  args: { as: 'textarea', placeholder: 'Tell me about your project…' },
+  decorators: [darkPanel],
 };
