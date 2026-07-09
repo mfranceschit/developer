@@ -13,6 +13,9 @@ if (existsSync('.env')) {
 export default defineConfig({
   site: 'https://developer.mfranceschit.com',
   output: 'static',
+  redirects: {
+    '/': { status: 301, destination: '/en/' },
+  },
   integrations: [
     react(),
     svelte(),
