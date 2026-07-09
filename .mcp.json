@@ -1,9 +1,8 @@
 {
   "mcpServers": {
     "storybook": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@storybook/mcp", "--url", "http://localhost:6006"]
+      "type": "http",
+      "url": "http://localhost:6006/mcp"
     }
   }
 }
