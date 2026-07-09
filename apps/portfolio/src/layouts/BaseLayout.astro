@@ -31,6 +31,7 @@ const alternateUrls = locales.map((code) => ({
   href: new URL(`/${code}${currentPath}`, Astro.site).href,
 }));
 const defaultUrl = new URL('/', Astro.site).href;
+const ogImageUrl = new URL('/og-image.png', Astro.site).href;
 
 const navLinks = [
   { href: '/', label: t('nav.home') },
@@ -51,6 +52,26 @@ const navLinks = [
     <link rel="canonical" href={canonicalUrl} />
     {alternateUrls.map(({ code, href }) => <link rel="alternate" hreflang={code} href={href} />)}
     <link rel="alternate" hreflang="x-default" href={defaultUrl} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1B2B5B" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
