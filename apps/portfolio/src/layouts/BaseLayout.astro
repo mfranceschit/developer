@@ -3,7 +3,7 @@ import '@/styles/global.css';
 import LanguagePicker from '@/components/LanguagePicker.astro';
 import HeaderWave from '@/components/islands/HeaderWave.svelte';
 import TramaBackground from '@/components/islands/TramaBackground.svelte';
-import { useTranslatedPath, useTranslations } from '@/i18n/utils';
+import { locales, useTranslatedPath, useTranslations } from '@/i18n/utils';
 import type { Locale } from '@/i18n/utils';
 
 interface Props {
@@ -25,6 +25,13 @@ const tp = useTranslatedPath(lang);
 const t = useTranslations(lang);
 const isHero = variant === 'hero';
 
+const canonicalUrl = new URL(`/${lang}${currentPath}`, Astro.site).href;
+const alternateUrls = locales.map((code) => ({
+  code,
+  href: new URL(`/${code}${currentPath}`, Astro.site).href,
+}));
+const defaultUrl = new URL('/', Astro.site).href;
+
 const navLinks = [
   { href: '/', label: t('nav.home') },
   { href: '/about', label: t('nav.about') },
@@ -41,6 +48,9 @@ const navLinks = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
+    {alternateUrls.map(({ code, href }) => <link rel="alternate" hreflang={code} href={href} />)}
+    <link rel="alternate" hreflang="x-default" href={defaultUrl} />
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
