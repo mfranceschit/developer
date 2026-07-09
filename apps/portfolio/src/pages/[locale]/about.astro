@@ -14,13 +14,14 @@ const t = useTranslations(locale);
 const paragraphs = aboutDescriptions[locale];
 
 const stack = [
-  'JavaScript', 'TypeScript', 'React', 'Node.js', 'Astro',
+  'JavaScript', 'TypeScript', 'Python', 'React', 'Node.js', 'Astro',
   'AWS', 'GCP', 'Azure', 'Terraform', 'Docker', 'New Relic',
 ];
 ---
 
 <BaseLayout title={t('meta.about.title')} description={t('meta.about.description')} lang={locale} currentPath="/about">
   <section class="mx-auto max-w-[720px] px-6 pb-[120px] pt-[56px]">
+    <p class="mf-eyebrow mb-3">{t('about.eyebrow')}</p>
     <h1 class="mb-[30px] text-[44px] font-bold tracking-tight text-white">
       {t('about.title')}
     </h1>
