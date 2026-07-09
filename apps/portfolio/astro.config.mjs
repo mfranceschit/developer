@@ -11,6 +11,7 @@ if (existsSync('.env')) {
 }
 
 export default defineConfig({
+  site: 'https://developer.mfranceschit.com',
   output: 'static',
   integrations: [
     react(),
