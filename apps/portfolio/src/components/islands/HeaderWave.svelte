@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { createCanvasScene, type Scene, type SceneCtx } from '@/lib/canvas/canvas-loop';
-  import { accents, beatEnv, gauss, rgba, type AccentMode } from '@/lib/canvas/wave-math';
+  import { accents, gauss, rgba, type AccentMode } from '@/lib/canvas/wave-math';
 
   interface Props {
     waveSpeed?: number;
@@ -11,19 +11,14 @@
   }
   const { waveSpeed = 1, waveEnergy = 0.75, accentMode = 'dual', reduceMotion }: Props = $props();
 
+  const DRIFT_PERIOD = 6;
+  const DRIFT_SPAN = 0.2;
+
   let canvas: HTMLCanvasElement;
 
   const plucks: { x: number; t0: number }[] = [];
-  const scrollSt = { frac: 0, vel: 0, last: 0 };
   let currentT = 0;
   let currentW = 1;
-
-  function onScroll() {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    scrollSt.frac = max > 0 ? window.scrollY / max : 0;
-    scrollSt.vel = Math.min(60, scrollSt.vel + Math.abs(window.scrollY - scrollSt.last) * 0.6);
-    scrollSt.last = window.scrollY;
-  }
 
   function onPluck(e: Event) {
     const el = (e.target as HTMLElement | null)?.closest?.('[data-pluck]');
@@ -34,19 +29,29 @@
     plucks.push({ x, t0: currentT });
   }
 
+  function hexToRgb(hex: string): [number, number, number] {
+    const n = Number.parseInt(hex.slice(1), 16);
+    return [n >> 16, (n >> 8) & 255, n & 255];
+  }
+
+  function mixRgba(a: [number, number, number], b: [number, number, number], k: number, alpha: number): string {
+    const r = Math.round(a[0] + (b[0] - a[0]) * k);
+    const g = Math.round(a[1] + (b[1] - a[1]) * k);
+    const bl = Math.round(a[2] + (b[2] - a[2]) * k);
+    return `rgba(${r},${g},${bl},${alpha})`;
+  }
+
   function draw(s: SceneCtx) {
     const { ctx: c, t, w, h } = s;
     currentT = t;
     currentW = w;
-    const E = waveEnergy;
     const [A, B] = accents(accentMode);
+    const rgbA = hexToRgb(A);
+    const rgbB = hexToRgb(B);
     const sp = waveSpeed;
-    scrollSt.vel *= 0.93;
-    const env = beatEnv(t);
-    const done = scrollSt.frac > 0.97;
     const y0 = 20;
     for (let i = plucks.length - 1; i >= 0; i--) if (t - plucks[i].t0 >= 2.5) plucks.splice(i, 1);
-    const amp = (1.1 + Math.min(9, scrollSt.vel * 0.22) + (done ? 2.5 * env : 0)) * E;
+    const amp = 1.6 * waveEnergy;
     const yFor = (x: number) => {
       let y =
         y0 +
@@ -67,50 +72,38 @@
       else c.lineTo(x, y);
     }
     c.stroke();
-    const fillW = Math.max(2, scrollSt.frac * w);
-    c.save();
-    c.beginPath();
-    c.rect(0, 0, fillW, h);
-    c.clip();
-    const grad = c.createLinearGradient(0, 0, w, 0);
-    grad.addColorStop(0, rgba(A, 0.85));
-    grad.addColorStop(0.72, rgba(A, 0.8));
-    grad.addColorStop(1, rgba(B, 0.95));
-    c.strokeStyle = done ? rgba(B, 0.75 + 0.25 * env) : grad;
-    c.lineWidth = 1.8;
-    c.shadowColor = done ? B : A;
-    c.shadowBlur = done ? 10 + 10 * env : 7;
-    c.beginPath();
-    for (let x = 0; x <= w; x += 5) {
+    const span = w * DRIFT_SPAN;
+    const cx = ((t % DRIFT_PERIOD) / DRIFT_PERIOD) * (w + span * 2) - span;
+    let prevX = 0;
+    let prevY = yFor(0);
+    for (let x = 5; x <= w; x += 5) {
       const y = yFor(x);
-      if (x === 0) c.moveTo(x, y);
-      else c.lineTo(x, y);
-    }
-    c.stroke();
-    c.restore();
-    if (!done && scrollSt.frac > 0.01) {
-      const gx = fillW;
-      const gy = yFor(fillW);
-      const g = c.createRadialGradient(gx, gy, 0, gx, gy, 22);
-      g.addColorStop(0, rgba(B, 0.5));
-      g.addColorStop(1, rgba(B, 0));
-      c.fillStyle = g;
+      const k = gauss(x, cx, span);
+      if (k > 0.05) {
+        c.strokeStyle = mixRgba(rgbA, rgbB, k, 0.18 * k);
+        c.lineWidth = 4;
+        c.beginPath();
+        c.moveTo(prevX, prevY);
+        c.lineTo(x, y);
+        c.stroke();
+      }
+      c.strokeStyle = mixRgba(rgbA, rgbB, k, 0.5 + 0.35 * k);
+      c.lineWidth = 1.8;
       c.beginPath();
-      c.arc(gx, gy, 22, 0, Math.PI * 2);
-      c.fill();
+      c.moveTo(prevX, prevY);
+      c.lineTo(x, y);
+      c.stroke();
+      prevX = x;
+      prevY = y;
     }
   }
 
   onMount(() => {
     const scene: Scene = createCanvasScene({ canvas, draw, reduceMotion, pointerTarget: window });
-    scrollSt.last = window.scrollY;
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('pointerover', onPluck, { passive: true });
     document.addEventListener('focusin', onPluck, { passive: true });
     return () => {
       scene.destroy();
-      window.removeEventListener('scroll', onScroll);
       document.removeEventListener('pointerover', onPluck);
       document.removeEventListener('focusin', onPluck);
     };
