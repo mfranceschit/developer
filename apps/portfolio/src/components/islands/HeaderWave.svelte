@@ -118,6 +118,6 @@
 <canvas
   bind:this={canvas}
   aria-hidden="true"
-  class="pointer-events-none fixed left-0 right-0 z-40"
+  class="pointer-events-none fixed left-0 right-0 z-40 w-full"
   style="top: 44px; height: 40px;"
 ></canvas>
