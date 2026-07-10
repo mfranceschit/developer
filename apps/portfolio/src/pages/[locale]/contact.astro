@@ -23,15 +23,15 @@ const formspreeEndpoint = `https://formspree.io/f/${import.meta.env.FORMSPREE_KE
     <div id="form-view">
       <form id="contact-form" action={formspreeEndpoint} method="POST" class="flex flex-col gap-[18px]">
         <FormField label={t('contact.name')} required>
-          <Input id="name" name="name" required placeholder="Your name" data-pluck />
+          <Input id="name" name="name" required placeholder="Your name" />
         </FormField>
 
         <FormField label={t('contact.email')} required>
-          <Input id="email" type="email" name="email" required placeholder="you@example.com" data-pluck />
+          <Input id="email" type="email" name="email" required placeholder="you@example.com" />
         </FormField>
 
         <FormField label={t('contact.subject')}>
-          <Input id="subject" name="subject" placeholder="What's this about?" data-pluck />
+          <Input id="subject" name="subject" placeholder="What's this about?" />
         </FormField>
 
         <FormField label={t('contact.message')} required>
@@ -42,13 +42,12 @@ const formspreeEndpoint = `https://formspree.io/f/${import.meta.env.FORMSPREE_KE
             rows={5}
             required
             placeholder="Tell me about your project…"
-            data-pluck
             className="min-h-[110px] resize-none"
           />
         </FormField>
 
         <div class="mt-1.5">
-          <Button type="submit" variant="gradient" size="lg" data-pluck>
+          <Button type="submit" variant="gradient" size="lg">
             {t('contact.cta')}
           </Button>
         </div>

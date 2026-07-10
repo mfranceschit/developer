@@ -25,7 +25,6 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
   <article class="mx-auto max-w-[720px] px-6 pb-[120px] pt-12">
     <a
       href={tp('/projects')}
-      data-pluck
       class="mb-[22px] inline-block text-[14px] text-[var(--text-tertiary)] no-underline transition-colors duration-200 hover:text-[var(--accent-birch-500)]"
     >
       ← {t('projects.title')}
@@ -67,7 +66,7 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
           <h3 class="mb-[14px] text-[22px] font-semibold text-[var(--text-heading)]">{t('projects.stack')}</h3>
           <div class="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
-              <span data-pluck>
+              <span>
                 <Badge tone="tint-accent" pill={false}>
                   {tech}
                 </Badge>
@@ -80,12 +79,12 @@ const descriptionParagraphs = renderBlocks(project.description ?? []);
 
     <div class="flex gap-[14px]">
       {project.url && (
-        <Button variant="tint-accent" href={project.url} target="_blank" rel="noopener noreferrer" data-pluck>
+        <Button variant="tint-accent" href={project.url} target="_blank" rel="noopener noreferrer">
           ↗ Live site
         </Button>
       )}
       {project.repository && (
-        <Button variant="tint-neutral" href={project.repository} target="_blank" rel="noopener noreferrer" data-pluck>
+        <Button variant="tint-neutral" href={project.repository} target="_blank" rel="noopener noreferrer">
           ★ Repository
         </Button>
       )}
