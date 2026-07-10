@@ -29,3 +29,6 @@ storybook-static
 .claude/*
 !.claude/hooks
 !.claude/settings.json
+
+# AI
+.superpowers/
