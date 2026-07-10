@@ -1,6 +1,8 @@
 ---
 import '@/styles/global.css';
+import { MobileNav } from '@mfranceschit/ui';
 import LanguagePicker from '@/components/LanguagePicker.astro';
+import { languages } from '@/i18n/ui';
 import HeaderWave from '@/components/islands/HeaderWave.svelte';
 import TramaBackground from '@/components/islands/TramaBackground.svelte';
 import { locales, useTranslatedPath, useTranslations } from '@/i18n/utils';
@@ -40,6 +42,21 @@ const navLinks = [
   { href: '/certifications', label: t('nav.certifications') },
   { href: '/contact', label: t('nav.contact') },
 ];
+
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+
+const mobileLinks = navLinks.map(({ href, label }) => ({
+  href: tp(href),
+  label,
+  active: isActive(href),
+}));
+
+const mobileLanguages = Object.entries(languages).map(([code, label]) => ({
+  href: `/${code}${currentPath}`,
+  label: label.slice(0, 2).toUpperCase(),
+  active: lang === code,
+}));
 ---
 
 <!doctype html>
@@ -88,11 +105,10 @@ const navLinks = [
       <a href={tp('/')} class="mf-wordmark text-[15px] font-semibold text-white no-underline">
         mfranceschit
       </a>
-      <nav class="flex items-center gap-[26px]">
+      <nav class="hidden items-center gap-[26px] md:flex">
         {
           navLinks.map(({ href, label }) => {
-            const active =
-              href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+            const active = isActive(href);
             return (
               <a
                 href={tp(href)}
@@ -110,7 +126,17 @@ const navLinks = [
           })
         }
       </nav>
-      <LanguagePicker lang={lang} currentPath={currentPath} />
+      <div class="hidden md:block">
+        <LanguagePicker lang={lang} currentPath={currentPath} />
+      </div>
+      <MobileNav
+        client:load
+        className="md:hidden"
+        links={mobileLinks}
+        languages={mobileLanguages}
+        triggerLabel={t('nav.openMenu')}
+        closeLabel={t('nav.closeMenu')}
+      />
     </header>
     {variant === 'interior' && <HeaderWave client:load waveEnergy={0.75} />}
     <main class="relative z-10 pt-16">
