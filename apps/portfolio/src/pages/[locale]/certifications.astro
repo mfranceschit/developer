@@ -27,7 +27,7 @@ const [certifications, degrees] = await Promise.all([
     <ul class="m-0 mb-[38px] flex list-none flex-col gap-3 p-0">
       {
         certifications.map((cert) => (
-          <Card as="li" tone="dark" interactive hoverLift={false} data-pluck className="flex items-center gap-4 px-[18px] py-4">
+          <Card as="li" tone="dark" interactive hoverLift={false} className="flex items-center gap-4 px-[18px] py-4">
             {cert.image ? (
               <img src={cert.image} alt={cert.name} class="h-12 w-12 shrink-0 rounded-[6px] object-contain" />
             ) : (
@@ -63,7 +63,7 @@ const [certifications, degrees] = await Promise.all([
     <ul class="m-0 flex list-none flex-col gap-3 p-0">
       {
         degrees.map((degree) => (
-          <Card as="li" tone="dark" interactive hoverLift={false} data-pluck className="flex items-center gap-4 px-[18px] py-4">
+          <Card as="li" tone="dark" interactive hoverLift={false} className="flex items-center gap-4 px-[18px] py-4">
             {degree.image ? (
               <img src={degree.image} alt={degree.name} class="h-12 w-12 shrink-0 rounded-[6px] object-contain" />
             ) : (
