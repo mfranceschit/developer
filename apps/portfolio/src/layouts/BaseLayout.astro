@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import { MobileNav } from '@mfranceschit/ui';
+import { ClientRouter } from 'astro:transitions';
 import LanguagePicker from '@/components/LanguagePicker.astro';
 import { languages } from '@/i18n/ui';
 import HeaderWave from '@/components/islands/HeaderWave.svelte';
@@ -91,6 +92,8 @@ const mobileLanguages = Object.entries(languages).map(([code, label]) => ({
 
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+    <ClientRouter />
   </head>
   <body class="min-h-screen bg-[image:var(--gradient-page)] bg-fixed font-sans text-[var(--text-heading-strong)]">
     {variant === 'interior' && <TramaBackground client:visible waveEnergy={0.75} />}
@@ -138,7 +141,7 @@ const mobileLanguages = Object.entries(languages).map(([code, label]) => ({
         closeLabel={t('nav.closeMenu')}
       />
     </header>
-    {variant === 'interior' && <HeaderWave client:load waveEnergy={0.75} />}
+    {variant === 'interior' && <HeaderWave client:load transition:persist="header-wave" waveEnergy={0.75} />}
     <main class="relative z-10 pt-16">
       <slot />
     </main>
