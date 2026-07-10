@@ -110,7 +110,8 @@
     reduceMotionActive =
       reduceMotion ?? window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scene: Scene = createCanvasScene({ canvas, draw, reduceMotion, pointerTarget: window });
-    const restart = () => {
+    const restart = (e: PointerEvent) => {
+      if ((e.target as Element | null)?.closest('a, button')) return;
       scene.resetTime();
     };
     window.addEventListener('pointerdown', restart, { passive: true });
