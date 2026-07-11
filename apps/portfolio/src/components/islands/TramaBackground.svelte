@@ -21,6 +21,7 @@
 
   let img: HTMLImageElement;
   let imgReady = false;
+  let visible = $state(false);
 
   function buildTiles(w: number, h: number): Tile[] {
     const out: Tile[] = [];
@@ -105,6 +106,7 @@
     img = new Image();
     img.onload = () => {
       imgReady = true;
+      visible = true;
     };
     img.src = '/monogram-beige.svg';
 
@@ -128,5 +130,6 @@
 <canvas
   bind:this={canvas}
   aria-hidden="true"
-  class="pointer-events-none fixed inset-0 z-0 h-full w-full"
+  class="pointer-events-none fixed inset-0 z-0 h-full w-full transition-opacity duration-[1200ms] ease-out"
+  style:opacity={visible ? 1 : 0}
 ></canvas>

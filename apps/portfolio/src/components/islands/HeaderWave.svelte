@@ -103,14 +103,21 @@
     }
   }
 
+  function markReady() {
+    document.documentElement.classList.add('header-wave-ready');
+  }
+
   onMount(() => {
     const scene: Scene = createCanvasScene({ canvas, draw, reduceMotion, pointerTarget: window });
+    markReady();
     document.addEventListener('pointerover', onPluck, { passive: true });
     document.addEventListener('focusin', onPluck, { passive: true });
+    document.addEventListener('astro:after-swap', markReady);
     return () => {
       scene.destroy();
       document.removeEventListener('pointerover', onPluck);
       document.removeEventListener('focusin', onPluck);
+      document.removeEventListener('astro:after-swap', markReady);
     };
   });
 </script>

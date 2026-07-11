@@ -93,11 +93,12 @@ const mobileLanguages = Object.entries(languages).map(([code, label]) => ({
 
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    {variant === 'interior' && <link rel="preload" href="/monogram-beige.svg" as="image" />}
 
     <ClientRouter />
   </head>
   <body class="min-h-screen bg-[image:var(--gradient-page)] bg-fixed font-sans text-[var(--text-heading-strong)]">
-    {variant === 'interior' && <TramaBackground client:visible waveEnergy={0.75} />}
+    {variant === 'interior' && <TramaBackground client:visible transition:persist="trama-background" waveEnergy={0.75} />}
     <header
       class:list={[
         'fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between gap-6 px-7',
@@ -142,6 +143,14 @@ const mobileLanguages = Object.entries(languages).map(([code, label]) => ({
         closeLabel={t('nav.closeMenu')}
       />
     </header>
+    {
+      variant === 'interior' && (
+        <div
+          class="pointer-events-none fixed left-0 right-0 top-16 z-40 h-px bg-[var(--border-hairline)] transition-opacity duration-500 [.header-wave-ready_&]:opacity-0"
+          aria-hidden="true"
+        />
+      )
+    }
     {variant === 'interior' && <HeaderWave client:load transition:persist="header-wave" waveEnergy={0.75} />}
     <main class="relative z-10 pt-16" transition:animate={waveSweep}>
       <slot />
