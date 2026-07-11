@@ -8,6 +8,7 @@ import HeaderWave from '@/components/islands/HeaderWave.svelte';
 import TramaBackground from '@/components/islands/TramaBackground.svelte';
 import { locales, useTranslatedPath, useTranslations } from '@/i18n/utils';
 import type { Locale } from '@/i18n/utils';
+import { waveSweep } from '@/lib/transitions';
 
 interface Props {
   title: string;
@@ -142,7 +143,7 @@ const mobileLanguages = Object.entries(languages).map(([code, label]) => ({
       />
     </header>
     {variant === 'interior' && <HeaderWave client:load transition:persist="header-wave" waveEnergy={0.75} />}
-    <main class="relative z-10 pt-16">
+    <main class="relative z-10 pt-16" transition:animate={waveSweep}>
       <slot />
     </main>
   </body>
