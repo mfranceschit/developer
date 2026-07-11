@@ -27,7 +27,7 @@ const [certifications, degrees] = await Promise.all([
     <ul class="m-0 mb-[38px] flex list-none flex-col gap-3 p-0">
       {
         certifications.map((cert) => (
-          <Card as="li" tone="dark" interactive hoverLift={false} className="flex items-center gap-4 px-[18px] py-4">
+          <Card as="li" tone="dark" interactive hoverLift={false} className="flex flex-col items-start gap-4 px-[18px] py-4 sm:flex-row sm:items-center">
             {cert.image ? (
               <img src={cert.image} alt={cert.name} class="h-12 w-12 shrink-0 rounded-[6px] object-contain" />
             ) : (
@@ -39,7 +39,7 @@ const [certifications, degrees] = await Promise.all([
               <p class="text-[14px] font-semibold text-[var(--text-heading)]">{cert.name}</p>
               {cert.issued && <p class="mt-0.5 text-[12px] text-[var(--text-tertiary)]">{cert.issued}</p>}
             </div>
-            <div class="flex shrink-0 items-center gap-[14px]">
+            <div class="flex shrink-0 items-center gap-[14px] self-end sm:self-auto">
               {cert.date && (
                 <span class="text-[12px] tabular-nums text-[var(--text-faint)]">{cert.date}</span>
               )}
@@ -63,7 +63,7 @@ const [certifications, degrees] = await Promise.all([
     <ul class="m-0 flex list-none flex-col gap-3 p-0">
       {
         degrees.map((degree) => (
-          <Card as="li" tone="dark" interactive hoverLift={false} className="flex items-center gap-4 px-[18px] py-4">
+          <Card as="li" tone="dark" interactive hoverLift={false} className="flex flex-col items-start gap-4 px-[18px] py-4 sm:flex-row sm:items-center">
             {degree.image ? (
               <img src={degree.image} alt={degree.name} class="h-12 w-12 shrink-0 rounded-[6px] object-contain" />
             ) : (
