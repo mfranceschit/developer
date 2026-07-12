@@ -16,6 +16,9 @@ export { Checkbox } from './Checkbox/Checkbox';
 export type { ComboboxProps } from './Combobox/Combobox';
 export { Combobox } from './Combobox/Combobox';
 
+export type { DatePickerProps } from './DatePicker/DatePicker';
+export { DatePicker } from './DatePicker/DatePicker';
+
 export type { DialogProps } from './Dialog/Dialog';
 export { Dialog } from './Dialog/Dialog';
 
