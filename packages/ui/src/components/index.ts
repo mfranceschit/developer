@@ -16,6 +16,9 @@ export { Checkbox } from './Checkbox/Checkbox';
 export type { ComboboxProps } from './Combobox/Combobox';
 export { Combobox } from './Combobox/Combobox';
 
+export type { DialogProps } from './Dialog/Dialog';
+export { Dialog } from './Dialog/Dialog';
+
 export type { FormFieldProps } from './FormField/FormField';
 export { FormField } from './FormField/FormField';
 
