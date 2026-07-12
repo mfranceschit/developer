@@ -52,11 +52,11 @@ export { Select } from './Select/Select';
 export type { SwitchProps } from './Switch/Switch';
 export { Switch } from './Switch/Switch';
 
-export type { TabItem, TabsProps } from './Tabs/Tabs';
-export { Tabs } from './Tabs/Tabs';
-
 export type { TableColumn, TableProps } from './Table/Table';
 export { Table } from './Table/Table';
+
+export type { TabItem, TabsProps } from './Tabs/Tabs';
+export { Tabs } from './Tabs/Tabs';
 
 export type { ToasterProps } from './Toast/Toast';
 export { createToaster, Toaster } from './Toast/Toast';
