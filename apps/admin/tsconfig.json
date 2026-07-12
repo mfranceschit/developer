@@ -1,6 +1,7 @@
 {
   "extends": "@mfranceschit/typescript-config/react-library",
   "compilerOptions": {
+    "types": ["vite/client"],
     "paths": {
       "@/*": ["./src/*"]
     }
