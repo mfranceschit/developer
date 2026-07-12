@@ -16,10 +16,12 @@ const dropzoneClasses =
   'border-2 border-dashed border-[var(--border-default)] bg-[var(--surface-field)] ' +
   'cursor-pointer transition-colors duration-[120ms] hover:border-[var(--focus-ring)]';
 
-// NOTE: onHotspotChange is not yet wired to a UI control. Wiring Ark UI's
-// ImageCropper namespace here (crop rect -> normalized hotspot point) is
-// substantially more work than the rest of this component and is left for a
-// later plan. See task-15-report.md for details.
+// NOTE: onHotspotChange is not yet wired to a UI control. Ark UI's
+// ImageCropper only exposes a crop rect (viewport + natural pixel
+// coordinates via naturalSize), not a hotspot point, so deriving and
+// normalizing a hotspot from it needs a full crop overlay (Root, Viewport,
+// Image, Selection, Handles, Grid) — substantially more work than the rest
+// of this component. Left for a later plan to implement.
 export function ImageUploader({
   imageUrl,
   alt,
