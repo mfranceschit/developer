@@ -15,13 +15,6 @@ const STATUS_TONE: Record<DocumentStatus, BadgeTone> = {
   'unpublished-changes': 'berry',
 };
 
-// `/certifications/$id` isn't registered yet (added by the sibling edit-route task) — a
-// non-literal `string` widens TanStack Router's `to` inference instead of checking it against
-// the known-route literal union. Resolves correctly once that route exists.
-function certificationDetailPath(id: string): string {
-  return `/certifications/${id}`;
-}
-
 function CertificationsListPage() {
   const { data, isLoading } = useDocumentList<CertificationRow>('certification');
   const navigate = useNavigate();
@@ -36,14 +29,19 @@ function CertificationsListPage() {
         <h1 className="font-sans text-xl font-semibold text-[var(--text-strong)]">
           Certifications
         </h1>
-        <Button size="sm" onClick={() => navigate({ to: certificationDetailPath('new') })}>
+        <Button
+          size="sm"
+          onClick={() => navigate({ to: '/certifications/$id', params: { id: 'new' } })}
+        >
           New certification
         </Button>
       </div>
       <Table<CertificationRow>
         rows={data ?? []}
         getRowKey={(row) => row._id}
-        onRowClick={(row) => navigate({ to: certificationDetailPath(row._id) })}
+        onRowClick={(row) =>
+          navigate({ to: '/certifications/$id', params: { id: row._id } })
+        }
         columns={[
           { header: 'Name', render: (row) => row.name },
           { header: 'Date', render: (row) => row.date },
