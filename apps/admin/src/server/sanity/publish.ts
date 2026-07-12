@@ -1,12 +1,5 @@
 import { draftSanityClient } from './client';
-
-function toDraftId(id: string): string {
-  return id.startsWith('drafts.') ? id : `drafts.${id}`;
-}
-
-function toPublishedId(id: string): string {
-  return id.startsWith('drafts.') ? id.slice('drafts.'.length) : id;
-}
+import { toDraftId, toPublishedId } from './ids';
 
 export async function publishDocument(id: string): Promise<void> {
   const draftId = toDraftId(id);
