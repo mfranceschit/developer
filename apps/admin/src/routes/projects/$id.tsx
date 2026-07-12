@@ -125,6 +125,7 @@ function ProjectEditPage() {
     formData.set('file', file);
     const asset = await uploadImageAssetFn({ data: formData });
     setUploadedAsset(asset);
+    // TODO: Placeholder Sanity CDN URL — image preview will not render until real URL resolution (e.g. @sanity/image-url) is implemented
     return `https://cdn.sanity.io/images/placeholder/${asset._ref}`;
   }
 
@@ -175,6 +176,7 @@ function ProjectEditPage() {
           name="imageAlt"
           render={({ field }) => (
             <ImageUploader
+              // TODO: Placeholder Sanity CDN URL — image preview will not render until real URL resolution is implemented
               imageUrl={
                 project?.image.asset._ref
                   ? `https://cdn.sanity.io/images/placeholder/${project.image.asset._ref}`
