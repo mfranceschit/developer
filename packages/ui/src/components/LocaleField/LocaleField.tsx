@@ -20,30 +20,37 @@ export type LocaleFieldProps = {
 export function LocaleField({
   value,
   onValueChange,
+  label,
   multiline = false,
   className = '',
 }: LocaleFieldProps) {
   const locales: SupportedLocale[] = ['en', 'es', 'pt'];
 
   return (
-    <Tabs
-      className={className}
-      items={locales.map((locale) => ({
-        value: locale,
-        label: LOCALE_LABELS[locale],
-        content: multiline ? (
-          <Input
-            as="textarea"
-            value={value[locale]}
-            onChange={(event) => onValueChange(locale, event.target.value)}
-          />
-        ) : (
-          <Input
-            value={value[locale]}
-            onChange={(event) => onValueChange(locale, event.target.value)}
-          />
-        ),
-      }))}
-    />
+    <div className={className}>
+      {label && (
+        <span className="mb-1 block font-sans text-sm font-medium text-[var(--text-body)]">
+          {label}
+        </span>
+      )}
+      <Tabs
+        items={locales.map((locale) => ({
+          value: locale,
+          label: LOCALE_LABELS[locale],
+          content: multiline ? (
+            <Input
+              as="textarea"
+              value={value[locale]}
+              onChange={(event) => onValueChange(locale, event.target.value)}
+            />
+          ) : (
+            <Input
+              value={value[locale]}
+              onChange={(event) => onValueChange(locale, event.target.value)}
+            />
+          ),
+        }))}
+      />
+    </div>
   );
 }
