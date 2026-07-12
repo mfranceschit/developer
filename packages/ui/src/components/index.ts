@@ -10,6 +10,9 @@ export { Button } from './Button/Button';
 export type { CardProps } from './Card/Card';
 export { Card } from './Card/Card';
 
+export type { CheckboxProps } from './Checkbox/Checkbox';
+export { Checkbox } from './Checkbox/Checkbox';
+
 export type { FormFieldProps } from './FormField/FormField';
 export { FormField } from './FormField/FormField';
 
