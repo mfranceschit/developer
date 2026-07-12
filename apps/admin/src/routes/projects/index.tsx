@@ -15,13 +15,6 @@ const STATUS_TONE: Record<DocumentStatus, BadgeTone> = {
   'unpublished-changes': 'berry',
 };
 
-// `/projects/$id` isn't registered in the route tree until Task 7 adds
-// `routes/projects/$id.tsx`; widening `to`/`id` to `string` sidesteps TanStack Router's
-// literal-union check the same way NavShell (Task 5) did for not-yet-existing routes.
-function projectDetailPath(id: string): string {
-  return `/projects/${id}`;
-}
-
 function ProjectsListPage() {
   const { data, isLoading } = useDocumentList<ProjectRow>('project');
   const navigate = useNavigate();
@@ -34,14 +27,17 @@ function ProjectsListPage() {
     <div className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <h1 className="font-sans text-xl font-semibold text-[var(--text-strong)]">Projects</h1>
-        <Button size="sm" onClick={() => navigate({ to: projectDetailPath('new') })}>
+        <Button
+          size="sm"
+          onClick={() => navigate({ to: '/projects/$id', params: { id: 'new' } })}
+        >
           New project
         </Button>
       </div>
       <Table<ProjectRow>
         rows={data ?? []}
         getRowKey={(row) => row._id}
-        onRowClick={(row) => navigate({ to: projectDetailPath(row._id) })}
+        onRowClick={(row) => navigate({ to: '/projects/$id', params: { id: row._id } })}
         columns={[
           { header: 'Name', render: (row) => row.name },
           { header: 'Technologies', render: (row) => row.technologies.join(', ') },
