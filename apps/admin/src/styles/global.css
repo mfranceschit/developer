@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+@import '@mfranceschit/ui/styles/tokens.css';
+
+@source '../../../../packages/ui/src/**/*.{ts,tsx}';
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    color: var(--text-body);
+    background: var(--surface-page);
+  }
+}

@@ -2,6 +2,8 @@ import type { QueryClient } from '@tanstack/react-query';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 
+import '../styles/global.css';
+
 interface RouterContext {
   queryClient: QueryClient;
 }
