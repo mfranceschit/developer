@@ -40,6 +40,9 @@ export { MobileNav } from './MobileNav/MobileNav';
 export type { NumberInputProps } from './NumberInput/NumberInput';
 export { NumberInput } from './NumberInput/NumberInput';
 
+export type { RichTextEditorProps } from './RichTextEditor/RichTextEditor';
+export { RichTextEditor } from './RichTextEditor/RichTextEditor';
+
 export type { SelectProps } from './Select/Select';
 export { Select } from './Select/Select';
 
