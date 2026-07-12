@@ -43,5 +43,8 @@ export { Switch } from './Switch/Switch';
 export type { TabItem, TabsProps } from './Tabs/Tabs';
 export { Tabs } from './Tabs/Tabs';
 
+export type { ToasterProps } from './Toast/Toast';
+export { createToaster, Toaster } from './Toast/Toast';
+
 export type { TooltipProps } from './Tooltip/Tooltip';
 export { Tooltip } from './Tooltip/Tooltip';
