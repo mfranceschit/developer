@@ -1,24 +1,17 @@
 import type { DocumentStatus } from '../../shared/types';
 import { draftSanityClient } from './client';
+import { toDraftId, toPublishedId } from './ids';
 
 interface RawDoc {
   _id: string;
   [key: string]: unknown;
 }
 
-function draftIdOf(id: string): string {
-  return id.startsWith('drafts.') ? id : `drafts.${id}`;
-}
-
-function publishedIdOf(id: string): string {
-  return id.startsWith('drafts.') ? id.slice('drafts.'.length) : id;
-}
-
 function resolveStatuses<T extends RawDoc>(docs: T[]): Array<T & { _status: DocumentStatus }> {
   const byPublishedId = new Map<string, { published?: T; draft?: T }>();
 
   for (const doc of docs) {
-    const publishedId = publishedIdOf(doc._id);
+    const publishedId = toPublishedId(doc._id);
     const entry = byPublishedId.get(publishedId) ?? {};
     if (doc._id.startsWith('drafts.')) {
       entry.draft = doc;
@@ -52,8 +45,8 @@ export async function getDocument<T extends RawDoc>(
   type: string,
   id: string,
 ): Promise<(T & { _status: DocumentStatus }) | null> {
-  const publishedId = publishedIdOf(id);
-  const draftId = draftIdOf(id);
+  const publishedId = toPublishedId(id);
+  const draftId = toDraftId(id);
   const docs = await draftSanityClient.fetch<T[]>(
     `*[_type == $type && (_id == $publishedId || _id == $draftId)]`,
     { type, publishedId, draftId },

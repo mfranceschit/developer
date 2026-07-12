@@ -1,9 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { draftSanityClient } from './client';
-
-function toDraftId(id: string): string {
-  return id.startsWith('drafts.') ? id : `drafts.${id}`;
-}
+import { toDraftId } from './ids';
 
 export async function createDraft<T extends Record<string, unknown>>(
   type: string,
