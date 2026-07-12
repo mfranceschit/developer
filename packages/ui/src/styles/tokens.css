@@ -63,6 +63,8 @@
   /* Surfaces */
   --surface-page: var(--mf-white);
   --surface-card: var(--mf-white);
+  --surface-overlay: var(--mf-white);
+  --surface-scrim: rgba(14, 23, 51, 0.45);
   --surface-field: var(--mf-white);
   --surface-sunken: var(--mf-gray-50);
   --surface-sand: var(--mf-sand);
@@ -187,6 +189,8 @@
   --surface-page: var(--mf-blue-900);
   --gradient-page: linear-gradient(180deg, var(--mf-blue-900) 0%, var(--mf-blue-950) 100%);
   --surface-card: rgba(14, 23, 51, 0.55);
+  --surface-overlay: var(--mf-blue-900);
+  --surface-scrim: rgba(0, 0, 0, 0.6);
   --surface-field: rgba(14, 23, 51, 0.6);
   --surface-header: rgba(14, 23, 51, 0.94);
   --surface-header-glass: rgba(14, 23, 51, 0.45);
