@@ -9,6 +9,7 @@ import {
 } from '@mfranceschit/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import {
@@ -75,6 +76,9 @@ function ProjectEditPage() {
   const patchDraft = usePatchDraft<Project>();
   const publish = usePublish();
   const discard = useDiscard();
+  const [uploadedAsset, setUploadedAsset] = useState<Project['image']['asset'] | undefined>(
+    undefined,
+  );
 
   const {
     control,
@@ -101,9 +105,9 @@ function ProjectEditPage() {
         es: values.descriptionEs,
         pt: values.descriptionPt,
       },
-      image: project?.image ?? {
+      image: {
         _type: 'image' as const,
-        asset: { _ref: '', _type: 'reference' as const },
+        asset: uploadedAsset ?? project?.image.asset ?? { _ref: '', _type: 'reference' as const },
         alt: values.imageAlt,
       },
     };
@@ -120,6 +124,7 @@ function ProjectEditPage() {
     const formData = new FormData();
     formData.set('file', file);
     const asset = await uploadImageAssetFn({ data: formData });
+    setUploadedAsset(asset);
     return `https://cdn.sanity.io/images/placeholder/${asset._ref}`;
   }
 
@@ -170,7 +175,11 @@ function ProjectEditPage() {
           name="imageAlt"
           render={({ field }) => (
             <ImageUploader
-              imageUrl={undefined}
+              imageUrl={
+                project?.image.asset._ref
+                  ? `https://cdn.sanity.io/images/placeholder/${project.image.asset._ref}`
+                  : undefined
+              }
               alt={field.value}
               onAltChange={field.onChange}
               onUpload={handleUpload}
