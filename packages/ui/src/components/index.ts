@@ -46,6 +46,9 @@ export { Switch } from './Switch/Switch';
 export type { TabItem, TabsProps } from './Tabs/Tabs';
 export { Tabs } from './Tabs/Tabs';
 
+export type { TableColumn, TableProps } from './Table/Table';
+export { Table } from './Table/Table';
+
 export type { ToasterProps } from './Toast/Toast';
 export { createToaster, Toaster } from './Toast/Toast';
 
