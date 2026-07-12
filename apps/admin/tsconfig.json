@@ -1,0 +1,9 @@
+{
+  "extends": "@mfranceschit/typescript-config/react-library",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src"]
+}

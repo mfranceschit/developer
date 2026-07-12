@@ -1,0 +1,4 @@
+.vinxi/
+.output/
+routeTree.gen.ts
+.env
