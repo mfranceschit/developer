@@ -25,6 +25,21 @@ export const Default: Story = {
   },
 };
 
+export const WithLabel: Story = {
+  render: () => {
+    const [value, setValue] = useState({ en: 'Issued', es: 'Emitido', pt: 'Emitido' });
+    return (
+      <LocaleField
+        label="Status label"
+        value={value}
+        onValueChange={(locale: SupportedLocale, next: string) =>
+          setValue((prev) => ({ ...prev, [locale]: next }))
+        }
+      />
+    );
+  },
+};
+
 export const Multiline: Story = {
   render: () => {
     const [value, setValue] = useState({ en: '', es: '', pt: '' });
