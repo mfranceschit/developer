@@ -1,11 +1,13 @@
 import type { QueryClient } from '@tanstack/react-query';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
-
+import { createToaster, Toaster } from '@mfranceschit/ui';
+import { NavShell } from '../widgets/NavShell/NavShell';
 import '../styles/global.css';
 
 interface RouterContext {
   queryClient: QueryClient;
+  toaster: ReturnType<typeof createToaster>;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
@@ -13,7 +15,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 });
 
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
+  const { queryClient, toaster } = Route.useRouteContext();
   return (
     <html lang="en">
       <head>
@@ -22,7 +24,10 @@ function RootComponent() {
       </head>
       <body>
         <QueryClientProvider client={queryClient}>
-          <Outlet />
+          <NavShell>
+            <Outlet />
+          </NavShell>
+          <Toaster toaster={toaster} />
         </QueryClientProvider>
       </body>
     </html>
