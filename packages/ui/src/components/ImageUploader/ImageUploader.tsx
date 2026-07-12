@@ -1,5 +1,5 @@
 import { FileUpload } from '@ark-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from '../Input/Input';
 
 export type ImageUploaderProps = {
@@ -31,6 +31,10 @@ export function ImageUploader({
 }: ImageUploaderProps) {
   const [previewUrl, setPreviewUrl] = useState(imageUrl);
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    setPreviewUrl(imageUrl);
+  }, [imageUrl]);
 
   return (
     <div className={['flex flex-col gap-3', className].filter(Boolean).join(' ')}>
