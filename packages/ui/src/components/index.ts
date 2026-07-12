@@ -27,3 +27,6 @@ export { MobileNav } from './MobileNav/MobileNav';
 
 export type { SwitchProps } from './Switch/Switch';
 export { Switch } from './Switch/Switch';
+
+export type { TooltipProps } from './Tooltip/Tooltip';
+export { Tooltip } from './Tooltip/Tooltip';
