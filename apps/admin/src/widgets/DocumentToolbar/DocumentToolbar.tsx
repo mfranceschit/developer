@@ -1,5 +1,6 @@
 import { Badge, type BadgeTone, Button, Dialog, type createToaster } from '@mfranceschit/ui';
 import { useState } from 'react';
+
 import type { DocumentStatus } from '../../shared/types';
 
 export type DocumentToolbarProps = {
@@ -31,6 +32,7 @@ export function DocumentToolbar({
 }: DocumentToolbarProps) {
   const [publishing, setPublishing] = useState(false);
   const [discarding, setDiscarding] = useState(false);
+  const [discardDialogOpen, setDiscardDialogOpen] = useState(false);
 
   async function handlePublish() {
     setPublishing(true);
@@ -53,6 +55,7 @@ export function DocumentToolbar({
       toaster.create({ title: 'Failed to discard', type: 'error' });
     } finally {
       setDiscarding(false);
+      setDiscardDialogOpen(false);
     }
   }
 
@@ -60,6 +63,8 @@ export function DocumentToolbar({
     <div className="flex items-center gap-3">
       <Badge tone={STATUS_TONE[status]}>{STATUS_LABEL[status]}</Badge>
       <Dialog
+        open={discardDialogOpen}
+        onOpenChange={setDiscardDialogOpen}
         title="Discard draft?"
         description="This will permanently delete your unpublished changes."
         trigger={
