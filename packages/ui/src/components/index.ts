@@ -28,6 +28,9 @@ export { MobileNav } from './MobileNav/MobileNav';
 export type { NumberInputProps } from './NumberInput/NumberInput';
 export { NumberInput } from './NumberInput/NumberInput';
 
+export type { SelectProps } from './Select/Select';
+export { Select } from './Select/Select';
+
 export type { SwitchProps } from './Switch/Switch';
 export { Switch } from './Switch/Switch';
 
