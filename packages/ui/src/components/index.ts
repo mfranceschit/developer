@@ -13,6 +13,9 @@ export { Card } from './Card/Card';
 export type { CheckboxProps } from './Checkbox/Checkbox';
 export { Checkbox } from './Checkbox/Checkbox';
 
+export type { ComboboxProps } from './Combobox/Combobox';
+export { Combobox } from './Combobox/Combobox';
+
 export type { FormFieldProps } from './FormField/FormField';
 export { FormField } from './FormField/FormField';
 
