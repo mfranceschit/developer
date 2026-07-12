@@ -28,6 +28,9 @@ export { FormField } from './FormField/FormField';
 export type { InputProps } from './Input/Input';
 export { Input } from './Input/Input';
 
+export type { LocaleFieldProps, SupportedLocale } from './LocaleField/LocaleField';
+export { LocaleField } from './LocaleField/LocaleField';
+
 export type { LogoProps, LogoVariant } from './Logo/Logo';
 export { Logo } from './Logo/Logo';
 
