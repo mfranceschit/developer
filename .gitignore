@@ -26,7 +26,6 @@ storybook-static
 
 # Worktrees
 .claude/worktrees
-.claude/*
 !.claude/hooks
 !.claude/settings.json
 
