@@ -37,5 +37,8 @@ export { Select } from './Select/Select';
 export type { SwitchProps } from './Switch/Switch';
 export { Switch } from './Switch/Switch';
 
+export type { TabItem, TabsProps } from './Tabs/Tabs';
+export { Tabs } from './Tabs/Tabs';
+
 export type { TooltipProps } from './Tooltip/Tooltip';
 export { Tooltip } from './Tooltip/Tooltip';
