@@ -24,3 +24,6 @@ export { Logo } from './Logo/Logo';
 
 export type { MobileNavLink, MobileNavProps } from './MobileNav/MobileNav';
 export { MobileNav } from './MobileNav/MobileNav';
+
+export type { SwitchProps } from './Switch/Switch';
+export { Switch } from './Switch/Switch';
