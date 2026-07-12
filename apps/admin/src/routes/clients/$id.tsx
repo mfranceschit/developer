@@ -155,7 +155,7 @@ function ClientEditPage() {
           render={({ field }) => (
             <NumberInput
               value={field.value}
-              onValueChange={(value) => field.onChange(String(value))}
+              onValueChange={(value) => field.onChange(Number.isNaN(value) ? '' : String(value))}
               min={0}
               step={0.01}
             />
