@@ -25,6 +25,9 @@ export { Dialog } from './Dialog/Dialog';
 export type { FormFieldProps } from './FormField/FormField';
 export { FormField } from './FormField/FormField';
 
+export type { ImageUploaderProps } from './ImageUploader/ImageUploader';
+export { ImageUploader } from './ImageUploader/ImageUploader';
+
 export type { InputProps } from './Input/Input';
 export { Input } from './Input/Input';
 
