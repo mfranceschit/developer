@@ -1,5 +1,6 @@
 import type { z } from 'zod';
 import type {
+  aboutSchema,
   businessProfileSchema,
   certificationSchema,
   clientSchema,
@@ -14,6 +15,7 @@ import type {
   sanityImageSchema,
 } from './schemas';
 
+export type About = z.infer<typeof aboutSchema>;
 export type LocaleString = z.infer<typeof localeStringSchema>;
 export type LocaleContent = z.infer<typeof localeContentSchema>;
 export type SanityImage = z.infer<typeof sanityImageSchema>;

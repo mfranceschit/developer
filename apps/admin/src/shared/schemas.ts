@@ -67,6 +67,15 @@ export const degreeSchema = z.object({
   issued: localeStringSchema,
 });
 
+export const aboutSchema = z.object({
+  _id: z.union([z.literal('about'), z.literal('drafts.about')]),
+  _type: z.literal('about'),
+  eyebrow: localeStringSchema,
+  title: localeStringSchema,
+  body: localeContentSchema,
+  stack: z.array(z.string()),
+});
+
 export const businessProfileSchema = z.object({
   _id: z.literal('businessProfile'),
   _type: z.literal('businessProfile'),
