@@ -50,7 +50,6 @@ export interface Degree {
 }
 
 export interface About {
-  eyebrow: string;
   title: string;
   body: SanityBlock[];
   stack: string[];
@@ -119,7 +118,6 @@ export async function getDegrees(locale = 'en'): Promise<Degree[]> {
 export async function getAbout(locale = 'en'): Promise<About | null> {
   return sanityClient.fetch(
     groq`*[_type == "about"][0]{
-      "eyebrow": eyebrow[$locale],
       "title": title[$locale],
       "body": body[$locale],
       stack

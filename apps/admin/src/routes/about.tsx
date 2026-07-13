@@ -27,9 +27,6 @@ export const Route = createFileRoute('/about')({
 type PortableTextValue = RichTextEditorProps['value'];
 
 const formSchema = z.object({
-  eyebrowEn: z.string(),
-  eyebrowEs: z.string(),
-  eyebrowPt: z.string(),
   titleEn: z.string().min(1, 'Title is required'),
   titleEs: z.string(),
   titlePt: z.string(),
@@ -43,9 +40,6 @@ type AboutFormValues = z.infer<typeof formSchema>;
 
 function toFormValues(about?: About | null): AboutFormValues {
   return {
-    eyebrowEn: about?.eyebrow.en ?? '',
-    eyebrowEs: about?.eyebrow.es ?? '',
-    eyebrowPt: about?.eyebrow.pt ?? '',
     titleEn: about?.title.en ?? '',
     titleEs: about?.title.es ?? '',
     titlePt: about?.title.pt ?? '',
@@ -74,14 +68,13 @@ function AboutEditPage() {
     resolver: zodResolver(formSchema),
   });
 
-  const [eyebrowEn, eyebrowEs, eyebrowPt, titleEn, titleEs, titlePt] = useWatch({
+  const [titleEn, titleEs, titlePt] = useWatch({
     control,
-    name: ['eyebrowEn', 'eyebrowEs', 'eyebrowPt', 'titleEn', 'titleEs', 'titlePt'],
+    name: ['titleEn', 'titleEs', 'titlePt'],
   });
 
   async function onSubmit(values: AboutFormValues) {
     await upsert.mutateAsync({
-      eyebrow: { en: values.eyebrowEn, es: values.eyebrowEs, pt: values.eyebrowPt },
       title: { en: values.titleEn, es: values.titleEs, pt: values.titlePt },
       body: { en: values.bodyEn, es: values.bodyEs, pt: values.bodyPt },
       stack: values.stack
@@ -108,22 +101,6 @@ function AboutEditPage() {
           toaster={toaster}
         />
       </div>
-
-      <FormField label="Eyebrow">
-        <LocaleField
-          value={{ en: eyebrowEn, es: eyebrowEs, pt: eyebrowPt }}
-          onValueChange={(locale, value) => {
-            setValue(
-              `eyebrow${locale[0].toUpperCase()}${locale.slice(1)}` as
-                | 'eyebrowEn'
-                | 'eyebrowEs'
-                | 'eyebrowPt',
-              value,
-              { shouldDirty: true },
-            );
-          }}
-        />
-      </FormField>
 
       <FormField label="Title" required error={errors.titleEn?.message}>
         <LocaleField
