@@ -19,14 +19,6 @@ function invoiceNumber(invoice: Invoice): string {
   return `INV-${year}-${String(invoice.seq).padStart(3, '0')}`;
 }
 
-// `/invoices/$id` isn't registered in the route tree until Task 8 adds
-// `routes/invoices/$id.tsx`; widening `to` to `string` sidesteps TanStack Router's
-// literal-union check the same way projects/index.tsx (Task 7 of the Projects plan) did
-// for not-yet-existing routes.
-function invoiceDetailPath(id: string): string {
-  return `/invoices/${id}`;
-}
-
 function InvoicesListPage() {
   const { data, isLoading } = useInvoiceList();
   const navigate = useNavigate();
@@ -39,14 +31,17 @@ function InvoicesListPage() {
     <div className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <h1 className="font-sans text-xl font-semibold text-[var(--text-strong)]">Invoices</h1>
-        <Button size="sm" onClick={() => navigate({ to: invoiceDetailPath('new') })}>
+        <Button
+          size="sm"
+          onClick={() => navigate({ to: '/invoices/$id', params: { id: 'new' } })}
+        >
           New invoice
         </Button>
       </div>
       <Table<Invoice>
         rows={data ?? []}
         getRowKey={(row) => row._id}
-        onRowClick={(row) => navigate({ to: invoiceDetailPath(row._id) })}
+        onRowClick={(row) => navigate({ to: '/invoices/$id', params: { id: row._id } })}
         columns={[
           { header: 'Number', render: invoiceNumber },
           { header: 'Client', render: (row) => row.clientSnapshot.name },
