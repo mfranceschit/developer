@@ -56,6 +56,13 @@ export { RichTextEditor } from './RichTextEditor/RichTextEditor';
 export type { SelectProps } from './Select/Select';
 export { Select } from './Select/Select';
 
+export type {
+  SegmentedControlOption,
+  SegmentedControlProps,
+  SegmentedControlSize,
+} from './SegmentedControl/SegmentedControl';
+export { SegmentedControl } from './SegmentedControl/SegmentedControl';
+
 export type { SwitchProps } from './Switch/Switch';
 export { Switch } from './Switch/Switch';
 
