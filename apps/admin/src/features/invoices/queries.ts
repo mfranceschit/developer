@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getBusinessProfileFn, upsertBusinessProfileFn } from '../../server/functions/businessProfile';
+import { getBusinessProfileFn, upsertBusinessProfileFn } from '@/server/functions/businessProfile';
 import {
   createInvoiceFn,
   deleteInvoiceFn,
   getInvoiceFn,
   listInvoicesFn,
   patchInvoiceFn,
-} from '../../server/functions/invoices';
-import type { BusinessProfile, Invoice } from '../../shared/types';
+} from '@/server/functions/invoices';
+import type { BusinessProfile, Invoice } from '@/shared/types';
 
 export function useInvoiceList() {
   return useQuery({

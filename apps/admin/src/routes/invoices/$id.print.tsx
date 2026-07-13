@@ -1,7 +1,7 @@
 import { Button, InvoiceDocument } from '@mfranceschit/ui';
 import { createFileRoute } from '@tanstack/react-router';
-import { useInvoice } from '../../features/invoices/queries';
-import { formatInvoiceNumber } from '../../shared/lib/format';
+import { useInvoice } from '@/features/invoices/queries';
+import { formatInvoiceNumber } from '@/shared/lib/format';
 
 export const Route = createFileRoute('/invoices/$id/print')({
   component: InvoicePrintPage,

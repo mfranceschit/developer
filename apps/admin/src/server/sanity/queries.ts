@@ -1,4 +1,4 @@
-import type { DocumentStatus } from '../../shared/types';
+import type { DocumentStatus } from '@/shared/types';
 import { draftSanityClient } from './client';
 import { toDraftId, toPublishedId } from './ids';
 

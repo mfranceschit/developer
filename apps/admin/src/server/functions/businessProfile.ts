@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
 import { z } from 'zod';
-import { getBusinessProfile, upsertBusinessProfile } from '../sanity/businessProfile';
+import { getBusinessProfile, upsertBusinessProfile } from '@/server/sanity/businessProfile';
 
 export const getBusinessProfileFn = createServerFn({
   method: 'GET',

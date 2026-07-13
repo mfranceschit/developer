@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { Invoice } from '../../shared/types';
+import type { Invoice } from '@/shared/types';
 import { draftSanityClient } from './client';
 
 export async function nextInvoiceSeq(year: number): Promise<number> {

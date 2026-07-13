@@ -9,9 +9,9 @@ import {
   useDocument,
   usePatchDraft,
   usePublish,
-} from '../../features/content/queries';
-import type { Client, DocumentStatus } from '../../shared/types';
-import { DocumentToolbar } from '../../widgets/DocumentToolbar/DocumentToolbar';
+} from '@/features/content/queries';
+import type { Client, DocumentStatus } from '@/shared/types';
+import { DocumentToolbar } from '@/widgets/DocumentToolbar/DocumentToolbar';
 
 export const Route = createFileRoute('/clients/$id')({
   component: ClientEditPage,

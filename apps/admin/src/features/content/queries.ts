@@ -5,8 +5,8 @@ import {
   getDocumentFn,
   listDocumentsFn,
   patchDraftFn,
-} from '../../server/functions/content';
-import { discardDraftFn, publishDocumentFn } from '../../server/functions/publish';
+} from '@/server/functions/content';
+import { discardDraftFn, publishDocumentFn } from '@/server/functions/publish';
 
 export function useDocumentList<T>(type: string) {
   return useQuery({

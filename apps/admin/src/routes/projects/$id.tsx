@@ -18,10 +18,11 @@ import {
   useDocument,
   usePatchDraft,
   usePublish,
-} from '../../features/content/queries';
-import { uploadImageAssetFn } from '../../server/functions/upload';
-import type { DocumentStatus, Project } from '../../shared/types';
-import { DocumentToolbar } from '../../widgets/DocumentToolbar/DocumentToolbar';
+} from '@/features/content/queries';
+import { uploadImageAssetFn } from '@/server/functions/upload';
+import { sanityImageUrl } from '@/shared/lib/sanityImage';
+import type { DocumentStatus, Project } from '@/shared/types';
+import { DocumentToolbar } from '@/widgets/DocumentToolbar/DocumentToolbar';
 
 export const Route = createFileRoute('/projects/$id')({
   component: ProjectEditPage,
@@ -125,8 +126,7 @@ function ProjectEditPage() {
     formData.set('file', file);
     const asset = await uploadImageAssetFn({ data: formData });
     setUploadedAsset(asset);
-    // TODO: Placeholder Sanity CDN URL — image preview will not render until real URL resolution (e.g. @sanity/image-url) is implemented
-    return `https://cdn.sanity.io/images/placeholder/${asset._ref}`;
+    return sanityImageUrl(asset._ref);
   }
 
   return (
@@ -176,10 +176,9 @@ function ProjectEditPage() {
           name="imageAlt"
           render={({ field }) => (
             <ImageUploader
-              // TODO: Placeholder Sanity CDN URL — image preview will not render until real URL resolution is implemented
               imageUrl={
                 project?.image.asset._ref
-                  ? `https://cdn.sanity.io/images/placeholder/${project.image.asset._ref}`
+                  ? sanityImageUrl(project.image.asset._ref)
                   : undefined
               }
               alt={field.value}

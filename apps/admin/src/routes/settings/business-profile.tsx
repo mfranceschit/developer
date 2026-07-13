@@ -3,8 +3,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useBusinessProfile, useUpsertBusinessProfile } from '../../features/invoices/queries';
-import type { BusinessProfile } from '../../shared/types';
+import { useBusinessProfile, useUpsertBusinessProfile } from '@/features/invoices/queries';
+import type { BusinessProfile } from '@/shared/types';
 
 export const Route = createFileRoute('/settings/business-profile')({
   component: BusinessProfilePage,

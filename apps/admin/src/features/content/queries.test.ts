@@ -4,7 +4,7 @@ import { createElement } from 'react';
 import type { ReactNode } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('../../server/functions/content', () => ({
+vi.mock('@/server/functions/content', () => ({
   listDocumentsFn: vi.fn(async () => [{ _id: 'a', name: 'A', _status: 'published' }]),
   getDocumentFn: vi.fn(async () => ({ _id: 'a', name: 'A', _status: 'published' })),
   createDraftFn: vi.fn(async () => ({ _id: 'drafts.b', name: 'B' })),
@@ -12,13 +12,13 @@ vi.mock('../../server/functions/content', () => ({
   deleteDraftFn: vi.fn(async () => undefined),
 }));
 
-vi.mock('../../server/functions/publish', () => ({
+vi.mock('@/server/functions/publish', () => ({
   publishDocumentFn: vi.fn(async () => undefined),
   discardDraftFn: vi.fn(async () => undefined),
 }));
 
-import { createDraftFn, getDocumentFn, listDocumentsFn, patchDraftFn } from '../../server/functions/content';
-import { discardDraftFn, publishDocumentFn } from '../../server/functions/publish';
+import { createDraftFn, getDocumentFn, listDocumentsFn, patchDraftFn } from '@/server/functions/content';
+import { discardDraftFn, publishDocumentFn } from '@/server/functions/publish';
 import {
   useCreateDraft,
   useDeleteDraft,
