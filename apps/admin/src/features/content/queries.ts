@@ -7,6 +7,8 @@ import {
   patchDraftFn,
 } from '@/server/functions/content';
 import { discardDraftFn, publishDocumentFn } from '@/server/functions/publish';
+import { upsertAboutDraftFn } from '@/server/functions/about';
+import type { About, DocumentStatus } from '@/shared/types';
 
 export function useDocumentList<T>(type: string) {
   return useQuery({
@@ -69,6 +71,27 @@ export function useDiscard() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id }: { id: string }) => discardDraftFn({ data: { id } }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['content'] });
+    },
+  });
+}
+
+export function useAbout() {
+  return useQuery({
+    queryKey: ['content', 'about', 'detail'],
+    queryFn: () =>
+      getDocumentFn({ data: { type: 'about', id: 'about' } }) as Promise<
+        (About & { _status: DocumentStatus }) | null
+      >,
+  });
+}
+
+export function useUpsertAboutDraft() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (doc: Record<string, unknown>) =>
+      upsertAboutDraftFn({ data: doc }) as Promise<About>,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['content'] });
     },
