@@ -19,7 +19,7 @@ import {
   useInvoice,
   usePatchInvoice,
 } from '../../features/invoices/queries';
-import { formatMoney } from '../../shared/lib/format';
+import { formatInvoiceNumber, formatMoney } from '../../shared/lib/format';
 import { calculateInvoiceTotals } from '../../shared/lib/invoiceTotals';
 import type { Client, DocumentStatus, Invoice } from '../../shared/types';
 
@@ -157,7 +157,7 @@ function InvoiceEditPage() {
     <form className="flex flex-col gap-4 p-6" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex items-center justify-between">
         <h1 className="font-sans text-xl font-semibold text-[var(--text-strong)]">
-          {isNew ? 'New invoice' : `Invoice ${invoice?.seq}`}
+          {isNew ? 'New invoice' : invoice && formatInvoiceNumber(invoice)}
         </h1>
         {!isNew && invoice && (
           <div className="flex items-center gap-3">
