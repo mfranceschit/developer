@@ -32,7 +32,7 @@ const NAV_GROUPS: NavGroup[] = [
 export function NavShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen">
-      <aside className="w-60 shrink-0 border-r border-[var(--border-subtle)] p-4">
+      <aside className="w-60 shrink-0 border-r border-[var(--border-subtle)] p-4 print:hidden">
         <Logo variant="navy" height={32} />
         <nav className="mt-6 flex flex-col gap-5">
           {NAV_GROUPS.map((group) => (
