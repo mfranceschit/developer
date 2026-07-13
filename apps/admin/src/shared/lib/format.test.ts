@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatDate, formatMoney } from './format';
+import { formatDate, formatInvoiceNumber, formatMoney } from './format';
 
 describe('formatMoney', () => {
   it('formats USD with two decimals', () => {
@@ -14,5 +14,11 @@ describe('formatMoney', () => {
 describe('formatDate', () => {
   it('formats an ISO date as YYYY-MM-DD unchanged', () => {
     expect(formatDate('2026-07-12')).toBe('2026-07-12');
+  });
+});
+
+describe('formatInvoiceNumber', () => {
+  it('formats the year and zero-padded sequence', () => {
+    expect(formatInvoiceNumber({ issueDate: '2026-07-12', seq: 7 })).toBe('INV-2026-007');
   });
 });

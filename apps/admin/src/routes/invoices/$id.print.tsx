@@ -1,6 +1,7 @@
 import { Button, InvoiceDocument } from '@mfranceschit/ui';
 import { createFileRoute } from '@tanstack/react-router';
 import { useInvoice } from '../../features/invoices/queries';
+import { formatInvoiceNumber } from '../../shared/lib/format';
 
 export const Route = createFileRoute('/invoices/$id/print')({
   component: InvoicePrintPage,
@@ -14,7 +15,7 @@ function InvoicePrintPage() {
     return <p className="p-6 font-sans text-sm text-[var(--text-muted)]">Loading…</p>;
   }
 
-  const invoiceNumber = `INV-${invoice.issueDate.slice(0, 4)}-${String(invoice.seq).padStart(3, '0')}`;
+  const invoiceNumber = formatInvoiceNumber(invoice);
 
   return (
     <div>

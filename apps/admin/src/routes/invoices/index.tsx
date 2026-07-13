@@ -1,7 +1,7 @@
 import { Badge, type BadgeTone, Button, Table } from '@mfranceschit/ui';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useInvoiceList } from '../../features/invoices/queries';
-import { formatMoney } from '../../shared/lib/format';
+import { formatInvoiceNumber, formatMoney } from '../../shared/lib/format';
 import type { Invoice, InvoiceStatus } from '../../shared/types';
 
 export const Route = createFileRoute('/invoices/')({
@@ -13,11 +13,6 @@ const STATUS_TONE: Record<InvoiceStatus, BadgeTone> = {
   sent: 'blue',
   paid: 'blue',
 };
-
-function invoiceNumber(invoice: Invoice): string {
-  const year = invoice.issueDate.slice(0, 4);
-  return `INV-${year}-${String(invoice.seq).padStart(3, '0')}`;
-}
 
 function InvoicesListPage() {
   const { data, isLoading } = useInvoiceList();
@@ -43,7 +38,7 @@ function InvoicesListPage() {
         getRowKey={(row) => row._id}
         onRowClick={(row) => navigate({ to: '/invoices/$id', params: { id: row._id } })}
         columns={[
-          { header: 'Number', render: invoiceNumber },
+          { header: 'Number', render: formatInvoiceNumber },
           { header: 'Client', render: (row) => row.clientSnapshot.name },
           {
             header: 'Total',
