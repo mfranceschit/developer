@@ -10,10 +10,11 @@ import {
   useDocument,
   usePatchDraft,
   usePublish,
-} from '../../features/content/queries';
-import { uploadImageAssetFn } from '../../server/functions/upload';
-import type { Certification, DocumentStatus } from '../../shared/types';
-import { DocumentToolbar } from '../../widgets/DocumentToolbar/DocumentToolbar';
+} from '@/features/content/queries';
+import { uploadImageAssetFn } from '@/server/functions/upload';
+import { sanityImageUrl } from '@/shared/lib/sanityImage';
+import type { Certification, DocumentStatus } from '@/shared/types';
+import { DocumentToolbar } from '@/widgets/DocumentToolbar/DocumentToolbar';
 
 export const Route = createFileRoute('/certifications/$id')({
   component: CertificationEditPage,
@@ -104,9 +105,7 @@ function CertificationEditPage() {
     formData.set('file', file);
     const asset = await uploadImageAssetFn({ data: formData });
     setUploadedAsset(asset);
-    // TODO: Placeholder Sanity CDN URL — image preview will not render until real URL
-    // resolution (e.g. @sanity/image-url) is implemented. See routes/projects/$id.tsx.
-    return `https://cdn.sanity.io/images/placeholder/${asset._ref}`;
+    return sanityImageUrl(asset._ref);
   }
 
   return (
@@ -154,10 +153,9 @@ function CertificationEditPage() {
           name="imageAlt"
           render={({ field }) => (
             <ImageUploader
-              // TODO: Placeholder Sanity CDN URL — see routes/projects/$id.tsx.
               imageUrl={
                 certification?.image.asset._ref
-                  ? `https://cdn.sanity.io/images/placeholder/${certification.image.asset._ref}`
+                  ? sanityImageUrl(certification.image.asset._ref)
                   : undefined
               }
               alt={field.value}

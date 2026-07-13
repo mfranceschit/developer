@@ -1,4 +1,4 @@
-import type { SanityImage } from '../../shared/types';
+import type { SanityImage } from '@/shared/types';
 import { draftSanityClient } from './client';
 
 export async function uploadImageAsset(

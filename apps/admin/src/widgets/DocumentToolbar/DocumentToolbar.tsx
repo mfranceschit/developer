@@ -1,7 +1,7 @@
 import { Badge, type BadgeTone, Button, Dialog, type createToaster } from '@mfranceschit/ui';
 import { useState } from 'react';
 
-import type { DocumentStatus } from '../../shared/types';
+import type { DocumentStatus } from '@/shared/types';
 
 export type DocumentToolbarProps = {
   status: DocumentStatus;

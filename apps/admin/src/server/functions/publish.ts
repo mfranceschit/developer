@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
 import { z } from 'zod';
-import { discardDraft, publishDocument } from '../sanity/publish';
+import { discardDraft, publishDocument } from '@/server/sanity/publish';
 
 export const publishDocumentFn = createServerFn({ method: 'POST' })
   .validator(z.object({ id: z.string() }))

@@ -4,7 +4,7 @@ import { createElement } from 'react';
 import type { ReactNode } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('../../server/functions/invoices', () => ({
+vi.mock('@/server/functions/invoices', () => ({
   listInvoicesFn: vi.fn(async () => [{ _id: 'inv-a', invoiceNumber: 'INV-1' }]),
   getInvoiceFn: vi.fn(async () => ({ _id: 'inv-a', invoiceNumber: 'INV-1' })),
   createInvoiceFn: vi.fn(async () => ({ _id: 'inv-b', invoiceNumber: 'INV-2' })),
@@ -12,7 +12,7 @@ vi.mock('../../server/functions/invoices', () => ({
   deleteInvoiceFn: vi.fn(async () => undefined),
 }));
 
-vi.mock('../../server/functions/businessProfile', () => ({
+vi.mock('@/server/functions/businessProfile', () => ({
   getBusinessProfileFn: vi.fn(async () => ({ _id: 'businessProfile', name: 'Acme' })),
   upsertBusinessProfileFn: vi.fn(async () => ({ _id: 'businessProfile', name: 'Acme Inc' })),
 }));
@@ -23,8 +23,8 @@ import {
   getInvoiceFn,
   listInvoicesFn,
   patchInvoiceFn,
-} from '../../server/functions/invoices';
-import { getBusinessProfileFn, upsertBusinessProfileFn } from '../../server/functions/businessProfile';
+} from '@/server/functions/invoices';
+import { getBusinessProfileFn, upsertBusinessProfileFn } from '@/server/functions/businessProfile';
 import {
   useBusinessProfile,
   useCreateInvoice,

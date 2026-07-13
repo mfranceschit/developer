@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
 import { z } from 'zod';
-import { uploadImageAsset } from '../sanity/upload';
+import { uploadImageAsset } from '@/server/sanity/upload';
 
 export const uploadImageAssetFn = createServerFn({ method: 'POST' })
   .validator(z.instanceof(FormData))

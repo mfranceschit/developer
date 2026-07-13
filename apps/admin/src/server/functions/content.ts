@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start';
 import { z } from 'zod';
-import { createDraft, deleteDraft, patchDraft } from '../sanity/mutations';
-import { getDocument, listDocuments } from '../sanity/queries';
+import { createDraft, deleteDraft, patchDraft } from '@/server/sanity/mutations';
+import { getDocument, listDocuments } from '@/server/sanity/queries';
 
 export const listDocumentsFn = createServerFn({ method: 'GET', strict: { output: false } })
   .validator(z.object({ type: z.string() }))

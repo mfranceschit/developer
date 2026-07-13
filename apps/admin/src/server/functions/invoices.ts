@@ -6,7 +6,7 @@ import {
   getInvoice,
   listInvoices,
   patchInvoice,
-} from '../sanity/invoices';
+} from '@/server/sanity/invoices';
 
 export const listInvoicesFn = createServerFn({ method: 'GET', strict: { output: false } }).handler(
   async () => listInvoices(),

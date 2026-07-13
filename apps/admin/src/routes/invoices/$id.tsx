@@ -12,16 +12,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Controller, useFieldArray, useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
-import { useDocumentList } from '../../features/content/queries';
+import { useDocumentList } from '@/features/content/queries';
 import {
   useBusinessProfile,
   useCreateInvoice,
   useInvoice,
   usePatchInvoice,
-} from '../../features/invoices/queries';
-import { formatInvoiceNumber, formatMoney } from '../../shared/lib/format';
-import { calculateInvoiceTotals } from '../../shared/lib/invoiceTotals';
-import type { Client, DocumentStatus, Invoice } from '../../shared/types';
+} from '@/features/invoices/queries';
+import { formatInvoiceNumber, formatMoney } from '@/shared/lib/format';
+import { calculateInvoiceTotals } from '@/shared/lib/invoiceTotals';
+import type { Client, DocumentStatus, Invoice } from '@/shared/types';
 
 export const Route = createFileRoute('/invoices/$id')({
   component: InvoiceEditPage,

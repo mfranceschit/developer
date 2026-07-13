@@ -1,7 +1,7 @@
 import { Badge, type BadgeTone, Button, Table } from '@mfranceschit/ui';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { useDocumentList } from '../../features/content/queries';
-import type { Certification, DocumentStatus } from '../../shared/types';
+import { useDocumentList } from '@/features/content/queries';
+import type { Certification, DocumentStatus } from '@/shared/types';
 
 export const Route = createFileRoute('/certifications/')({
   component: CertificationsListPage,

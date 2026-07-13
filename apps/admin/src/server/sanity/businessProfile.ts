@@ -1,4 +1,4 @@
-import type { BusinessProfile } from '../../shared/types';
+import type { BusinessProfile } from '@/shared/types';
 import { draftSanityClient } from './client';
 
 const BUSINESS_PROFILE_ID = 'businessProfile';

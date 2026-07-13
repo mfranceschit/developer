@@ -10,10 +10,11 @@ import {
   useDocument,
   usePatchDraft,
   usePublish,
-} from '../../features/content/queries';
-import { uploadImageAssetFn } from '../../server/functions/upload';
-import type { Degree, DocumentStatus } from '../../shared/types';
-import { DocumentToolbar } from '../../widgets/DocumentToolbar/DocumentToolbar';
+} from '@/features/content/queries';
+import { uploadImageAssetFn } from '@/server/functions/upload';
+import { sanityImageUrl } from '@/shared/lib/sanityImage';
+import type { Degree, DocumentStatus } from '@/shared/types';
+import { DocumentToolbar } from '@/widgets/DocumentToolbar/DocumentToolbar';
 
 export const Route = createFileRoute('/degrees/$id')({
   component: DegreeEditPage,
@@ -101,8 +102,7 @@ function DegreeEditPage() {
     formData.set('file', file);
     const asset = await uploadImageAssetFn({ data: formData });
     setUploadedAsset(asset);
-    // TODO: Placeholder Sanity CDN URL — see routes/projects/$id.tsx.
-    return `https://cdn.sanity.io/images/placeholder/${asset._ref}`;
+    return sanityImageUrl(asset._ref);
   }
 
   return (
@@ -145,11 +145,8 @@ function DegreeEditPage() {
           name="imageAlt"
           render={({ field }) => (
             <ImageUploader
-              // TODO: Placeholder Sanity CDN URL — see routes/projects/$id.tsx.
               imageUrl={
-                degree?.image.asset._ref
-                  ? `https://cdn.sanity.io/images/placeholder/${degree.image.asset._ref}`
-                  : undefined
+                degree?.image.asset._ref ? sanityImageUrl(degree.image.asset._ref) : undefined
               }
               alt={field.value}
               onAltChange={field.onChange}

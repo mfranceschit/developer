@@ -1,8 +1,8 @@
 import { Badge, type BadgeTone, Button, Table } from '@mfranceschit/ui';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { useInvoiceList } from '../../features/invoices/queries';
-import { formatInvoiceNumber, formatMoney } from '../../shared/lib/format';
-import type { Invoice, InvoiceStatus } from '../../shared/types';
+import { useInvoiceList } from '@/features/invoices/queries';
+import { formatInvoiceNumber, formatMoney } from '@/shared/lib/format';
+import type { Invoice, InvoiceStatus } from '@/shared/types';
 
 export const Route = createFileRoute('/invoices/')({
   component: InvoicesListPage,
