@@ -17,9 +17,15 @@ vi.mock('@/server/functions/publish', () => ({
   discardDraftFn: vi.fn(async () => undefined),
 }));
 
+vi.mock('@/server/functions/about', () => ({
+  upsertAboutDraftFn: vi.fn(async () => ({ _id: 'drafts.about', title: { en: 'Me' } })),
+}));
+
 import { createDraftFn, getDocumentFn, listDocumentsFn, patchDraftFn } from '@/server/functions/content';
+import { upsertAboutDraftFn } from '@/server/functions/about';
 import { discardDraftFn, publishDocumentFn } from '@/server/functions/publish';
 import {
+  useAbout,
   useCreateDraft,
   useDeleteDraft,
   useDiscard,
@@ -27,6 +33,7 @@ import {
   useDocumentList,
   usePatchDraft,
   usePublish,
+  useUpsertAboutDraft,
 } from './queries';
 
 function wrapper({ children }: { children: ReactNode }) {
@@ -96,5 +103,23 @@ describe('useDiscard', () => {
     result.current.mutate({ id: 'a' });
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(discardDraftFn).toHaveBeenCalledWith({ data: { id: 'a' } });
+  });
+});
+
+describe('useAbout', () => {
+  it('fetches the about singleton via the generic document fn', async () => {
+    const { result } = renderHook(() => useAbout(), { wrapper });
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    expect(getDocumentFn).toHaveBeenCalledWith({ data: { type: 'about', id: 'about' } });
+  });
+});
+
+describe('useUpsertAboutDraft', () => {
+  it('upserts the about draft', async () => {
+    const doc = { title: { en: 'Me' }, body: { en: [] }, stack: [] };
+    const { result } = renderHook(() => useUpsertAboutDraft(), { wrapper });
+    result.current.mutate(doc);
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    expect(upsertAboutDraftFn).toHaveBeenCalledWith({ data: doc });
   });
 });

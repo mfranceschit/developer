@@ -114,7 +114,6 @@ describe('aboutSchema', () => {
     const result = aboutSchema.parse({
       _id: 'about',
       _type: 'about',
-      eyebrow: { en: 'Build', es: 'Build', pt: 'Build' },
       title: { en: 'Me', es: 'Yo', pt: 'Eu' },
       body: { en: [{ _type: 'block', children: [{ text: 'hi' }] }], es: [], pt: [] },
       stack: ['TypeScript', 'React'],
@@ -127,12 +126,11 @@ describe('aboutSchema', () => {
     const result = aboutSchema.parse({
       _id: 'drafts.about',
       _type: 'about',
-      eyebrow: { en: 'Build' },
       title: { en: 'Me' },
       body: { en: [] },
       stack: [],
     });
-    expect(result.eyebrow.es).toBe('');
+    expect(result.title.es).toBe('');
     expect(result.title.pt).toBe('');
   });
 });

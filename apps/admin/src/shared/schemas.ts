@@ -70,7 +70,6 @@ export const degreeSchema = z.object({
 export const aboutSchema = z.object({
   _id: z.union([z.literal('about'), z.literal('drafts.about')]),
   _type: z.literal('about'),
-  eyebrow: localeStringSchema,
   title: localeStringSchema,
   body: localeContentSchema,
   stack: z.array(z.string()),

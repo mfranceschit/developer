@@ -42,11 +42,6 @@ const bodyPt: string[] = [
 const doc = {
   _id: 'about',
   _type: 'about',
-  eyebrow: {
-    en: 'Build · Test · Automate',
-    es: 'Build · Test · Automate',
-    pt: 'Build · Test · Automate',
-  },
   title: { en: 'Me', es: 'Yo', pt: 'Eu' },
   body: { en: toBlocks(bodyEn), es: toBlocks(bodyEs), pt: toBlocks(bodyPt) },
   stack: [
