@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  aboutSchema,
   certificationSchema,
   clientSchema,
   degreeSchema,
@@ -105,6 +106,34 @@ describe('degreeSchema', () => {
       issued: { en: '2020', es: '2020', pt: '2020' },
     };
     expect(degreeSchema.parse(degree)).toEqual(degree);
+  });
+});
+
+describe('aboutSchema', () => {
+  it('parses a full about document', () => {
+    const result = aboutSchema.parse({
+      _id: 'about',
+      _type: 'about',
+      eyebrow: { en: 'Build', es: 'Build', pt: 'Build' },
+      title: { en: 'Me', es: 'Yo', pt: 'Eu' },
+      body: { en: [{ _type: 'block', children: [{ text: 'hi' }] }], es: [], pt: [] },
+      stack: ['TypeScript', 'React'],
+    });
+    expect(result.title.en).toBe('Me');
+    expect(result.stack).toEqual(['TypeScript', 'React']);
+  });
+
+  it('defaults es/pt locale strings and empty stack', () => {
+    const result = aboutSchema.parse({
+      _id: 'drafts.about',
+      _type: 'about',
+      eyebrow: { en: 'Build' },
+      title: { en: 'Me' },
+      body: { en: [] },
+      stack: [],
+    });
+    expect(result.eyebrow.es).toBe('');
+    expect(result.title.pt).toBe('');
   });
 });
 
