@@ -1,14 +1,15 @@
 import {
   defineSchema,
   EditorProvider,
-  PortableTextEditable,
-  useEditor,
   type PortableTextBlock,
+  PortableTextEditable,
   type RenderDecoratorFunction,
   type RenderListItemFunction,
   type RenderStyleFunction,
+  useEditor,
 } from '@portabletext/editor';
 import { EventListenerPlugin } from '@portabletext/editor/plugins';
+import { useEffect } from 'react';
 import { Button } from '../Button/Button';
 
 export type RichTextEditorProps = {
@@ -58,6 +59,16 @@ const renderDecorator: RenderDecoratorFunction = (props) => {
 const renderStyle: RenderStyleFunction = (props) => <>{props.children}</>;
 
 const renderListItem: RenderListItemFunction = (props) => <>{props.children}</>;
+
+function ValueSync({ value }: Pick<RichTextEditorProps, 'value'>) {
+  const editor = useEditor();
+
+  useEffect(() => {
+    editor.send({ type: 'update value', value });
+  }, [editor, value]);
+
+  return null;
+}
 
 function Toolbar() {
   const editor = useEditor();
@@ -117,6 +128,7 @@ export function RichTextEditor({
             }
           }}
         />
+        <ValueSync value={value} />
         <Toolbar />
         <PortableTextEditable
           className={editableClasses}
