@@ -19,6 +19,14 @@ const NAV_GROUPS: NavGroup[] = [
     label: 'Work',
     links: [{ to: '/projects', label: 'Projects' }],
   },
+  {
+    label: 'Billing',
+    links: [
+      { to: '/clients', label: 'Clients' },
+      { to: '/invoices', label: 'Invoices' },
+      { to: '/settings/business-profile', label: 'Business Profile' },
+    ],
+  },
 ];
 
 export function NavShell({ children }: { children: ReactNode }) {
