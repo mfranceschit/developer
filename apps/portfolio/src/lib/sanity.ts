@@ -49,6 +49,13 @@ export interface Degree {
   issued: string;
 }
 
+export interface About {
+  eyebrow: string;
+  title: string;
+  body: SanityBlock[];
+  stack: string[];
+}
+
 export function renderBlocks(blocks: SanityBlock[]): string[] {
   if (!blocks) return [];
   return blocks
@@ -104,6 +111,18 @@ export async function getDegrees(locale = 'en'): Promise<Degree[]> {
       "name": name[$locale],
       "image": image.asset->url,
       "issued": issued[$locale]
+    }`,
+    { locale },
+  );
+}
+
+export async function getAbout(locale = 'en'): Promise<About | null> {
+  return sanityClient.fetch(
+    groq`*[_type == "about"][0]{
+      "eyebrow": eyebrow[$locale],
+      "title": title[$locale],
+      "body": body[$locale],
+      stack
     }`,
     { locale },
   );
