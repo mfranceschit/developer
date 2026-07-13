@@ -20,6 +20,10 @@ const NAV_GROUPS: NavGroup[] = [
     links: [{ to: '/projects', label: 'Projects' }],
   },
   {
+    label: 'Site',
+    links: [{ to: '/about', label: 'About' }],
+  },
+  {
     label: 'Billing',
     links: [
       { to: '/clients', label: 'Clients' },
