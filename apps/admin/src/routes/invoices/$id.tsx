@@ -101,6 +101,8 @@ function InvoiceEditPage() {
   );
 
   async function onSubmit(values: InvoiceFormValues) {
+    if (locked) return;
+
     const client = clients?.find((c) => c._id === values.clientId);
     if (!client || !businessProfile) return;
 
