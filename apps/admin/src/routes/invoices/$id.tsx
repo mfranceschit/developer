@@ -1,6 +1,6 @@
 import {
-  Badge,
   Button,
+  Card,
   Combobox,
   DatePicker,
   FormField,
@@ -19,9 +19,11 @@ import {
   useInvoice,
   usePatchInvoice,
 } from '@/features/invoices/queries';
-import { formatInvoiceNumber, formatMoney } from '@/shared/lib/format';
+import { formatInvoiceNumber } from '@/shared/lib/format';
 import { calculateInvoiceTotals } from '@/shared/lib/invoiceTotals';
 import type { Client, DocumentStatus, Invoice } from '@/shared/types';
+import { EditorLayout } from '@/widgets/EditorLayout/EditorLayout';
+import { InvoiceSummaryCard } from '@/widgets/InvoiceSummaryCard/InvoiceSummaryCard';
 
 export const Route = createFileRoute('/invoices/$id')({
   component: InvoiceEditPage,
@@ -100,6 +102,8 @@ function InvoiceEditPage() {
     Number(watchedTaxRate) || 0,
   );
 
+  const saving = createInvoice.isPending || patchInvoice.isPending;
+
   async function onSubmit(values: InvoiceFormValues) {
     if (locked) return;
 
@@ -154,176 +158,174 @@ function InvoiceEditPage() {
   }
 
   return (
-    <form className="flex flex-col gap-4 p-6" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex items-center justify-between">
-        <h1 className="font-sans text-xl font-semibold text-[var(--text-strong)]">
-          {isNew ? 'New invoice' : invoice && formatInvoiceNumber(invoice)}
-        </h1>
-        {!isNew && invoice && (
-          <div className="flex items-center gap-3">
-            <Badge tone={invoice.status === 'draft' ? 'neutral' : 'blue'}>{invoice.status}</Badge>
-            {invoice.status === 'draft' && (
-              <Button type="button" size="sm" onClick={() => markAs('sent')}>
-                Mark as sent
-              </Button>
-            )}
-            {invoice.status === 'sent' && (
-              <Button type="button" size="sm" onClick={() => markAs('paid')}>
-                Mark as paid
-              </Button>
-            )}
-          </div>
-        )}
-      </div>
-
-      <FormField label="Client" required error={errors.clientId?.message}>
-        <Controller
-          control={control}
-          name="clientId"
-          render={({ field }) => (
-            <Combobox
-              items={clients ?? []}
-              itemToString={(item: Client) => item.name}
-              itemToValue={(item: Client) => item._id}
-              value={field.value ? [field.value] : []}
-              onValueChange={(value) => field.onChange(value[0] ?? '')}
-              disabled={locked}
+    <EditorLayout
+      header={{
+        eyebrow: 'Billing · Invoice',
+        title: isNew ? 'New invoice' : invoice ? formatInvoiceNumber(invoice) : 'Invoice',
+        backLink: { label: 'Invoices', onClick: () => navigate({ to: '/invoices' }) },
+      }}
+      aside={
+        <InvoiceSummaryCard
+          status={invoice?.status ?? 'draft'}
+          currency={watchedCurrency || 'USD'}
+          subtotal={liveTotals.subtotal}
+          vat={liveTotals.vat}
+          total={liveTotals.total}
+          taxRate={Number(watchedTaxRate) || 0}
+          locked={locked}
+          saving={saving}
+          onSave={handleSubmit(onSubmit)}
+          onMarkSent={() => markAs('sent')}
+          issuer={
+            businessProfile
+              ? {
+                  name: businessProfile.name,
+                  email: businessProfile.email,
+                  taxId: businessProfile.taxId,
+                }
+              : undefined
+          }
+          onEditIssuer={() => navigate({ to: '/settings/business-profile' })}
+        />
+      }
+    >
+      <form className="contents" onSubmit={handleSubmit(onSubmit)}>
+        <Card padding="24px" className="flex flex-col gap-4">
+          <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Billing</h2>
+          <FormField label="Client" required error={errors.clientId?.message}>
+            <Controller
+              control={control}
+              name="clientId"
+              render={({ field }) => (
+                <Combobox
+                  items={clients ?? []}
+                  itemToString={(item: Client) => item.name}
+                  itemToValue={(item: Client) => item._id}
+                  value={field.value ? [field.value] : []}
+                  onValueChange={(value) => field.onChange(value[0] ?? '')}
+                  disabled={locked}
+                />
+              )}
             />
-          )}
-        />
-      </FormField>
-
-      <FormField label="Issue Date" required error={errors.issueDate?.message}>
-        <Controller
-          control={control}
-          name="issueDate"
-          render={({ field }) => (
-            <DatePicker value={field.value} onValueChange={field.onChange} disabled={locked} />
-          )}
-        />
-      </FormField>
-
-      <FormField label="Due Date" error={errors.dueDate?.message}>
-        <Controller
-          control={control}
-          name="dueDate"
-          render={({ field }) => (
-            <DatePicker value={field.value} onValueChange={field.onChange} disabled={locked} />
-          )}
-        />
-      </FormField>
-
-      <FormField label="Currency" required error={errors.currency?.message}>
-        <Controller
-          control={control}
-          name="currency"
-          render={({ field }) => (
-            <Select
-              items={CURRENCIES}
-              itemToString={(item: string) => item}
-              itemToValue={(item: string) => item}
-              value={[field.value]}
-              onValueChange={(value) => field.onChange(value[0] ?? '')}
-              disabled={locked}
-            />
-          )}
-        />
-      </FormField>
-
-      <FormField label="Tax Rate (%)" error={errors.taxRate?.message}>
-        <Controller
-          control={control}
-          name="taxRate"
-          render={({ field }) => (
-            <NumberInput
-              value={field.value}
-              onValueChange={(value) => field.onChange(Number.isNaN(value) ? '' : String(value))}
-              min={0}
-              disabled={locked}
-            />
-          )}
-        />
-      </FormField>
-
-      <div className="flex flex-col gap-2">
-        <span className="font-sans text-sm font-medium text-[var(--text-body)]">Line items</span>
-        {fields.map((item, index) => (
-          <div key={item.id} className="flex gap-2">
-            <div className="w-20">
+          </FormField>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <FormField label="Issue date" required error={errors.issueDate?.message}>
               <Controller
                 control={control}
-                name={`lineItems.${index}.quantity`}
+                name="issueDate"
+                render={({ field }) => (
+                  <DatePicker value={field.value} onValueChange={field.onChange} disabled={locked} />
+                )}
+              />
+            </FormField>
+            <FormField label="Due date" error={errors.dueDate?.message}>
+              <Controller
+                control={control}
+                name="dueDate"
+                render={({ field }) => (
+                  <DatePicker value={field.value} onValueChange={field.onChange} disabled={locked} />
+                )}
+              />
+            </FormField>
+            <FormField label="Currency" required error={errors.currency?.message}>
+              <Controller
+                control={control}
+                name="currency"
+                render={({ field }) => (
+                  <Select
+                    items={CURRENCIES}
+                    itemToString={(item: string) => item}
+                    itemToValue={(item: string) => item}
+                    value={[field.value]}
+                    onValueChange={(value) => field.onChange(value[0] ?? '')}
+                    disabled={locked}
+                  />
+                )}
+              />
+            </FormField>
+            <FormField label="Tax rate (%)" error={errors.taxRate?.message}>
+              <Controller
+                control={control}
+                name="taxRate"
                 render={({ field }) => (
                   <NumberInput
                     value={field.value}
-                    onValueChange={(value) =>
-                      field.onChange(Number.isNaN(value) ? '' : String(value))
-                    }
+                    onValueChange={(value) => field.onChange(Number.isNaN(value) ? '' : String(value))}
                     min={0}
                     disabled={locked}
                   />
                 )}
               />
-            </div>
-            <Input
-              {...register(`lineItems.${index}.description`)}
-              className="flex-1"
-              placeholder="Description"
-              disabled={locked}
-            />
-            <div className="w-28">
-              <Controller
-                control={control}
-                name={`lineItems.${index}.unitPrice`}
-                render={({ field }) => (
-                  <NumberInput
-                    value={field.value}
-                    onValueChange={(value) =>
-                      field.onChange(Number.isNaN(value) ? '' : String(value))
-                    }
-                    min={0}
-                    step={0.01}
-                    disabled={locked}
-                  />
-                )}
-              />
-            </div>
-            {!locked && (
-              <Button variant="outline" size="sm" type="button" onClick={() => remove(index)}>
-                Remove
-              </Button>
-            )}
+            </FormField>
           </div>
-        ))}
-        {!locked && (
-          <Button
-            variant="outline"
-            size="sm"
-            type="button"
-            onClick={() => append({ quantity: '1', description: '', unitPrice: '0' })}
-          >
-            Add line item
-          </Button>
-        )}
-      </div>
+        </Card>
 
-      <FormField label="Notes" error={errors.notes?.message}>
-        <Input as="textarea" {...register('notes')} disabled={locked} />
-      </FormField>
+        <Card padding="24px" className="flex flex-col gap-3">
+          <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Line items</h2>
+          {fields.map((item, index) => (
+            <div key={item.id} className="flex items-start gap-2">
+              <div className="w-20">
+                <Controller
+                  control={control}
+                  name={`lineItems.${index}.quantity`}
+                  render={({ field }) => (
+                    <NumberInput
+                      value={field.value}
+                      onValueChange={(value) => field.onChange(Number.isNaN(value) ? '' : String(value))}
+                      min={0}
+                      disabled={locked}
+                    />
+                  )}
+                />
+              </div>
+              <Input
+                {...register(`lineItems.${index}.description`)}
+                className="flex-1"
+                placeholder="Description"
+                disabled={locked}
+              />
+              <div className="w-28">
+                <Controller
+                  control={control}
+                  name={`lineItems.${index}.unitPrice`}
+                  render={({ field }) => (
+                    <NumberInput
+                      value={field.value}
+                      onValueChange={(value) => field.onChange(Number.isNaN(value) ? '' : String(value))}
+                      min={0}
+                      step={0.01}
+                      disabled={locked}
+                    />
+                  )}
+                />
+              </div>
+              {!locked && (
+                <Button variant="outline" size="sm" type="button" onClick={() => remove(index)}>
+                  Remove
+                </Button>
+              )}
+            </div>
+          ))}
+          {!locked && (
+            <Button
+              variant="outline"
+              size="sm"
+              type="button"
+              onClick={() => append({ quantity: '1', description: '', unitPrice: '0' })}
+              className="self-start"
+            >
+              + Add line item
+            </Button>
+          )}
+        </Card>
 
-      <div className="self-end text-right font-sans text-sm">
-        <div>Subtotal: {formatMoney(liveTotals.subtotal, watchedCurrency || 'USD')}</div>
-        <div>VAT: {formatMoney(liveTotals.vat, watchedCurrency || 'USD')}</div>
-        <div className="font-semibold">
-          Total: {formatMoney(liveTotals.total, watchedCurrency || 'USD')}
-        </div>
-      </div>
-
-      {!locked && (
-        <Button type="submit" className="self-start">
-          Save draft
-        </Button>
-      )}
-    </form>
+        <Card padding="24px" className="flex flex-col gap-3">
+          <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Notes</h2>
+          <FormField label="Notes" error={errors.notes?.message}>
+            <Input as="textarea" {...register('notes')} disabled={locked} />
+          </FormField>
+        </Card>
+      </form>
+    </EditorLayout>
   );
 }
