@@ -23,6 +23,7 @@ function InvoicesListPage() {
   const sentCount = sent.length;
   const outstanding = sent.reduce((sum, i) => sum + i.totals.total, 0);
   const outstandingCurrency = sent[0]?.currency ?? 'USD';
+  const mixed = new Set(sent.map((i) => i.currency)).size > 1;
 
   if (isLoading) {
     return <p className="font-sans text-sm text-[var(--text-muted)]">Loading…</p>;
@@ -63,7 +64,9 @@ function InvoicesListPage() {
         <div className="border-t border-[var(--border-subtle)] bg-[var(--mf-gray-50)] px-6 py-3 font-sans text-[13px] text-[var(--text-muted)]">
           {sentCount === 0
             ? 'No outstanding invoices'
-            : `${formatMoney(outstanding, outstandingCurrency)} outstanding across ${sentCount} sent invoice${sentCount === 1 ? '' : 's'}`}
+            : mixed
+              ? `${outstanding.toLocaleString('en-US')} (mixed currencies) outstanding across ${sentCount} sent invoice${sentCount === 1 ? '' : 's'}`
+              : `${formatMoney(outstanding, outstandingCurrency)} outstanding across ${sentCount} sent invoice${sentCount === 1 ? '' : 's'}`}
         </div>
       </Card>
     </div>
