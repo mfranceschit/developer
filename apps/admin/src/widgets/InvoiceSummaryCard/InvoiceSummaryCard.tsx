@@ -17,6 +17,7 @@ export type InvoiceSummaryCardProps = {
   onMarkPaid: () => void;
   issuer?: { name: string; email: string; taxId?: string };
   onEditIssuer: () => void;
+  pdfUrl?: string;
 };
 
 const STEPS: InvoiceStatus[] = ['draft', 'sent', 'paid'];
@@ -37,6 +38,7 @@ export function InvoiceSummaryCard({
   onMarkPaid,
   issuer,
   onEditIssuer,
+  pdfUrl,
 }: InvoiceSummaryCardProps) {
   const activeIndex = STEPS.indexOf(status);
   return (
@@ -102,6 +104,16 @@ export function InvoiceSummaryCard({
         <p className="font-sans text-xs leading-relaxed text-[var(--text-muted)]">
           Once marked as sent, line items and totals lock permanently.
         </p>
+        {pdfUrl ? (
+          <a
+            href={pdfUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-sans text-sm font-medium text-[var(--text-strong)] underline underline-offset-2"
+          >
+            Download PDF
+          </a>
+        ) : null}
       </Card>
       {issuer && (
         <Card

@@ -23,6 +23,7 @@ import {
 } from '@/features/invoices/queries';
 import { formatInvoiceNumber } from '@/shared/lib/format';
 import { calculateInvoiceTotals } from '@/shared/lib/invoiceTotals';
+import { sanityFileUrl } from '@/shared/lib/sanityFile';
 import type { Client, DocumentStatus, Invoice } from '@/shared/types';
 import { EditorLayout } from '@/widgets/EditorLayout/EditorLayout';
 import { InvoiceSummaryCard } from '@/widgets/InvoiceSummaryCard/InvoiceSummaryCard';
@@ -192,6 +193,7 @@ function InvoiceEditPage() {
               : undefined
           }
           onEditIssuer={() => navigate({ to: '/settings/business-profile' })}
+          pdfUrl={invoice?.pdf?.asset._ref ? sanityFileUrl(invoice.pdf.asset._ref) : undefined}
         />
       }
     >
