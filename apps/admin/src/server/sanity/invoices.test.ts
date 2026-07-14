@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('./client', () => ({
   draftSanityClient: {
@@ -9,19 +9,32 @@ vi.mock('./client', () => ({
   },
 }));
 
+vi.mock('./upload', () => ({
+  uploadFileAsset: vi.fn(async () => ({ _ref: 'file-abc-pdf', _type: 'reference' })),
+}));
+
+vi.mock('../pdf/renderInvoicePdf', () => ({
+  renderInvoicePdf: vi.fn(async () => Buffer.from('%PDF-fake')),
+}));
+
 import { draftSanityClient } from './client';
 import {
   createInvoice,
   deleteInvoice,
   getInvoice,
   listInvoices,
+  markInvoiceStatus,
   nextInvoiceSeq,
   patchInvoice,
 } from './invoices';
+import { renderInvoicePdf } from '../pdf/renderInvoicePdf';
+import { uploadFileAsset } from './upload';
 
 const fetchMock = vi.mocked(draftSanityClient.fetch) as unknown as ReturnType<
   typeof vi.fn<(query: string, params?: Record<string, unknown>) => Promise<unknown>>
 >;
+
+beforeEach(() => vi.clearAllMocks());
 
 describe('nextInvoiceSeq', () => {
   it('returns 1 when no invoices exist for the year', async () => {
@@ -96,5 +109,62 @@ describe('listInvoices / getInvoice', () => {
 
     fetchMock.mockResolvedValueOnce([]);
     expect(await getInvoice('missing')).toBeNull();
+  });
+});
+
+describe('markInvoiceStatus', () => {
+  function mockPatch() {
+    const commitMock = vi.fn(async () => ({ _id: 'inv-1', status: 'sent' }));
+    const setMock = vi.fn(() => ({ commit: commitMock }));
+    vi.mocked(draftSanityClient.patch).mockReturnValue({ set: setMock } as never);
+    return { setMock };
+  }
+
+  const draftInvoice = {
+    _id: 'inv-1',
+    _type: 'invoice',
+    seq: 7,
+    issueDate: '2026-06-30',
+    status: 'draft',
+    issuerSnapshot: { name: 'Me', address: 'A', phone: 'P', email: 'e@x.com' },
+    clientSnapshot: { name: 'Acme', email: 'a@x.com', phone: 'P', address: 'A', currency: 'USD' },
+    client: { _ref: 'client-1', _type: 'reference' },
+    currency: 'USD',
+    lineItems: [],
+    taxRate: 0,
+    totals: { subtotal: 0, vat: 0, total: 0 },
+  };
+
+  it('renders + uploads a PDF and patches status when leaving draft', async () => {
+    fetchMock.mockResolvedValueOnce([draftInvoice]);
+    const { setMock } = mockPatch();
+
+    await markInvoiceStatus('inv-1', 'sent');
+
+    expect(renderInvoicePdf).toHaveBeenCalledOnce();
+    expect(uploadFileAsset).toHaveBeenCalledWith(expect.any(Buffer), 'INV-2026-007.pdf');
+    expect(setMock).toHaveBeenCalledWith({
+      status: 'sent',
+      pdf: { _type: 'file', asset: { _ref: 'file-abc-pdf', _type: 'reference' } },
+    });
+  });
+
+  it('patches status only (no PDF) when already out of draft', async () => {
+    fetchMock.mockResolvedValueOnce([{ ...draftInvoice, status: 'sent' }]);
+    const { setMock } = mockPatch();
+
+    await markInvoiceStatus('inv-1', 'paid');
+
+    expect(renderInvoicePdf).not.toHaveBeenCalled();
+    expect(uploadFileAsset).not.toHaveBeenCalled();
+    expect(setMock).toHaveBeenCalledWith({ status: 'paid' });
+  });
+
+  it('does not patch when PDF generation fails', async () => {
+    fetchMock.mockResolvedValueOnce([draftInvoice]);
+    vi.mocked(renderInvoicePdf).mockRejectedValueOnce(new Error('render boom'));
+
+    await expect(markInvoiceStatus('inv-1', 'sent')).rejects.toThrow('render boom');
+    expect(draftSanityClient.patch).not.toHaveBeenCalled();
   });
 });
