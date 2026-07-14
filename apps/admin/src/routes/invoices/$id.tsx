@@ -18,6 +18,7 @@ import {
   useBusinessProfile,
   useCreateInvoice,
   useInvoice,
+  useMarkInvoiceStatus,
   usePatchInvoice,
 } from '@/features/invoices/queries';
 import { formatInvoiceNumber } from '@/shared/lib/format';
@@ -76,6 +77,7 @@ function InvoiceEditPage() {
   const { data: businessProfile, isPending: profileLoading } = useBusinessProfile();
   const createInvoice = useCreateInvoice();
   const patchInvoice = usePatchInvoice();
+  const markInvoiceStatus = useMarkInvoiceStatus();
 
   const locked = !isNew && invoice?.status !== 'draft' && invoice !== undefined;
   const needsBusinessProfile = !profileLoading && !businessProfile;
@@ -156,7 +158,7 @@ function InvoiceEditPage() {
 
   async function markAs(status: 'sent' | 'paid') {
     if (isNew) return;
-    await patchInvoice.mutateAsync({ id, patch: { status } });
+    await markInvoiceStatus.mutateAsync({ id, status });
   }
 
   return (

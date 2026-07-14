@@ -5,6 +5,7 @@ import {
   deleteInvoiceFn,
   getInvoiceFn,
   listInvoicesFn,
+  markInvoiceStatusFn,
   patchInvoiceFn,
 } from '@/server/functions/invoices';
 import type { BusinessProfile, Invoice } from '@/shared/types';
@@ -40,6 +41,17 @@ export function usePatchInvoice() {
   return useMutation({
     mutationFn: ({ id, patch }: { id: string; patch: Record<string, unknown> }) =>
       patchInvoiceFn({ data: { id, patch } }) as Promise<Invoice>,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['invoices'] });
+    },
+  });
+}
+
+export function useMarkInvoiceStatus() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, status }: { id: string; status: 'sent' | 'paid' }) =>
+      markInvoiceStatusFn({ data: { id, status } }) as Promise<Invoice>,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invoices'] });
     },
