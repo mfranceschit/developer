@@ -40,6 +40,7 @@ export type {
   InvoicePartyInfo,
 } from './InvoiceDocument/InvoiceDocument';
 export { InvoiceDocument } from './InvoiceDocument/InvoiceDocument';
+export { InvoiceDocumentPdf } from './InvoiceDocumentPdf/InvoiceDocumentPdf';
 
 export type { LocaleFieldProps, SupportedLocale } from './LocaleField/LocaleField';
 export { LocaleField } from './LocaleField/LocaleField';

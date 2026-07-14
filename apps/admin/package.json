@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
     "@mfranceschit/ui": "workspace:*",
+    "@react-pdf/renderer": "^4.5.1",
     "@sanity/client": "^7.23.0",
     "@tanstack/react-query": "^5.101.2",
     "@tanstack/react-router": "^1.170.17",
