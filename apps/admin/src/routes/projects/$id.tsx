@@ -1,11 +1,12 @@
 import {
   Button,
+  Card,
   FormField,
   ImageUploader,
   Input,
   RichTextEditor,
   type RichTextEditorProps,
-  Tabs,
+  SegmentedControl,
 } from '@mfranceschit/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
@@ -22,7 +23,8 @@ import {
 import { uploadImageAssetFn } from '@/server/functions/upload';
 import { sanityImageUrl } from '@/shared/lib/sanityImage';
 import type { DocumentStatus, Project } from '@/shared/types';
-import { DocumentToolbar } from '@/widgets/DocumentToolbar/DocumentToolbar';
+import { EditorLayout } from '@/widgets/EditorLayout/EditorLayout';
+import { PublishingCard } from '@/widgets/PublishingCard/PublishingCard';
 
 export const Route = createFileRoute('/projects/$id')({
   component: ProjectEditPage,
@@ -91,6 +93,9 @@ function ProjectEditPage() {
     resolver: zodResolver(formSchema),
   });
 
+  const [descLocale, setDescLocale] = useState<'en' | 'es' | 'pt'>('en');
+  const saving = createDraft.isPending || patchDraft.isPending;
+
   async function onSubmit(values: ProjectFormValues) {
     const doc = {
       name: values.name,
@@ -130,15 +135,19 @@ function ProjectEditPage() {
   }
 
   return (
-    <form className="flex flex-col gap-4 p-6" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex items-center justify-between">
-        <h1 className="font-sans text-xl font-semibold text-[var(--text-strong)]">
-          {isNew ? 'New project' : project?.name}
-        </h1>
-        {!isNew && (
-          <DocumentToolbar
+    <EditorLayout
+      header={{
+        eyebrow: 'Work · Project',
+        title: isNew ? 'New project' : (project?.name ?? 'Project'),
+        backLink: { label: 'Projects', onClick: () => navigate({ to: '/projects' }) },
+      }}
+      aside={
+        isNew ? null : (
+          <PublishingCard
             status={project?._status ?? 'draft'}
             dirty={isDirty}
+            saving={saving}
+            onSave={handleSubmit(onSubmit)}
             onPublish={async () => {
               await publish.mutateAsync({ id });
             }}
@@ -147,97 +156,102 @@ function ProjectEditPage() {
             }}
             toaster={toaster}
           />
-        )}
-      </div>
+        )
+      }
+    >
+      <form className="contents" onSubmit={handleSubmit(onSubmit)}>
+        <Card padding="24px" className="flex flex-col gap-4">
+          <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Details</h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <FormField label="Name" required error={errors.name?.message}>
+              <Input {...register('name')} />
+            </FormField>
+            <FormField label="Slug" required error={errors.slug?.message}>
+              <Input {...register('slug')} />
+            </FormField>
+            <FormField label="URL" error={errors.url?.message}>
+              <Input {...register('url')} />
+            </FormField>
+            <FormField label="Repository" error={errors.repository?.message}>
+              <Input {...register('repository')} />
+            </FormField>
+          </div>
+          <FormField label="Technologies" hint="Comma-separated" error={errors.technologies?.message}>
+            <Input {...register('technologies')} />
+          </FormField>
+        </Card>
 
-      <FormField label="Name" required error={errors.name?.message}>
-        <Input {...register('name')} />
-      </FormField>
+        <Card padding="24px" className="flex flex-col gap-4">
+          <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Media</h2>
+          <FormField label="Image">
+            <Controller
+              control={control}
+              name="imageAlt"
+              render={({ field }) => (
+                <ImageUploader
+                  imageUrl={
+                    project?.image.asset._ref ? sanityImageUrl(project.image.asset._ref) : undefined
+                  }
+                  alt={field.value}
+                  onAltChange={field.onChange}
+                  onUpload={handleUpload}
+                />
+              )}
+            />
+          </FormField>
+        </Card>
 
-      <FormField label="Slug" required error={errors.slug?.message}>
-        <Input {...register('slug')} />
-      </FormField>
-
-      <FormField label="URL" error={errors.url?.message}>
-        <Input {...register('url')} />
-      </FormField>
-
-      <FormField label="Repository" error={errors.repository?.message}>
-        <Input {...register('repository')} />
-      </FormField>
-
-      <FormField label="Technologies" hint="Comma-separated" error={errors.technologies?.message}>
-        <Input {...register('technologies')} />
-      </FormField>
-
-      <FormField label="Image">
-        <Controller
-          control={control}
-          name="imageAlt"
-          render={({ field }) => (
-            <ImageUploader
-              imageUrl={
-                project?.image.asset._ref
-                  ? sanityImageUrl(project.image.asset._ref)
-                  : undefined
-              }
-              alt={field.value}
-              onAltChange={field.onChange}
-              onUpload={handleUpload}
+        <Card padding="24px" className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">
+              Description
+            </h2>
+            <SegmentedControl
+              size="sm"
+              aria-label="Description locale"
+              value={descLocale}
+              onValueChange={setDescLocale}
+              options={[
+                { value: 'en', label: 'EN' },
+                { value: 'es', label: 'ES' },
+                { value: 'pt', label: 'PT' },
+              ]}
+            />
+          </div>
+          {descLocale === 'en' && (
+            <Controller
+              control={control}
+              name="descriptionEn"
+              render={({ field }) => (
+                <RichTextEditor value={field.value} onValueChange={field.onChange} />
+              )}
             />
           )}
-        />
-      </FormField>
-
-      <FormField label="Description">
-        <Tabs
-          items={[
-            {
-              value: 'en',
-              label: 'English',
-              content: (
-                <Controller
-                  control={control}
-                  name="descriptionEn"
-                  render={({ field }) => (
-                    <RichTextEditor value={field.value} onValueChange={field.onChange} />
-                  )}
-                />
-              ),
-            },
-            {
-              value: 'es',
-              label: 'Español',
-              content: (
-                <Controller
-                  control={control}
-                  name="descriptionEs"
-                  render={({ field }) => (
-                    <RichTextEditor value={field.value} onValueChange={field.onChange} />
-                  )}
-                />
-              ),
-            },
-            {
-              value: 'pt',
-              label: 'Português',
-              content: (
-                <Controller
-                  control={control}
-                  name="descriptionPt"
-                  render={({ field }) => (
-                    <RichTextEditor value={field.value} onValueChange={field.onChange} />
-                  )}
-                />
-              ),
-            },
-          ]}
-        />
-      </FormField>
-
-      <Button type="submit" className="self-start">
-        Save draft
-      </Button>
-    </form>
+          {descLocale === 'es' && (
+            <Controller
+              control={control}
+              name="descriptionEs"
+              render={({ field }) => (
+                <RichTextEditor value={field.value} onValueChange={field.onChange} />
+              )}
+            />
+          )}
+          {descLocale === 'pt' && (
+            <Controller
+              control={control}
+              name="descriptionPt"
+              render={({ field }) => (
+                <RichTextEditor value={field.value} onValueChange={field.onChange} />
+              )}
+            />
+          )}
+          {isNew && (
+            <Button type="submit" className="self-start">
+              Save draft
+            </Button>
+          )}
+        </Card>
+      </form>
+    </EditorLayout>
   );
 }
