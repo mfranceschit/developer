@@ -35,13 +35,13 @@ type DegreeFormValues = z.infer<typeof formSchema>;
 
 function toFormValues(degree?: Degree | null): DegreeFormValues {
   return {
-    nameEn: degree?.name.en ?? '',
-    nameEs: degree?.name.es ?? '',
-    namePt: degree?.name.pt ?? '',
-    issuedEn: degree?.issued.en ?? '',
-    issuedEs: degree?.issued.es ?? '',
-    issuedPt: degree?.issued.pt ?? '',
-    imageAlt: degree?.image.alt ?? '',
+    nameEn: degree?.name?.en ?? '',
+    nameEs: degree?.name?.es ?? '',
+    namePt: degree?.name?.pt ?? '',
+    issuedEn: degree?.issued?.en ?? '',
+    issuedEs: degree?.issued?.es ?? '',
+    issuedPt: degree?.issued?.pt ?? '',
+    imageAlt: degree?.image?.alt ?? '',
   };
 }
 
@@ -92,7 +92,7 @@ function DegreeEditPage() {
       issued: { en: values.issuedEn, es: values.issuedEs, pt: values.issuedPt },
       image: {
         _type: 'image' as const,
-        asset: uploadedAsset ?? degree?.image.asset ?? { _ref: '', _type: 'reference' as const },
+        asset: uploadedAsset ?? degree?.image?.asset ?? { _ref: '', _type: 'reference' as const },
         alt: values.imageAlt,
       },
     };
@@ -117,7 +117,7 @@ function DegreeEditPage() {
     <EditorLayout
       header={{
         eyebrow: 'Certifications · Degree',
-        title: isNew ? 'New degree' : (degree?.name.en ?? 'Degree'),
+        title: isNew ? 'New degree' : (degree?.name?.en ?? 'Degree'),
         backLink: { label: 'Degrees', onClick: () => navigate({ to: '/degrees' }) },
       }}
       aside={
@@ -181,7 +181,7 @@ function DegreeEditPage() {
               render={({ field }) => (
                 <ImageUploader
                   imageUrl={
-                    degree?.image.asset._ref ? sanityImageUrl(degree.image.asset._ref) : undefined
+                    degree?.image?.asset._ref ? sanityImageUrl(degree.image.asset._ref) : undefined
                   }
                   alt={field.value}
                   onAltChange={field.onChange}

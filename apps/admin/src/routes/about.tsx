@@ -41,12 +41,12 @@ type AboutFormValues = z.infer<typeof formSchema>;
 
 function toFormValues(about?: About | null): AboutFormValues {
   return {
-    titleEn: about?.title.en ?? '',
-    titleEs: about?.title.es ?? '',
-    titlePt: about?.title.pt ?? '',
-    bodyEn: (about?.body.en as PortableTextValue | undefined) ?? [],
-    bodyEs: (about?.body.es as PortableTextValue | undefined) ?? [],
-    bodyPt: (about?.body.pt as PortableTextValue | undefined) ?? [],
+    titleEn: about?.title?.en ?? '',
+    titleEs: about?.title?.es ?? '',
+    titlePt: about?.title?.pt ?? '',
+    bodyEn: (about?.body?.en as PortableTextValue | undefined) ?? [],
+    bodyEs: (about?.body?.es as PortableTextValue | undefined) ?? [],
+    bodyPt: (about?.body?.pt as PortableTextValue | undefined) ?? [],
     stack: about?.stack?.join(', ') ?? '',
   };
 }

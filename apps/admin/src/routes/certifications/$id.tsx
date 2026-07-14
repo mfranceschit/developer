@@ -46,10 +46,10 @@ function toFormValues(certification?: Certification | null): CertificationFormVa
     name: certification?.name ?? '',
     date: certification?.date ?? '',
     url: certification?.url ?? '',
-    issuedEn: certification?.issued.en ?? '',
-    issuedEs: certification?.issued.es ?? '',
-    issuedPt: certification?.issued.pt ?? '',
-    imageAlt: certification?.image.alt ?? '',
+    issuedEn: certification?.issued?.en ?? '',
+    issuedEs: certification?.issued?.es ?? '',
+    issuedPt: certification?.issued?.pt ?? '',
+    imageAlt: certification?.image?.alt ?? '',
   };
 }
 
@@ -101,7 +101,7 @@ function CertificationEditPage() {
       image: {
         _type: 'image' as const,
         asset: uploadedAsset ??
-          certification?.image.asset ?? { _ref: '', _type: 'reference' as const },
+          certification?.image?.asset ?? { _ref: '', _type: 'reference' as const },
         alt: values.imageAlt,
       },
     };
@@ -202,7 +202,7 @@ function CertificationEditPage() {
               render={({ field }) => (
                 <ImageUploader
                   imageUrl={
-                    certification?.image.asset._ref
+                    certification?.image?.asset._ref
                       ? sanityImageUrl(certification.image.asset._ref)
                       : undefined
                   }
