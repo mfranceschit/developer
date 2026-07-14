@@ -13,6 +13,7 @@ export type InvoiceSummaryCardProps = {
   saving: boolean;
   onSave: () => void;
   onMarkSent: () => void;
+  onMarkPaid: () => void;
   issuer?: { name: string; email: string; taxId?: string };
   onEditIssuer: () => void;
 };
@@ -31,6 +32,7 @@ export function InvoiceSummaryCard({
   saving,
   onSave,
   onMarkSent,
+  onMarkPaid,
   issuer,
   onEditIssuer,
 }: InvoiceSummaryCardProps) {
@@ -89,6 +91,11 @@ export function InvoiceSummaryCard({
               Mark as sent
             </Button>
           </div>
+        )}
+        {status === 'sent' && (
+          <Button variant="outline" fullWidth onClick={onMarkPaid}>
+            Mark as paid
+          </Button>
         )}
         <p className="font-sans text-xs leading-relaxed text-[var(--text-muted)]">
           Once marked as sent, line items and totals lock permanently.

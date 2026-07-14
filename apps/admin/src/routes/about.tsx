@@ -134,7 +134,11 @@ function AboutEditPage() {
               ]}
             />
           </div>
-          <FormField label="Title" required error={errors.titleEn?.message}>
+          <FormField
+            label="Title"
+            required
+            error={titleLocale === 'en' ? errors.titleEn?.message : undefined}
+          >
             <Input
               value={titleValues[titleLocale]}
               onChange={(event) =>

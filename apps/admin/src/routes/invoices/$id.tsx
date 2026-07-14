@@ -176,6 +176,7 @@ function InvoiceEditPage() {
           saving={saving}
           onSave={handleSubmit(onSubmit)}
           onMarkSent={() => markAs('sent')}
+          onMarkPaid={() => markAs('paid')}
           issuer={
             businessProfile
               ? {
