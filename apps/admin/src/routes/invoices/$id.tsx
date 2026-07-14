@@ -1,4 +1,5 @@
 import {
+  Banner,
   Button,
   Card,
   Combobox,
@@ -72,11 +73,12 @@ function InvoiceEditPage() {
 
   const { data: invoice } = useInvoice(isNew ? '' : id);
   const { data: clients } = useDocumentList<Client & { _status: DocumentStatus }>('client');
-  const { data: businessProfile } = useBusinessProfile();
+  const { data: businessProfile, isPending: profileLoading } = useBusinessProfile();
   const createInvoice = useCreateInvoice();
   const patchInvoice = usePatchInvoice();
 
   const locked = !isNew && invoice?.status !== 'draft' && invoice !== undefined;
+  const needsBusinessProfile = !profileLoading && !businessProfile;
 
   const {
     control,
@@ -174,6 +176,7 @@ function InvoiceEditPage() {
           taxRate={Number(watchedTaxRate) || 0}
           locked={locked}
           saving={saving}
+          blocked={needsBusinessProfile}
           onSave={handleSubmit(onSubmit)}
           onMarkSent={() => markAs('sent')}
           onMarkPaid={() => markAs('paid')}
@@ -190,6 +193,24 @@ function InvoiceEditPage() {
         />
       }
     >
+      {needsBusinessProfile && (
+        <Banner
+          tone="warning"
+          title="Set up your business profile first"
+          action={
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate({ to: '/settings/business-profile' })}
+            >
+              Go to Business Profile
+            </Button>
+          }
+        >
+          Every invoice is stamped with your issuer details. Add your business profile before
+          creating one.
+        </Banner>
+      )}
       <form className="contents" onSubmit={handleSubmit(onSubmit)}>
         <Card padding="24px" className="flex flex-col gap-4">
           <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Billing</h2>

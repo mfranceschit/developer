@@ -11,6 +11,7 @@ export type InvoiceSummaryCardProps = {
   taxRate: number;
   locked: boolean;
   saving: boolean;
+  blocked?: boolean;
   onSave: () => void;
   onMarkSent: () => void;
   onMarkPaid: () => void;
@@ -30,6 +31,7 @@ export function InvoiceSummaryCard({
   taxRate,
   locked,
   saving,
+  blocked = false,
   onSave,
   onMarkSent,
   onMarkPaid,
@@ -84,10 +86,10 @@ export function InvoiceSummaryCard({
         </div>
         {!locked && (
           <div className="flex flex-col gap-2">
-            <Button fullWidth onClick={onSave} disabled={saving}>
+            <Button fullWidth onClick={onSave} disabled={saving || blocked}>
               {saving ? 'Saving…' : 'Save draft'}
             </Button>
-            <Button variant="outline" fullWidth onClick={onMarkSent}>
+            <Button variant="outline" fullWidth onClick={onMarkSent} disabled={blocked}>
               Mark as sent
             </Button>
           </div>

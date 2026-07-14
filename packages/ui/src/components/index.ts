@@ -4,6 +4,9 @@ export { Avatar } from './Avatar/Avatar';
 export type { BadgeProps, BadgeTone } from './Badge/Badge';
 export { Badge } from './Badge/Badge';
 
+export type { BannerProps, BannerTone } from './Banner/Banner';
+export { Banner } from './Banner/Banner';
+
 export type { ButtonProps, ButtonSize, ButtonVariant } from './Button/Button';
 export { Button } from './Button/Button';
 
