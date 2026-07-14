@@ -1,4 +1,4 @@
-import { Button, FormField, ImageUploader, LocaleField } from '@mfranceschit/ui';
+import { Button, Card, FormField, ImageUploader, Input, SegmentedControl } from '@mfranceschit/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
@@ -14,7 +14,8 @@ import {
 import { uploadImageAssetFn } from '@/server/functions/upload';
 import { sanityImageUrl } from '@/shared/lib/sanityImage';
 import type { Degree, DocumentStatus } from '@/shared/types';
-import { DocumentToolbar } from '@/widgets/DocumentToolbar/DocumentToolbar';
+import { EditorLayout } from '@/widgets/EditorLayout/EditorLayout';
+import { PublishingCard } from '@/widgets/PublishingCard/PublishingCard';
 
 export const Route = createFileRoute('/degrees/$id')({
   component: DegreeEditPage,
@@ -78,6 +79,13 @@ function DegreeEditPage() {
     name: ['issuedEn', 'issuedEs', 'issuedPt'],
   });
 
+  const [locale, setLocale] = useState<'en' | 'es' | 'pt'>('en');
+  const saving = createDraft.isPending || patchDraft.isPending;
+  const nameValues = { en: nameEn, es: nameEs, pt: namePt };
+  const nameFields = { en: 'nameEn', es: 'nameEs', pt: 'namePt' } as const;
+  const issuedValues = { en: issuedEn, es: issuedEs, pt: issuedPt };
+  const issuedFields = { en: 'issuedEn', es: 'issuedEs', pt: 'issuedPt' } as const;
+
   async function onSubmit(values: DegreeFormValues) {
     const doc = {
       name: { en: values.nameEn, es: values.nameEs, pt: values.namePt },
@@ -106,15 +114,19 @@ function DegreeEditPage() {
   }
 
   return (
-    <form className="flex flex-col gap-4 p-6" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex items-center justify-between">
-        <h1 className="font-sans text-xl font-semibold text-[var(--text-strong)]">
-          {isNew ? 'New degree' : degree?.name.en}
-        </h1>
-        {!isNew && (
-          <DocumentToolbar
+    <EditorLayout
+      header={{
+        eyebrow: 'Certifications · Degree',
+        title: isNew ? 'New degree' : (degree?.name.en ?? 'Degree'),
+        backLink: { label: 'Degrees', onClick: () => navigate({ to: '/degrees' }) },
+      }}
+      aside={
+        isNew ? null : (
+          <PublishingCard
             status={degree?._status ?? 'draft'}
             dirty={isDirty}
+            saving={saving}
+            onSave={handleSubmit(onSubmit)}
             onPublish={async () => {
               await publish.mutateAsync({ id });
             }}
@@ -123,55 +135,68 @@ function DegreeEditPage() {
             }}
             toaster={toaster}
           />
-        )}
-      </div>
-
-      <FormField label="Name" required error={errors.nameEn?.message}>
-        <LocaleField
-          value={{ en: nameEn, es: nameEs, pt: namePt }}
-          onValueChange={(locale, value) => {
-            const field = `name${locale[0].toUpperCase()}${locale.slice(1)}` as
-              | 'nameEn'
-              | 'nameEs'
-              | 'namePt';
-            setValue(field, value, { shouldDirty: true });
-          }}
-        />
-      </FormField>
-
-      <FormField label="Image">
-        <Controller
-          control={control}
-          name="imageAlt"
-          render={({ field }) => (
-            <ImageUploader
-              imageUrl={
-                degree?.image.asset._ref ? sanityImageUrl(degree.image.asset._ref) : undefined
-              }
-              alt={field.value}
-              onAltChange={field.onChange}
-              onUpload={handleUpload}
+        )
+      }
+    >
+      <form className="contents" onSubmit={handleSubmit(onSubmit)}>
+        <Card padding="24px" className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Details</h2>
+            <SegmentedControl
+              size="sm"
+              aria-label="Locale"
+              value={locale}
+              onValueChange={setLocale}
+              options={[
+                { value: 'en', label: 'EN' },
+                { value: 'es', label: 'ES' },
+                { value: 'pt', label: 'PT' },
+              ]}
             />
+          </div>
+          <FormField label="Name" required error={errors.nameEn?.message}>
+            <Input
+              value={nameValues[locale]}
+              onChange={(event) =>
+                setValue(nameFields[locale], event.target.value, { shouldDirty: true })
+              }
+            />
+          </FormField>
+          <FormField label="Issued by" hint="Name and issuer follow the selected language">
+            <Input
+              value={issuedValues[locale]}
+              onChange={(event) =>
+                setValue(issuedFields[locale], event.target.value, { shouldDirty: true })
+              }
+            />
+          </FormField>
+        </Card>
+
+        <Card padding="24px" className="flex flex-col gap-4">
+          <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Media</h2>
+          <FormField label="Image">
+            <Controller
+              control={control}
+              name="imageAlt"
+              render={({ field }) => (
+                <ImageUploader
+                  imageUrl={
+                    degree?.image.asset._ref ? sanityImageUrl(degree.image.asset._ref) : undefined
+                  }
+                  alt={field.value}
+                  onAltChange={field.onChange}
+                  onUpload={handleUpload}
+                />
+              )}
+            />
+          </FormField>
+          {isNew && (
+            <Button type="submit" className="self-start">
+              Save draft
+            </Button>
           )}
-        />
-      </FormField>
-
-      <FormField label="Issued">
-        <LocaleField
-          value={{ en: issuedEn, es: issuedEs, pt: issuedPt }}
-          onValueChange={(locale, value) => {
-            const field = `issued${locale[0].toUpperCase()}${locale.slice(1)}` as
-              | 'issuedEn'
-              | 'issuedEs'
-              | 'issuedPt';
-            setValue(field, value, { shouldDirty: true });
-          }}
-        />
-      </FormField>
-
-      <Button type="submit" className="self-start">
-        Save draft
-      </Button>
-    </form>
+        </Card>
+      </form>
+    </EditorLayout>
   );
 }
