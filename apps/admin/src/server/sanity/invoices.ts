@@ -1,6 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import type { Invoice } from '@/shared/types';
+import { formatInvoiceNumber } from '@/shared/lib/format';
+import { renderInvoicePdf } from '../pdf/renderInvoicePdf';
 import { draftSanityClient } from './client';
+import { uploadFileAsset } from './upload';
 
 export async function nextInvoiceSeq(year: number): Promise<number> {
   const invoices = await draftSanityClient.fetch<Array<{ seq: number; issueDate: string }>>(
@@ -41,4 +44,21 @@ export async function patchInvoice(id: string, patch: Partial<Invoice>): Promise
 
 export async function deleteInvoice(id: string): Promise<void> {
   await draftSanityClient.delete(id);
+}
+
+export async function markInvoiceStatus(
+  id: string,
+  status: 'sent' | 'paid',
+): Promise<Invoice> {
+  const invoice = await getInvoice(id);
+  if (!invoice) {
+    throw new Error(`Invoice not found: ${id}`);
+  }
+  const patch: Partial<Invoice> = { status };
+  if (invoice.status === 'draft' && !invoice.pdf) {
+    const buffer = await renderInvoicePdf(invoice);
+    const asset = await uploadFileAsset(buffer, `${formatInvoiceNumber(invoice)}.pdf`);
+    patch.pdf = { _type: 'file', asset };
+  }
+  return patchInvoice(id, patch);
 }

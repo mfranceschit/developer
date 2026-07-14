@@ -142,4 +142,10 @@ export const invoiceSchema = z.object({
   notes: z.string().optional(),
   status: invoiceStatusSchema,
   totals: invoiceTotalsSchema,
+  pdf: z
+    .object({
+      _type: z.literal('file'),
+      asset: z.object({ _ref: z.string(), _type: z.literal('reference') }),
+    })
+    .optional(),
 });
