@@ -1,4 +1,4 @@
-import { Button, FormField, Input, NumberInput, Select } from '@mfranceschit/ui';
+import { Button, Card, FormField, Input, NumberInput, Select } from '@mfranceschit/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Controller, useForm } from 'react-hook-form';
@@ -11,7 +11,8 @@ import {
   usePublish,
 } from '@/features/content/queries';
 import type { Client, DocumentStatus } from '@/shared/types';
-import { DocumentToolbar } from '@/widgets/DocumentToolbar/DocumentToolbar';
+import { EditorLayout } from '@/widgets/EditorLayout/EditorLayout';
+import { PublishingCard } from '@/widgets/PublishingCard/PublishingCard';
 
 export const Route = createFileRoute('/clients/$id')({
   component: ClientEditPage,
@@ -68,6 +69,8 @@ function ClientEditPage() {
     resolver: zodResolver(formSchema),
   });
 
+  const saving = createDraft.isPending || patchDraft.isPending;
+
   async function onSubmit(values: ClientFormValues) {
     const doc = {
       name: values.name,
@@ -88,15 +91,19 @@ function ClientEditPage() {
   }
 
   return (
-    <form className="flex flex-col gap-4 p-6" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex items-center justify-between">
-        <h1 className="font-sans text-xl font-semibold text-[var(--text-strong)]">
-          {isNew ? 'New client' : client?.name}
-        </h1>
-        {!isNew && (
-          <DocumentToolbar
+    <EditorLayout
+      header={{
+        eyebrow: 'Billing · Client',
+        title: isNew ? 'New client' : (client?.name ?? 'Client'),
+        backLink: { label: 'Clients', onClick: () => navigate({ to: '/clients' }) },
+      }}
+      aside={
+        isNew ? null : (
+          <PublishingCard
             status={client?._status ?? 'draft'}
             dirty={isDirty}
+            saving={saving}
+            onSave={handleSubmit(onSubmit)}
             onPublish={async () => {
               await publish.mutateAsync({ id });
             }}
@@ -105,67 +112,77 @@ function ClientEditPage() {
             }}
             toaster={toaster}
           />
-        )}
-      </div>
+        )
+      }
+    >
+      <form className="contents" onSubmit={handleSubmit(onSubmit)}>
+        <Card padding="24px" className="flex flex-col gap-4">
+          <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Contact</h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <FormField label="Name" required error={errors.name?.message}>
+              <Input {...register('name')} />
+            </FormField>
+            <FormField label="Email" required error={errors.email?.message}>
+              <Input {...register('email')} />
+            </FormField>
+            <FormField label="Phone" error={errors.phone?.message}>
+              <Input {...register('phone')} />
+            </FormField>
+            <FormField label="Tax ID" error={errors.taxId?.message}>
+              <Input {...register('taxId')} />
+            </FormField>
+          </div>
+          <FormField label="Address" error={errors.address?.message}>
+            <Input as="textarea" {...register('address')} />
+          </FormField>
+        </Card>
 
-      <FormField label="Name" required error={errors.name?.message}>
-        <Input {...register('name')} />
-      </FormField>
-
-      <FormField label="Email" required error={errors.email?.message}>
-        <Input {...register('email')} />
-      </FormField>
-
-      <FormField label="Phone" error={errors.phone?.message}>
-        <Input {...register('phone')} />
-      </FormField>
-
-      <FormField label="Address" error={errors.address?.message}>
-        <Input as="textarea" {...register('address')} />
-      </FormField>
-
-      <FormField label="Tax ID" error={errors.taxId?.message}>
-        <Input {...register('taxId')} />
-      </FormField>
-
-      <FormField label="Currency" required error={errors.currency?.message}>
-        <Controller
-          control={control}
-          name="currency"
-          render={({ field }) => (
-            <Select
-              items={CURRENCIES}
-              itemToString={(item: string) => item}
-              itemToValue={(item: string) => item}
-              value={[field.value]}
-              onValueChange={(value) => field.onChange(value[0] ?? '')}
-            />
+        <Card padding="24px" className="flex flex-col gap-4">
+          <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">
+            Billing defaults
+          </h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <FormField label="Currency" required error={errors.currency?.message}>
+              <Controller
+                control={control}
+                name="currency"
+                render={({ field }) => (
+                  <Select
+                    items={CURRENCIES}
+                    itemToString={(item: string) => item}
+                    itemToValue={(item: string) => item}
+                    value={[field.value]}
+                    onValueChange={(value) => field.onChange(value[0] ?? '')}
+                  />
+                )}
+              />
+            </FormField>
+            <FormField
+              label="Default rate"
+              hint="Optional, per-hour or per-project"
+              error={errors.defaultRate?.message}
+            >
+              <Controller
+                control={control}
+                name="defaultRate"
+                render={({ field }) => (
+                  <NumberInput
+                    value={field.value}
+                    onValueChange={(value) => field.onChange(Number.isNaN(value) ? '' : String(value))}
+                    min={0}
+                    step={0.01}
+                  />
+                )}
+              />
+            </FormField>
+          </div>
+          {isNew && (
+            <Button type="submit" className="self-start">
+              Save draft
+            </Button>
           )}
-        />
-      </FormField>
-
-      <FormField
-        label="Default rate"
-        hint="Optional, per-hour or per-project"
-        error={errors.defaultRate?.message}
-      >
-        <Controller
-          control={control}
-          name="defaultRate"
-          render={({ field }) => (
-            <NumberInput
-              value={field.value}
-              onValueChange={(value) => field.onChange(Number.isNaN(value) ? '' : String(value))}
-              min={0}
-              step={0.01}
-            />
-          )}
-        />
-      </FormField>
-
-      <Button type="submit" className="self-start">
-        Save draft
-      </Button>
-    </form>
+        </Card>
+      </form>
+    </EditorLayout>
   );
 }
