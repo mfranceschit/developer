@@ -1,14 +1,14 @@
 import {
-  Button,
+  Card,
   FormField,
   Input,
-  LocaleField,
   RichTextEditor,
   type RichTextEditorProps,
-  Tabs,
+  SegmentedControl,
 } from '@mfranceschit/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useState } from 'react';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 import {
@@ -18,7 +18,8 @@ import {
   useUpsertAboutDraft,
 } from '@/features/content/queries';
 import type { About } from '@/shared/types';
-import { DocumentToolbar } from '@/widgets/DocumentToolbar/DocumentToolbar';
+import { EditorLayout } from '@/widgets/EditorLayout/EditorLayout';
+import { PublishingCard } from '@/widgets/PublishingCard/PublishingCard';
 
 export const Route = createFileRoute('/about')({
   component: AboutEditPage,
@@ -52,6 +53,7 @@ function toFormValues(about?: About | null): AboutFormValues {
 
 function AboutEditPage() {
   const { toaster } = Route.useRouteContext();
+  const navigate = useNavigate();
   const { data: about } = useAbout();
   const upsert = useUpsertAboutDraft();
   const publish = usePublish();
@@ -73,6 +75,12 @@ function AboutEditPage() {
     name: ['titleEn', 'titleEs', 'titlePt'],
   });
 
+  const [titleLocale, setTitleLocale] = useState<'en' | 'es' | 'pt'>('en');
+  const [bodyLocale, setBodyLocale] = useState<'en' | 'es' | 'pt'>('en');
+  const saving = upsert.isPending;
+  const titleValues = { en: titleEn, es: titleEs, pt: titlePt };
+  const titleFields = { en: 'titleEn', es: 'titleEs', pt: 'titlePt' } as const;
+
   async function onSubmit(values: AboutFormValues) {
     await upsert.mutateAsync({
       title: { en: values.titleEn, es: values.titleEs, pt: values.titlePt },
@@ -86,12 +94,18 @@ function AboutEditPage() {
   }
 
   return (
-    <form className="flex flex-col gap-4 p-6" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex items-center justify-between">
-        <h1 className="font-sans text-xl font-semibold text-[var(--text-strong)]">About</h1>
-        <DocumentToolbar
+    <EditorLayout
+      header={{
+        eyebrow: 'Site',
+        title: 'About',
+        backLink: { label: 'Dashboard', onClick: () => navigate({ to: '/' }) },
+      }}
+      aside={
+        <PublishingCard
           status={about?._status ?? 'draft'}
           dirty={isDirty}
+          saving={saving}
+          onSave={handleSubmit(onSubmit)}
           onPublish={async () => {
             await publish.mutateAsync({ id: 'about' });
           }}
@@ -100,77 +114,83 @@ function AboutEditPage() {
           }}
           toaster={toaster}
         />
-      </div>
+      }
+    >
+      <form className="contents" onSubmit={handleSubmit(onSubmit)}>
+        <Card padding="24px" className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">
+              Title &amp; stack
+            </h2>
+            <SegmentedControl
+              size="sm"
+              aria-label="Title locale"
+              value={titleLocale}
+              onValueChange={setTitleLocale}
+              options={[
+                { value: 'en', label: 'EN' },
+                { value: 'es', label: 'ES' },
+                { value: 'pt', label: 'PT' },
+              ]}
+            />
+          </div>
+          <FormField label="Title" required error={errors.titleEn?.message}>
+            <Input
+              value={titleValues[titleLocale]}
+              onChange={(event) =>
+                setValue(titleFields[titleLocale], event.target.value, { shouldDirty: true })
+              }
+            />
+          </FormField>
+          <FormField label="Stack" hint="Comma-separated" error={errors.stack?.message}>
+            <Input {...register('stack')} />
+          </FormField>
+        </Card>
 
-      <FormField label="Title" required error={errors.titleEn?.message}>
-        <LocaleField
-          value={{ en: titleEn, es: titleEs, pt: titlePt }}
-          onValueChange={(locale, value) => {
-            setValue(
-              `title${locale[0].toUpperCase()}${locale.slice(1)}` as
-                | 'titleEn'
-                | 'titleEs'
-                | 'titlePt',
-              value,
-              { shouldDirty: true },
-            );
-          }}
-        />
-      </FormField>
-
-      <FormField label="Stack" hint="Comma-separated" error={errors.stack?.message}>
-        <Input {...register('stack')} />
-      </FormField>
-
-      <FormField label="Body">
-        <Tabs
-          items={[
-            {
-              value: 'en',
-              label: 'English',
-              content: (
-                <Controller
-                  control={control}
-                  name="bodyEn"
-                  render={({ field }) => (
-                    <RichTextEditor value={field.value} onValueChange={field.onChange} />
-                  )}
-                />
-              ),
-            },
-            {
-              value: 'es',
-              label: 'Español',
-              content: (
-                <Controller
-                  control={control}
-                  name="bodyEs"
-                  render={({ field }) => (
-                    <RichTextEditor value={field.value} onValueChange={field.onChange} />
-                  )}
-                />
-              ),
-            },
-            {
-              value: 'pt',
-              label: 'Português',
-              content: (
-                <Controller
-                  control={control}
-                  name="bodyPt"
-                  render={({ field }) => (
-                    <RichTextEditor value={field.value} onValueChange={field.onChange} />
-                  )}
-                />
-              ),
-            },
-          ]}
-        />
-      </FormField>
-
-      <Button type="submit" className="self-start">
-        Save draft
-      </Button>
-    </form>
+        <Card padding="24px" className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <h2 className="font-sans text-base font-semibold text-[var(--text-strong)]">Body</h2>
+            <SegmentedControl
+              size="sm"
+              aria-label="Body locale"
+              value={bodyLocale}
+              onValueChange={setBodyLocale}
+              options={[
+                { value: 'en', label: 'EN' },
+                { value: 'es', label: 'ES' },
+                { value: 'pt', label: 'PT' },
+              ]}
+            />
+          </div>
+          {bodyLocale === 'en' && (
+            <Controller
+              control={control}
+              name="bodyEn"
+              render={({ field }) => (
+                <RichTextEditor value={field.value} onValueChange={field.onChange} />
+              )}
+            />
+          )}
+          {bodyLocale === 'es' && (
+            <Controller
+              control={control}
+              name="bodyEs"
+              render={({ field }) => (
+                <RichTextEditor value={field.value} onValueChange={field.onChange} />
+              )}
+            />
+          )}
+          {bodyLocale === 'pt' && (
+            <Controller
+              control={control}
+              name="bodyPt"
+              render={({ field }) => (
+                <RichTextEditor value={field.value} onValueChange={field.onChange} />
+              )}
+            />
+          )}
+        </Card>
+      </form>
+    </EditorLayout>
   );
 }
