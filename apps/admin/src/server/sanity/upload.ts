@@ -8,3 +8,11 @@ export async function uploadImageAsset(
   const asset = await draftSanityClient.assets.upload('image', file, { filename });
   return { _ref: asset._id, _type: 'reference' };
 }
+
+export async function uploadFileAsset(
+  file: Buffer,
+  filename: string,
+): Promise<{ _ref: string; _type: 'reference' }> {
+  const asset = await draftSanityClient.assets.upload('file', file, { filename });
+  return { _ref: asset._id, _type: 'reference' };
+}
