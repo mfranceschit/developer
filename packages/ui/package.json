@@ -16,6 +16,7 @@
   "dependencies": {
     "@ark-ui/react": "^5.37.2",
     "@portabletext/editor": "^7.10.7",
+    "@react-pdf/renderer": "^4.5.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
