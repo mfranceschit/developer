@@ -58,10 +58,10 @@ function toFormValues(project?: Project | null): ProjectFormValues {
     url: project?.url ?? '',
     repository: project?.repository ?? '',
     technologies: project?.technologies?.join(', ') ?? '',
-    descriptionEn: (project?.description.en as PortableTextValue | undefined) ?? [],
-    descriptionEs: (project?.description.es as PortableTextValue | undefined) ?? [],
-    descriptionPt: (project?.description.pt as PortableTextValue | undefined) ?? [],
-    imageAlt: project?.image.alt ?? '',
+    descriptionEn: (project?.description?.en as PortableTextValue | undefined) ?? [],
+    descriptionEs: (project?.description?.es as PortableTextValue | undefined) ?? [],
+    descriptionPt: (project?.description?.pt as PortableTextValue | undefined) ?? [],
+    imageAlt: project?.image?.alt ?? '',
   };
 }
 
@@ -113,7 +113,7 @@ function ProjectEditPage() {
       },
       image: {
         _type: 'image' as const,
-        asset: uploadedAsset ?? project?.image.asset ?? { _ref: '', _type: 'reference' as const },
+        asset: uploadedAsset ?? project?.image?.asset ?? { _ref: '', _type: 'reference' as const },
         alt: values.imageAlt,
       },
     };
@@ -190,7 +190,7 @@ function ProjectEditPage() {
               render={({ field }) => (
                 <ImageUploader
                   imageUrl={
-                    project?.image.asset._ref ? sanityImageUrl(project.image.asset._ref) : undefined
+                    project?.image?.asset._ref ? sanityImageUrl(project.image.asset._ref) : undefined
                   }
                   alt={field.value}
                   onAltChange={field.onChange}

@@ -51,12 +51,12 @@ type InvoiceFormValues = z.infer<typeof formSchema>;
 
 function toFormValues(invoice?: Invoice | null): InvoiceFormValues {
   return {
-    clientId: invoice?.client._ref ?? '',
+    clientId: invoice?.client?._ref ?? '',
     issueDate: invoice?.issueDate ?? new Date().toISOString().slice(0, 10),
     dueDate: invoice?.dueDate ?? '',
     currency: invoice?.currency ?? 'USD',
     taxRate: invoice?.taxRate !== undefined ? String(invoice.taxRate) : '0',
-    lineItems: invoice?.lineItems.map((item) => ({
+    lineItems: invoice?.lineItems?.map((item) => ({
       quantity: String(item.quantity),
       description: item.description,
       unitPrice: String(item.unitPrice),
