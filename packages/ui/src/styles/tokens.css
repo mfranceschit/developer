@@ -95,6 +95,17 @@
   --border-strong: var(--mf-gray-400);
   --focus-ring: var(--mf-silver-birch);
 
+  /* Feedback banners — soft tint + border derived from the status hue,
+     mixed against the card surface so both flip with the theme. */
+  --surface-info-soft: color-mix(in srgb, var(--mf-info) 10%, var(--surface-card));
+  --border-info: color-mix(in srgb, var(--mf-info) 32%, var(--surface-card));
+  --surface-success-soft: color-mix(in srgb, var(--mf-success) 12%, var(--surface-card));
+  --border-success: color-mix(in srgb, var(--mf-success) 32%, var(--surface-card));
+  --surface-warning-soft: color-mix(in srgb, var(--mf-warning) 14%, var(--surface-card));
+  --border-warning: color-mix(in srgb, var(--mf-warning) 38%, var(--surface-card));
+  --surface-danger-soft: color-mix(in srgb, var(--mf-danger) 12%, var(--surface-card));
+  --border-danger: color-mix(in srgb, var(--mf-danger) 34%, var(--surface-card));
+
   /* Controls on an always-dark branded surface (e.g. dashboard hero over navy).
      Constant white-alpha, theme-independent — the surface is dark in any theme. */
   --surface-on-dark: rgba(255, 255, 255, 0.08);

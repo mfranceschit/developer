@@ -35,7 +35,7 @@ export function DatePicker({
       value={value ? [parseDate(value)] : undefined}
       defaultValue={defaultValue ? [parseDate(defaultValue)] : undefined}
       onValueChange={(details) => {
-        const iso = details.valueAsString[0];
+        const iso = details.value[0]?.toString();
         if (iso) onValueChange?.(iso);
       }}
       disabled={disabled}
