@@ -59,9 +59,11 @@ error; the error propagates to the client mutation and is surfaced via the toast
    - Colors come from the JS token surface `tokens/colors.ts` (never raw hex) — this is
      the sanctioned path for JS consumers that cannot read CSS variables. HARD rule
      satisfied.
-   - Register Inter (via `Font.register`) to match brand typography. Font files sourced
-     from the existing web font assets; if none are bundled in `packages/ui`, add the
-     `.ttf` under the component folder and register from disk at module load.
+   - Typography uses react-pdf's built-in `Helvetica` / `Helvetica-Bold` (no font
+     files bundled). This is a deliberate relaxation of "Inter": `@fontsource/inter`
+     ships woff (not react-pdf-loadable TTF), and bundling raw Inter `.ttf` binaries is
+     disproportionate to the fidelity gain. Swappable later by registering an Inter
+     `.ttf` via `Font.register`.
    - `@react-pdf/renderer` is a **dependency of `packages/ui`** (peer/normal dep as the
      repo convention dictates). Verify the current version with `pnpm info
      @react-pdf/renderer` before adding — do not pin from memory.
