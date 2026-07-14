@@ -5,6 +5,7 @@ import {
   deleteInvoice,
   getInvoice,
   listInvoices,
+  markInvoiceStatus,
   patchInvoice,
 } from '@/server/sanity/invoices';
 
@@ -27,3 +28,7 @@ export const patchInvoiceFn = createServerFn({ method: 'POST', strict: { output:
 export const deleteInvoiceFn = createServerFn({ method: 'POST' })
   .validator(z.object({ id: z.string() }))
   .handler(async ({ data }) => deleteInvoice(data.id));
+
+export const markInvoiceStatusFn = createServerFn({ method: 'POST', strict: { output: false } })
+  .validator(z.object({ id: z.string(), status: z.enum(['sent', 'paid']) }))
+  .handler(async ({ data }) => markInvoiceStatus(data.id, data.status));
