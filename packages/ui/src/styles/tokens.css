@@ -95,6 +95,12 @@
   --border-strong: var(--mf-gray-400);
   --focus-ring: var(--mf-silver-birch);
 
+  /* Controls on an always-dark branded surface (e.g. dashboard hero over navy).
+     Constant white-alpha, theme-independent — the surface is dark in any theme. */
+  --surface-on-dark: rgba(255, 255, 255, 0.08);
+  --surface-on-dark-hover: rgba(255, 255, 255, 0.16);
+  --border-on-dark: rgba(255, 255, 255, 0.25);
+
   /* Shadows */
   --shadow-xs: 0 1px 2px rgba(27, 43, 91, 0.06);
   --shadow-sm: 0 1px 3px rgba(27, 43, 91, 0.08), 0 1px 2px rgba(27, 43, 91, 0.06);

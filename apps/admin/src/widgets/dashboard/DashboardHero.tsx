@@ -36,10 +36,10 @@ export function DashboardHero({
         <Button variant="accent" size="sm" onClick={onNewProject}>
           New project
         </Button>
-        <Button variant="glass" size="sm" onClick={onNewInvoice}>
+        <Button variant="on-dark" size="sm" onClick={onNewInvoice}>
           New invoice
         </Button>
-        <Button variant="glass" size="sm" onClick={onEditAbout}>
+        <Button variant="on-dark" size="sm" onClick={onEditAbout}>
           Edit about
         </Button>
       </div>

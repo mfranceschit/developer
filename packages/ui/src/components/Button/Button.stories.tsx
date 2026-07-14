@@ -71,6 +71,11 @@ export const TintNeutral: Story = {
   decorators: [darkPanel],
 };
 
+export const OnDark: Story = {
+  args: { variant: 'on-dark', children: 'New invoice' },
+  decorators: [darkPanel],
+};
+
 export const HeroActions: Story = {
   decorators: [darkPanel],
   render: () => (

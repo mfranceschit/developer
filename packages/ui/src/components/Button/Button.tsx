@@ -8,7 +8,8 @@ export type ButtonVariant =
   | 'glass'
   | 'gradient'
   | 'tint-accent'
-  | 'tint-neutral';
+  | 'tint-neutral'
+  | 'on-dark';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 const variantClasses: Record<ButtonVariant, string> = {
@@ -32,6 +33,10 @@ const variantClasses: Record<ButtonVariant, string> = {
   /* Neutral translucent outline (project detail "Repository"). */
   'tint-neutral':
     'bg-[var(--surface-btn-neutral)] border border-[var(--border-btn-neutral)] text-[var(--text-heading-strong)] hover:bg-[var(--surface-btn-neutral-hover)]',
+  /* Translucent white control on an always-dark branded surface (dashboard hero);
+     theme-independent white-alpha, unlike `glass` which is theme-relative. */
+  'on-dark':
+    'bg-[var(--surface-on-dark)] border border-[var(--border-on-dark)] text-[var(--mf-white)] hover:bg-[var(--surface-on-dark-hover)]',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
