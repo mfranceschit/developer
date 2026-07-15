@@ -20,7 +20,7 @@ export function PageHeader({ eyebrow, title, subtitle, action, backLink }: PageH
           ← {backLink.label}
         </button>
       )}
-      <div className="flex items-end justify-between gap-4">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           {eyebrow && (
             <div className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">

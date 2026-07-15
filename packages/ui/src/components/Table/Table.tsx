@@ -28,46 +28,56 @@ export function Table<T>({
   className = '',
 }: TableProps<T>) {
   return (
-    <table className={['w-full border-collapse', className].filter(Boolean).join(' ')}>
-      <thead>
-        <tr>
-          {columns.map((column) => (
-            <th
-              key={column.header}
-              className={[headerCellClasses, column.align === 'right' ? 'text-right' : 'text-left']
-                .filter(Boolean)
-                .join(' ')}
-            >
-              {column.header}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => (
-          <tr
-            key={getRowKey(row)}
-            onClick={onRowClick ? () => onRowClick(row) : undefined}
-            className={[
-              'border-b border-[var(--border-subtle)] last:border-b-0',
-              onRowClick ? 'cursor-pointer hover:bg-[var(--primary-soft)]' : '',
-            ]
-              .filter(Boolean)
-              .join(' ')}
-          >
+    <div className="overflow-x-auto">
+      <table
+        className={['w-full min-w-[560px] border-collapse', className].filter(Boolean).join(' ')}
+      >
+        <thead>
+          <tr>
             {columns.map((column) => (
-              <td
+              <th
                 key={column.header}
-                className={[bodyCellClasses, column.align === 'right' ? 'text-right' : 'text-left']
+                className={[
+                  headerCellClasses,
+                  column.align === 'right' ? 'text-right' : 'text-left',
+                ]
                   .filter(Boolean)
                   .join(' ')}
               >
-                {column.render(row)}
-              </td>
+                {column.header}
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr
+              key={getRowKey(row)}
+              onClick={onRowClick ? () => onRowClick(row) : undefined}
+              className={[
+                'border-b border-[var(--border-subtle)] last:border-b-0',
+                onRowClick ? 'cursor-pointer hover:bg-[var(--primary-soft)]' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+            >
+              {columns.map((column) => (
+                <td
+                  key={column.header}
+                  className={[
+                    bodyCellClasses,
+                    column.align === 'right' ? 'text-right' : 'text-left',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                >
+                  {column.render(row)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
