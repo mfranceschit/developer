@@ -9,6 +9,7 @@ export async function renderInvoicePdf(invoice: Invoice): Promise<Buffer> {
     <InvoiceDocumentPdf
       invoiceNumber={formatInvoiceNumber(invoice)}
       issueDate={invoice.issueDate}
+      dueDate={invoice.dueDate}
       issuer={invoice.issuerSnapshot}
       billTo={{
         name: invoice.clientSnapshot.name,

@@ -15,6 +15,7 @@ export type InvoiceLineItem = {
 export type InvoiceDocumentProps = {
   invoiceNumber: string;
   issueDate: string;
+  dueDate?: string;
   issuer: InvoicePartyInfo;
   billTo: InvoicePartyInfo;
   lineItems: InvoiceLineItem[];

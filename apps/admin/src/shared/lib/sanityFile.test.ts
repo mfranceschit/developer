@@ -21,6 +21,12 @@ describe('sanityFileUrl', () => {
     );
   });
 
+  it('appends a dl query param when a download filename is given', () => {
+    expect(sanityFileUrl('file-abc-pdf', 'INV-2026-003.pdf')).toBe(
+      'https://cdn.sanity.io/files/abc123/production/abc.pdf?dl=INV-2026-003.pdf',
+    );
+  });
+
   it('returns an empty string for an empty ref', () => {
     expect(sanityFileUrl('')).toBe('');
   });

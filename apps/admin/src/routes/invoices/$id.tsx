@@ -193,7 +193,11 @@ function InvoiceEditPage() {
               : undefined
           }
           onEditIssuer={() => navigate({ to: '/settings/business-profile' })}
-          pdfUrl={invoice?.pdf?.asset._ref ? sanityFileUrl(invoice.pdf.asset._ref) : undefined}
+          pdfUrl={
+            invoice?.pdf?.asset._ref
+              ? sanityFileUrl(invoice.pdf.asset._ref, `${formatInvoiceNumber(invoice)}.pdf`)
+              : undefined
+          }
         />
       }
     >
