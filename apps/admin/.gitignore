@@ -1,5 +1,6 @@
 .vinxi/
 .output/
+.wrangler/
 dist/
 routeTree.gen.ts
 .env
