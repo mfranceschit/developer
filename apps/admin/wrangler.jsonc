@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mfranceschit-admin",
+  "compatibility_date": "2026-07-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  "workers_dev": false,
+  "observability": { "enabled": true },
+  "vars": {
+    "SANITY_DATASET": "production",
+    "SANITY_API_VERSION": "2023-12-08"
+  }
+}
