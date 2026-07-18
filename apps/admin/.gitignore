@@ -1,4 +1,5 @@
 .vinxi/
 .output/
+dist/
 routeTree.gen.ts
 .env
